@@ -1,0 +1,21 @@
+.adminHeader {
+  display: flex;
+  flex-direction: row;
+  height: 5rem;
+  width: 100%;
+  border: 1px solid;
+  justify-content: space-around;
+}
+.addUser {
+  display: flex;
+  flex-direction: row;
+  height: 5rem;
+  width: 15rem;
+  border: 1px solid;
+  justify-content: space-between;
+}
+.profile {
+  height: 5rem;
+  width: 5rem;
+  margin-top: 1.5rem;
+}
