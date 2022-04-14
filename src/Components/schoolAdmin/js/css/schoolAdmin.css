@@ -3,7 +3,7 @@
   flex-direction: row;
   height: 5rem;
   width: 100%;
-  border: 1px solid;
+  border: 5px solid;
   justify-content: space-around;
 }
 .addUser {

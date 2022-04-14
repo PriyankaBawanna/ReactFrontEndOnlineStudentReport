@@ -1,12 +1,9 @@
 import React from "react";
-import LinkRouter from "../../../Components/schoolAdmin/js/Router/LinkRouter";
+
 import "../css/StudentList.css";
 const StudentList = () => {
   return (
     <>
-      <div>
-        <LinkRouter />
-      </div>
       <table id="customers">
         <tr>
           <th>Student_Name</th>

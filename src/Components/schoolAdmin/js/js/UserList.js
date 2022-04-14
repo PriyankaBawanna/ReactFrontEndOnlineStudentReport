@@ -1,10 +1,11 @@
 import React from "react";
-import LinkRouter from "../Router/LinkRouter";
+import Header from "./Header";
+
 const UserList = () => {
   return (
     <>
+      <Header />
       <main style={{ padding: "1rem 0" }}>
-        <LinkRouter />
         <h2> Welcome to Online Student Report </h2>
       </main>
     </>

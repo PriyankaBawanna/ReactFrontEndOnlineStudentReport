@@ -1,9 +1,14 @@
+import StudentList from "./Common Components/StudentList.js/js/StudentList";
+import TeacherList from "./Common Components/TeacherList/TeacherList";
 import Routers from "./Components/Home/js/Routers";
+import AdminRouter from "./Components/schoolAdmin/js/js/AdminRouter";
+import HeaderAdmin from "./Components/schoolAdmin/js/js/HeaderAdmin";
 
 // import AddParent from "./Model/AddParent/js/AddParent";
 // import AddStudent from "./Model/AddStudent/js/AddStudent";
 // import AddTeacher from "./Model/AddTeacher/js/AddTeacher";
-import AdminRouters from "../src/Components/schoolAdmin/js/Router/AdminRouter";
+
+import SchoolAdmin from "./Components/schoolAdmin/js/js/SchooAdmin";
 
 function App() {
   return (
@@ -14,6 +19,8 @@ function App() {
       <AddParent />
       <AddTeacher /> */}
       <Routers />
+      {/* <SchoolAdmin /> */}
+      {/* <AddStudent /> */}
     </>
   );
 }

@@ -1,12 +1,15 @@
 import { useState } from "react";
 import HomeLink from "../../../Components/Home/js/HomeLink";
 import axios from "axios";
-import AdminRouters from "../../../Components/schoolAdmin/js/Router/AdminRouter";
+import { useNavigate } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 //import { useHistory } from "react-router-dom";
 
 const LoginPage = () => {
   //const history = useHistory();
+
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     email: "",
@@ -18,13 +21,9 @@ const LoginPage = () => {
       let LoginStatus = res.data.message;
       alert(LoginStatus);
       if (LoginStatus === "Login Sucessfull") {
-        console.log("login status true");
+        navigate("/SchoolAdmin", { replace: true });
       }
     });
-  };
-
-  const handleValidSignUp = (e) => {
-    e.preventDefault();
   };
 
   const handleChange = (e) => {
@@ -41,6 +40,7 @@ const LoginPage = () => {
 
   const LoginHandler = (e) => {
     e.preventDefault();
+    // navigate("/SchoolAdmin", { replace: true });
   };
 
   return (
