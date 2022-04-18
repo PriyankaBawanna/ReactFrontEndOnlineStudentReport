@@ -4,8 +4,13 @@ import Registration from "../../../Common Components/RegistrationPage/AdminRegis
 import HomePage from "./HomePage";
 import SchoolAdmin from "../../schoolAdmin/js/js/SchooAdmin";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import StudentList from "../../../Common Components/StudentList/js/StudentList";
+import TeacherList from "../../../Common Components/TeacherList/TeacherList";
 const Routers = () => {
   const [user, setLoginUser] = useState({});
+
+  //save user details into local storage
+
   return (
     <>
       <BrowserRouter>
@@ -16,7 +21,11 @@ const Routers = () => {
             path="/Login"
             element={<LoginPage setLoginUser={setLoginUser} />}
           />
-          <Route path="/SchoolAdmin" element={<SchoolAdmin />} />
+          <Route path="/SchoolAdmin" element={<SchoolAdmin />}>
+            <Route index element={<StudentList />} />
+            <Route path="StudentList" element={<StudentList />} />
+            <Route path="TeacherList" element={<TeacherList />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

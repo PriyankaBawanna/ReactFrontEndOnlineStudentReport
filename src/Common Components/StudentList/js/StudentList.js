@@ -1,23 +1,38 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
 
 import "../css/StudentList.css";
-const StudentList = () => {
-  const state = useSelector((state) => state.getStudentDetailsReducer.items);
 
+const StudentList = () => {
+  const [users, setUser] = useState([]);
   useEffect(() => {
-    dispatch(getStudentDetails(state));
-    console.log("State on User Repo ", state);
+    fetch("http://localhost:8085/addStudent").then((result) => {
+      result.json().then((resp) => {
+        // console.warn(resp)
+        setUser(resp);
+      });
+    });
   }, []);
+  console.warn(users);
   return (
     <>
       <table id="customers">
-        <tr>
-          <th>{state.studentName}</th>
-          <th>{state.studentEmail}</th>
-          <th>{state.studentStandard}</th>
-          <th>{state.studentRollNo}</th>
-        </tr>
+        <h3>List of Student</h3>
+        <tbody>
+          <tr>
+            <td>Student Name</td>
+            <td>Parent Email</td>
+            <td>Student Standard</td>
+            <td>Student Roll Number</td>
+          </tr>
+          {users.map((item, i) => (
+            <tr key={i}>
+              <td>{item.studentName}</td>
+              <td>{item.studentEmail}</td>
+              <td>{item.studentStandard}</td>
+              <td>{item.studentRollNo}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </>
   );
