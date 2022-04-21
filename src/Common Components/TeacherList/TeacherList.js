@@ -1,6 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const TeacherList = () => {
+  const [users, setUser] = useState([]);
+  const [value, setValue] = useState("");
+  const [response, setresponse] = useState("");
+
+  useEffect(() => {
+    addTeacher();
+  }, []);
+
+  const addTeacher = async () => {
+    await fetch("http://localhost:8085/addTeacher").then((result) => {
+      result.json().then((resp) => {
+        setUser(resp);
+      });
+    });
+  };
+
+  const deleteTeacher = async (id) => {
+    console.log("user _id", id);
+    let result = await fetch(`http://localhost:8085/teacher/${id}`, {
+      method: "Delete",
+    });
+    result = await result.json();
+    if (result) {
+      console.log("record is deleted ");
+      addTeacher();
+    }
+  };
+
   return (
     <>
       <table id="customers">
@@ -9,14 +37,19 @@ const TeacherList = () => {
           <th>Teacher Id</th>
           <th>Mobile No</th>
           <th>Email Id </th>
+          <th>Operation</th>
         </tr>
-
-        <tr>
-          <td>Abc</td>
-          <td>T-1ab</td>
-          <td>1234567890</td>
-          <td>teacher@gmail.com</td>
-        </tr>
+        {users.map((item, i) => (
+          <tr key={i}>
+            <td>{item.teacherName}</td>
+            <td>{item.teacherNo}</td>
+            <td>{item.teacherMobileNo}</td>
+            <td>{item.teacherEmailId}</td>
+            <td>
+              <button onClick={() => deleteTeacher(item._id)}>Delete</button>
+            </td>
+          </tr>
+        ))}
       </table>
     </>
   );

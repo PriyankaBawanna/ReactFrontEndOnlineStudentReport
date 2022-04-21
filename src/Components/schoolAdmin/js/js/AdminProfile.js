@@ -1,14 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import Logout from "../../../../Common Components/LogOut/Logout";
 import "../css/AdminProfile.css";
-const AdminProfile = () => {
+const AdminProfile = ({ setLoginUser }) => {
   const [users, setUser] = useState([]);
 
   return (
     <>
       <div class="dropdown">
         <span className="userProfile">User</span>
-        <div class="dropdown-content"></div>
+        <div class="dropdown-content">
+          <Logout />
+        </div>
       </div>
     </>
   );

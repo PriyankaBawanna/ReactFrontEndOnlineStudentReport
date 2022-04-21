@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 //import { useHistory } from "react-router-dom";
 
-const LoginPage = () => {
+const LoginPage = ({ setLoginUser }) => {
   //const history = useHistory();
 
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const LoginPage = () => {
       let LoginStatus = res.data.message;
       alert(LoginStatus);
       if (LoginStatus === "Login Sucessfull") {
+        setLoginUser(true);
         navigate("/SchoolAdmin", { replace: true });
       }
     });
