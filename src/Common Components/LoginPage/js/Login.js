@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 //import { useHistory } from "react-router-dom";
 
+import { useParams } from "react-router-dom";
+
 const LoginPage = ({ setLoginUser }) => {
   //const history = useHistory();
 
@@ -19,7 +21,9 @@ const LoginPage = ({ setLoginUser }) => {
   const login = () => {
     axios.post("http://localhost:8085/login", user).then((res) => {
       let LoginStatus = res.data.message;
+      console.log("user data", res.data.user);
       alert(LoginStatus);
+
       if (LoginStatus === "Login Sucessfull") {
         setLoginUser(true);
         navigate("/SchoolAdmin", { replace: true });

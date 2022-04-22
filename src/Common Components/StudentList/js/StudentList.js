@@ -9,7 +9,7 @@ const StudentList = () => {
   const [value, setValue] = useState("");
   useEffect(() => {
     addStudent();
-  });
+  }, []);
   const addStudent = async () => {
     fetch("http://localhost:8085/addStudent").then((result) => {
       result.json().then((resp) => {
