@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import UpdateStudent from "../../../Model/UpdateStudent/js/updateStudent";
+import StudentInformation from "../../../Common Components/StudentInformation/js/StudentInformation";
 
-import "../css/StudentList.css";
-
-const StudentList = () => {
+const StudentMarksList = () => {
   const [users, setUser] = useState([]);
-  const [value, setValue] = useState("");
   useEffect(() => {
     addStudent();
   }, []);
   const addStudent = async () => {
-    const addStudent = fetch("http://localhost:8085/addStudent").then(
-      (result) => {
-        result.json().then((resp) => {
-          // console.warn(resp)
-          setUser(resp);
-        });
-      }
-    );
+    fetch("http://localhost:8085/addStudent").then((result) => {
+      result.json().then((resp) => {
+        // console.warn(resp)
+        setUser(resp);
+      });
+    });
   };
-  console.warn(users);
 
   const deleteStudent = async (id) => {
     console.log("user _id", id);
-    let result = await fetch(`http://localhost:8085/StudentSearch/${id}`, {
+    let result = await fetch(`http://localhost:8085/student/${id}`, {
       method: "Delete",
     });
     result = await result.json();
@@ -33,6 +26,7 @@ const StudentList = () => {
       addStudent();
     }
   };
+
   const searchHandle = async (e) => {
     console.warn(e.target.value);
     let key = e.target.value;
@@ -47,29 +41,36 @@ const StudentList = () => {
       addStudent();
     }
   };
+
   return (
     <>
-      <input type="text" placeholder="Search student" onChange={searchHandle} />
       <table id="customers">
         <h3>List of Student</h3>
+        <input
+          type="text"
+          placeholder="Search student"
+          onChange={searchHandle}
+        />
         <tbody>
           <tr>
             <td>Student Name</td>
-            <td>Parent Email</td>
             <td>Student Standard</td>
             <td>Student Roll Number</td>
-            <td>Edit</td>
-            <td>Delete</td>
+            <td>Term One</td>
+            <td>Term Two</td>
+            <td>Term Three</td>
+            <td>Operation</td>
           </tr>
           {users.map((item, i) => (
             <tr key={i}>
               <td>{item.studentName}</td>
-              <td>{item.studentEmail}</td>
+
               <td>{item.studentStandard}</td>
               <td>{item.studentRollNo}</td>
-              <td>
-                <UpdateStudent studentId={item._id} />
-              </td>
+              <td>Term One</td>
+              <td>Term Two</td>
+              <td>Term Three</td>
+
               <td>
                 <button
                   onClick={() => {
@@ -78,6 +79,8 @@ const StudentList = () => {
                 >
                   Delete
                 </button>
+
+                <StudentInformation />
               </td>
             </tr>
           ))}
@@ -86,4 +89,4 @@ const StudentList = () => {
     </>
   );
 };
-export default StudentList;
+export default StudentMarksList;

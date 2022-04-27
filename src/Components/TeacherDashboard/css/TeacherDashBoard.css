@@ -1,0 +1,15 @@
+.teacher-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: solid 1px black;
+  height: 10rem;
+  width: 100%;
+}
+.bodyListTeacher {
+  height: 20rem;
+  width: 100%;
+  border: solid 1px black;
+  margin-top: 20px;
+}

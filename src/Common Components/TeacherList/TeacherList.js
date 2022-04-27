@@ -7,7 +7,7 @@ const TeacherList = () => {
 
   useEffect(() => {
     addTeacher();
-  });
+  }, []);
 
   const addTeacher = async () => {
     await fetch("http://localhost:8085/addTeacher").then((result) => {
@@ -29,8 +29,24 @@ const TeacherList = () => {
     }
   };
 
+  const searchHandle = async (e) => {
+    console.warn(e.target.value);
+    let key = e.target.value;
+    if (key) {
+      let result = await fetch(`http://localhost:8085/TeacherSearch/${key}`);
+      result = await result.json();
+      if (result) {
+        console.log("Result of Student Search ", result);
+        setUser(result);
+      }
+    } else {
+      addTeacher();
+    }
+  };
+
   return (
     <>
+      <input type="text" placeholder="Search Teacher" onChange={searchHandle} />
       <table id="customers">
         <tr>
           <th>Teacher Name</th>

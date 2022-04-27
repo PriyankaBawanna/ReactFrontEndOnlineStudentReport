@@ -9,7 +9,8 @@ import Routers from "./Components/Home/js/Routers";
 // import AddTeacher from "./Model/AddTeacher/js/AddTeacher";
 
 // import SchoolAdmin from "./Components/schoolAdmin/js/js/SchooAdmin";
-
+import StudentInformation from "./Common Components/StudentInformation/js/StudentInformation";
+import TeacherDashBoard from "./Components/TeacherDashboard/js/TeacherDashboard";
 function App() {
   return (
     <>
@@ -22,6 +23,8 @@ function App() {
       {/* <SchoolAdmin /> */}
       {/* <AddStudent /> */}
       {/* <StudentList /> */}
+
+      <TeacherDashBoard />
     </>
   );
 }
