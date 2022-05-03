@@ -51,6 +51,7 @@ const LoginPage = ({ setLoginUser }) => {
   return (
     <>
       <HomeLink />
+
       <form onSubmit={LoginHandler}>
         <h1>Login</h1>
         {console.log("user", user)}

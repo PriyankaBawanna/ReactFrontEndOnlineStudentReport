@@ -5,32 +5,34 @@ const AddTeacher = () => {
   /*modal useState*/
   const [modal, setModal] = useState(false);
 
-  const [teacherData, setTeacherData] = useState({
-    teacherNo: "",
-    teacherName: "",
-    teacherMobileNo: "",
-    teacherEmailId: "",
-  });
+  const [teacherNo, setTeacherNo] = useState("");
+  const [teacherName, setTeacherName] = useState("");
+  const [teacherMobileNo, setTeacherMobileNo] = useState("");
+  const [teacherEmailId, setTeacherEmailId] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setTeacherData({
-      ...teacherData,
-      [name]: value,
-    });
-  };
-
+  //function use to save teacher data into data base using post API
   const addTeacherData = () => {
-    const { teacherNo, teacherName, teacherMobileNo, teacherEmailId } =
-      teacherData;
-
-    if (teacherNo && teacherName && teacherMobileNo && teacherEmailId) {
+    console.log(
+      "Teacher Data ",
+      teacherNo,
+      teacherName,
+      teacherEmailId,
+      teacherMobileNo
+    );
+    const teacherData = {
+      teacherNo,
+      teacherName,
+      teacherEmailId,
+      teacherMobileNo,
+    };
+    if (teacherNo && teacherName && teacherEmailId && teacherMobileNo) {
       axios
         .post("http://localhost:8085/addTeacher", teacherData)
         .then((res) => alert(res.data.message));
     } else {
-      alert("please enter values");
+      alert("Invalid");
     }
+    localStorage.setItem("teacherDetails", JSON.stringify(teacherData));
   };
 
   return (
@@ -50,8 +52,10 @@ const AddTeacher = () => {
               name="teacherName"
               type="text"
               placeholder="teacher name"
-              value={teacherData.teacherName}
-              onChange={handleChange}
+              value={teacherName}
+              onChange={(e) => {
+                setTeacherName(e.target.value);
+              }}
             />
           </div>
           <div>
@@ -59,8 +63,10 @@ const AddTeacher = () => {
               name="teacherNo"
               type="text"
               placeholder="enter the teacher Id "
-              value={teacherData.teacherNo}
-              onChange={handleChange}
+              value={teacherNo}
+              onChange={(e) => {
+                setTeacherNo(e.target.value);
+              }}
             />
           </div>
 
@@ -69,8 +75,10 @@ const AddTeacher = () => {
               name="teacherMobileNo"
               type="number"
               placeholder="Mobile No."
-              value={teacherData.teacherMobileNo}
-              onChange={handleChange}
+              value={teacherMobileNo}
+              onChange={(e) => {
+                setTeacherMobileNo(e.target.value);
+              }}
             />
           </div>
 
@@ -79,8 +87,10 @@ const AddTeacher = () => {
               name="teacherEmailId"
               type="text"
               placeholder=" Email Id"
-              value={teacherData.teacherEmailId}
-              onChange={handleChange}
+              value={teacherEmailId}
+              onChange={(e) => {
+                setTeacherEmailId(e.target.value);
+              }}
             />
           </div>
 

@@ -7,25 +7,20 @@ const AddStudent = () => {
   /*modal useState*/
   const [modal, setModal] = useState(false);
   /*input form state validattion use state*/
-  const [studentData, setstudentData] = useState({
-    studentName: "",
-    studentEmail: "",
-    studentStandard: "",
-    studentRollNo: "",
-  });
+  const [studentName, setStudentName] = useState("");
+  const [studentEmail, setStudentEmail] = useState("");
+  const [studentStandard, setStudentStandard] = useState("");
+  const [studentRollNo, setStudentRollNo] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    console.log("Inside the ADD Student Handle Chanhge", e.target);
-    setstudentData({
-      ...studentData,
-      [name]: value,
-    });
-  };
+  ////function use to save student data into data base using post API
   const addStudentData = () => {
-    const { studentName, studentEmail, studentStandard, studentRollNo } =
-      studentData;
-    console.log("student Data : ", studentData);
+    console.log(studentName, studentEmail, studentStandard, studentRollNo);
+    const studentData = {
+      studentName,
+      studentEmail,
+      studentStandard,
+      studentRollNo,
+    };
     if (studentName && studentEmail && studentStandard && studentRollNo) {
       axios
         .post("http://localhost:8085/addStudent", studentData)
@@ -51,37 +46,45 @@ const AddStudent = () => {
           <div>
             <input
               name="studentName"
-              value={studentData.studentName}
+              value={studentName}
               type="text"
               placeholder="Student Name "
-              onChange={handleChange}
+              onChange={(e) => {
+                setStudentName(e.target.value);
+              }}
             />
           </div>
           <div>
             <input
               name="studentEmail"
-              value={studentData.studentEmail}
+              value={studentEmail}
               type="email"
               placeholder="Enter Parent Email id "
-              onChange={handleChange}
+              onChange={(e) => {
+                setStudentEmail(e.target.value);
+              }}
             />
           </div>
           <div>
             <input
               name="studentStandard"
-              value={studentData.studentStandard}
+              value={studentStandard}
               type="Number"
               placeholder="Enter student Standard "
-              onChange={handleChange}
+              onChange={(e) => {
+                setStudentStandard(e.target.value);
+              }}
             />
           </div>
           <div>
             <input
               name="studentRollNo"
-              value={studentData.studentRollNo}
-              type="Number"
+              value={studentRollNo}
+              type="text"
               placeholder="Enter student RollNo "
-              onChange={handleChange}
+              onChange={(e) => {
+                setStudentRollNo(e.target.value);
+              }}
             />
           </div>
 

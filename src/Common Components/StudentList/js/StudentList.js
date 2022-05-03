@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, createContext, useContext } from "react";
+import { Link, UNSAFE_RouteContext } from "react-router-dom";
 import UpdateStudent from "../../../Model/UpdateStudent/js/updateStudent";
 
 import "../css/StudentList.css";
@@ -7,6 +7,7 @@ import "../css/StudentList.css";
 const StudentList = () => {
   const [users, setUser] = useState([]);
   const [value, setValue] = useState("");
+  const StudentContext = createContext();
   useEffect(() => {
     addStudent();
   }, []);

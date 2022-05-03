@@ -5,30 +5,32 @@ import axios from "axios";
 const AddParent = () => {
   /*modal useState*/
   const [modal, setModal] = useState(false);
-  const [parentData, setparentData] = useState({
-    parentName: "",
-    studentRollNo: "",
-    mobilenumber: "",
-    parentEmail: "",
-  });
+  const [parentName, setParentName] = useState("");
+  const [studentRollNo, setStudentRollNo] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [parentEmail, setParentEmail] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setparentData({ ...parentData, [name]: value });
-  };
-
+  //function use to save parent data into data base using post API
   const addParentData = () => {
-    const { parentName, studentRollNo, mobilenumber, parentEmail } = parentData;
+    console.log(
+      "Parent Data ",
+      parentName,
+      studentRollNo,
+      mobileNumber,
+      parentEmail
+    );
+    const parentData = { parentName, studentRollNo, mobileNumber, parentEmail };
 
-    if (parentName && studentRollNo && mobilenumber && parentEmail) {
+    if (parentName && studentRollNo && mobileNumber && parentEmail) {
       axios
         .post("http://localhost:8085/addParent", parentData)
         .then((res) => alert(res.data.message));
     } else {
       alert("Invalid");
     }
+    console.log("Student Parent  Data ", parentData);
+    localStorage.setItem("parentDetails", JSON.stringify(parentData));
   };
-
   return (
     <>
       <Modal
@@ -45,38 +47,46 @@ const AddParent = () => {
             <input
               name="parentName"
               type="text"
-              value={parentData.parentName}
+              value={parentName}
               placeholder="user name"
-              onChange={handleChange}
+              onChange={(e) => {
+                setParentName(e.target.value);
+              }}
             />
           </div>
           <div>
             <input
               name="studentRollNo"
               type="text"
-              value={parentData.studentRollNo}
+              value={studentRollNo}
               placeholder="student Roll No. "
-              onChange={handleChange}
+              onChange={(e) => {
+                setStudentRollNo(e.target.value);
+              }}
             />
           </div>
 
           <div>
             <input
-              name="mobilenumber"
+              name=" mobileNumber"
               type="number"
-              placeholder="mobilenumber"
-              value={parentData.mobilenumber}
-              onChange={handleChange}
+              placeholder=" mobileNumber"
+              value={mobileNumber}
+              onChange={(e) => {
+                setMobileNumber(e.target.value);
+              }}
             />
           </div>
 
           <div>
             <input
               name="parentEmail"
-              value={parentData.parentEmail}
+              value={parentEmail}
               type="email"
               placeholder="email"
-              onChange={handleChange}
+              onChange={(e) => {
+                setParentEmail(e.target.value);
+              }}
             />
           </div>
 

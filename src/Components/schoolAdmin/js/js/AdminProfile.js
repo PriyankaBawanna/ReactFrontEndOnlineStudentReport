@@ -9,10 +9,10 @@ const AdminProfile = ({ setLoginUser }) => {
 
   return (
     <>
-      <div class="dropdown">
+      <div className="dropdown">
         <span className="userProfile">User</span>
 
-        <div class="dropdown-content">
+        <div className="dropdown-content">
           <Logout />
         </div>
       </div>

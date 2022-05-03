@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-
 const UpdateStudent = (props) => {
   //   console.log("Student Id ", props.studentId);
 
@@ -100,7 +99,7 @@ const UpdateStudent = (props) => {
             <input
               name="studentRollNo"
               value={studentRollNo}
-              type="Number"
+              type="text"
               placeholder="Enter student RollNo "
               onChange={(e) => {
                 setStudentRollNo(e.target.value);
