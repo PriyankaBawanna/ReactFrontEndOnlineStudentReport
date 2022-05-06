@@ -18,6 +18,7 @@ const UpdateStudent = (props) => {
   }, []);
 
   const getStudentDetails = async () => {
+    console.log("Student Update Props ", props.studentId);
     let studentDetails = await fetch(
       `http://localhost:8085/studentInfo/${props.studentId}`
     );

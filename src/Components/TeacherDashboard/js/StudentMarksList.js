@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import StudentInformation from "../../../Common Components/StudentInformation/js/StudentInformation";
+import TermTwoMarkSheet from "../../ParentDashboard.js/js/TermTwoMarkSheet";
 
-const StudentMarksList = () => {
+const StudentMarksList = (marksProps) => {
   const [users, setUser] = useState([]);
   // const [termOneData, setTermOneData] = useState("");
   // const [termTwoData, setTermTwoData] = useState("");
@@ -13,6 +14,8 @@ const StudentMarksList = () => {
   //   termTwoData: {},
   //   termThreeData: {},
   // });
+
+  const [allTermData, setAllTermData] = useState([{}]);
 
   const [marks, setMarks] = useState({
     firstTerms: {},
@@ -25,14 +28,6 @@ const StudentMarksList = () => {
   useEffect(() => {
     addStudent();
   }, []);
-
-  // useEffect(() => {
-  //   marksDetails();
-  // }, []);
-
-  useEffect(() => {
-    fetchStudentMarksDetails();
-  }, []);
   const addStudent = async () => {
     fetch("http://localhost:8085/addStudent").then((result) => {
       result.json().then((resp) => {
@@ -42,42 +37,97 @@ const StudentMarksList = () => {
     });
   };
 
+  // useEffect(() => {
+  //   marksDetails();
+  // }, []);
+
+  // useEffect(() => {
+  //   fetchStudentMarksDetails();
+  // }, []);
+  // const addStudent = async () => {
+  //   const termOne = `http://localhost:8085/TermOneStudentMarksDetails`;
+  //   const termTwo = `http://localhost:8085/TermTwoStudentMarksDetails`;
+  //   const termThree = `http://localhost:8085/TermThreeStudentMarksDetails`;
+
+  //   const termOneMarks = axios.get(termOne);
+  //   const termTwoMarks = axios.get(termTwo);
+  //   const termThreeMarks = axios.get(termThree);
+
+  //   axios.all([termOneMarks, termTwoMarks, termThreeMarks]).then(
+  //     axios.spread((...allData) => {
+  //       console.log("all data", allData[1].data);
+  //       const termOneMarks = allData[0].data;
+  //       const termTwoMarks = allData[1].data;
+  //       const termThreeMarks = allData[2].data;
+
+  //       const termMarks = setMarks({
+  //         firstTerms: termOneMarks,
+  //         secondTerms: termTwoMarks,
+  //         thirdTerms: termThreeMarks,
+  //       });
+  //       console.log("Term", termMarks);
+
+  //       console.log("Term One  -----", termOneMarks, termTwoMarks, termThree);
+  //       console.log("Term Two mark", termTwoMarks);
+
+  //       const combine = termOneMarks.concat(termTwoMarks, termThreeMarks);
+
+  //       console.log("Combine", combine);
+  //       let deepCopy = JSON.parse(JSON.stringify(combine));
+  //       setUser(deepCopy);
+  //       console.log("Deep copy  ", deepCopy);
+  //     })
+  //   );
+  // };
+
   //API
-  const fetchStudentMarksDetails = () => {
-    const termOne = `http://localhost:8085/TermOneStudentMarksDetails`;
-    const termTwo = `http://localhost:8085/TermTwoStudentMarksDetails`;
-    const termThree = `http://localhost:8085/TermThreeStudentMarksDetails`;
+  // fetch("http://localhost:8085/addStudent").then((result) => {
+  //   result.json().then((resp) => {
+  //     // console.warn(resp)
+  //     setUser(resp);
+  //   });
+  // });
+  // const addStudent = async () => {
+  //   const termOne = `http://localhost:8085/TermOneStudentMarksDetails`;
+  //   const termTwo = `http://localhost:8085/TermTwoStudentMarksDetails`;
+  //   const termThree = `http://localhost:8085/TermThreeStudentMarksDetails`;
 
-    const termOneMarks = axios.get(termOne);
-    const termTwoMarks = axios.get(termTwo);
-    const termThreeMarks = axios.get(termThree);
+  //   const termOneMarks = axios.get(termOne);
+  //   const termTwoMarks = axios.get(termTwo);
+  //   const termThreeMarks = axios.get(termThree);
 
-    axios.all([termOneMarks, termTwoMarks, termThreeMarks]).then(
-      axios.spread((...allData) => {
-        console.log("all data", allData[1].data);
-        const termOneMarks = allData[0].data;
-        const termTwoMarks = allData[1].data;
-        const termThreeMarks = allData[2].data;
-        // setTermOneData(termOneMarks);
-        // console.log("Term One Student ", termOneMarks);
-        // setTermTwoData(termTwoMarks);
-        // console.log("Term Two Student Data", termTwoMarks);
-        // setTermThreeData(termThreeMarks);
-        // console.log("Term Three Student Data ", termThreeMarks);
+  //   axios.all([termOneMarks, termTwoMarks, termThreeMarks]).then(
+  //     axios.spread((...allData) => {
+  //       console.log("all data", allData[1].data);
+  //       const termOneMarks = allData[0].data;
+  //       const termTwoMarks = allData[1].data;
+  //       const termThreeMarks = allData[2].data;
+  //       // setTermOneData(termOneMarks);
+  //       // console.log("Term One Student ", termOneMarks);
+  //       // setTermTwoData(termTwoMarks);
+  //       // console.log("Term Two Student Data", termTwoMarks);
+  //       // setTermThreeData(termThreeMarks);
+  //       // console.log("Term Three Student Data ", termThreeMarks);
 
-        const termMarks = setMarks({
-          firstTerms: termOneMarks,
-          secondTerms: termTwoMarks,
-          thirdTerms: termThreeMarks,
-        });
-        console.log("Term", termMarks);
+  //       const termMarks = setMarks({
+  //         firstTerms: termOneMarks,
+  //         secondTerms: termTwoMarks,
+  //         thirdTerms: termThreeMarks,
+  //       });
+  //       console.log("Term", termMarks);
 
-        console.log("Term One  -----", termOneMarks, termTwoMarks, termThree);
-        console.log("Term Two mark", marks.secondTerms);
-        console.log("Term Three Data");
-      })
-    );
-  };
+  //       console.log("Term One  -----", termOneMarks, termTwoMarks, termThree);
+  //       console.log("Term Two mark", termTwoMarks);
+
+  //       const combine = termOneMarks.concat(termTwoMarks, termThreeMarks);
+
+  //       console.log("Combine", combine);
+  //       let deepCopy = JSON.parse(JSON.stringify(combine));
+  //       setUser(deepCopy);
+  //       console.log("Deep copy  ", allTermData[0].data);
+  //     })
+  //   );
+  // };
 
   const deleteStudent = async (id) => {
     console.log("user _id", id);
@@ -132,9 +182,9 @@ const StudentMarksList = () => {
               <td>{item.studentStandard}</td>
               <td>{item.studentRollNo}</td>
 
-              <td>{marks.firstTerms.Total}</td>
-              <td>Term Two</td>
-              <td>Term Three</td>
+              <td>{item.totalTermOneMarks}</td>
+              <td>{item.totalTermTwoMarks}</td>
+              <td>{item.totalTermThreeMarks}</td>
 
               <td>
                 <button
@@ -145,7 +195,7 @@ const StudentMarksList = () => {
                   Delete
                 </button>
 
-                <StudentInformation studentId={item._id} />
+                <StudentInformation student_id={item._id} />
               </td>
             </tr>
           ))}

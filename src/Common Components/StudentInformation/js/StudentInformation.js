@@ -1,46 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import UpdateStudent from "../../../Model/UpdateStudent/js/updateStudent";
 
 import "../css/studentInfo.css";
 const StudentInformation = (p) => {
+  const [termTotal, setTermTotal] = useState("");
+
   const [studentName, setStudentName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
   const [studentStandard, setStudentStandard] = useState("");
   const [studentRollNo, setStudentRollNo] = useState("");
   const [studentDataUpdate, SetStudentDataUpdate] = useState(false);
-  const [studentId, setStudentId] = useState(p.studentId);
-  const idOfStudent = studentId;
+  const [student_id, setStudent_id] = useState(p.student_id);
+  const idOfStudent = student_id;
 
   //Term Student Data
-  const [hindiMarks, setHindiMarks] = useState();
-  const [englishMarks, setEnglishMarks] = useState();
-  const [science, setScience] = useState();
-  const [socialScience, setSocialScience] = useState();
-  const [mathMarks, setMathMarks] = useState();
-  const [Total, setTotal] = useState();
+  const [hindiTermOneMarks, setHindiTermOneMarks] = useState();
+  const [englishTermOneMarks, setEnglishTermOneMarks] = useState();
+  const [scienceTermOneMarks, setScienceTermOneMarks] = useState();
+  const [socialScienceTermOneMarks, setSocialScienceTermOneMarks] = useState();
+  const [mathTermOneMarks, setMathTermOneMarks] = useState();
+  const [totalTermOneMarks, setTotalTermOneMarks] = useState();
   const [percentage, setPercentage] = useState("");
   const [grade, setGrade] = useState("");
 
   //Student Term two Marks
-  const [hindiMarksTermTwo, setHindiMarksTermTwo] = useState();
-  const [englishMarksTermTwo, setEnglishMarksTermTwo] = useState();
-  const [scienceTermTwo, setScienceTermTwo] = useState();
-  const [socialScienceTermTwo, setSocialScienceTermTwo] = useState();
-  const [mathMarksTermTwo, setMathMarksTermTwo] = useState();
-  const [TotalTermTwo, setTotalTermTwo] = useState();
+  const [hindiTermTwoMarks, sethindiTermTwoMarks] = useState();
+  const [englishTermTwoMarks, setEnglishTermTwoMarks] = useState();
+  const [scienceTermTwoMarks, setScienceTermTwoMarks] = useState();
+  const [socialScienceTermTwoMarks, setSocialScienceTermTwoMarks] = useState();
+  const [mathTermTwoMarks, setMathTermTwoMarks] = useState();
+  const [totalTermTwoMarks, setTotalTermTwoMarks] = useState();
   const [percentageTermTwo, setPercentageTermTwo] = useState("");
   const [gradeTermTwo, setGradeTermTwo] = useState("");
 
   //Student Term three Marks
-  const [hindiMarksTermThree, setHindiMarksTermThree] = useState();
-  const [englishMarksTermThree, setEnglishMarksTermThree] = useState();
-  const [scienceTermThree, setScienceTermThree] = useState();
-  const [socialScienceTermThree, setSocialScienceTermThree] = useState();
-  const [mathMarksTermThree, setMathMarksTermThree] = useState();
-  const [TotalTermThree, setTotalTermThree] = useState();
+  const [hindiTermThreeMarks, setHindiTermThreeMarks] = useState();
+  const [englishTermThreeMarks, setEnglishTermThreeMarks] = useState();
+  const [scienceTermThreeMarks, setScienceTermThreeMarks] = useState();
+  const [socialScienceTermThreeMarks, setSocialScienceTermThreeMarks] =
+    useState();
+  const [mathTermThreeMarks, setMathTermThreeMarks] = useState();
+  const [totalTermThreeMarks, setTotalTermThreeMarks] = useState();
   const [percentageTermThree, setPercentageTermThree] = useState("");
-  const [gradeTermThree, setGradeTermThree] = useState("");
+  const [gradeTermThree, setGradeTermThree] = useState("TotalMark");
 
   console.log(
     "Student Id in StudentInformation using useState  paas into the variable ",
@@ -54,40 +56,87 @@ const StudentInformation = (p) => {
   // console.log("Student Data : ", studentDataUpdate);
   useEffect(() => {
     getStudentDetails();
-    UpdateStudentData();
+    // UpdateStudentData();
   }, []);
+  const addStudentMarks = async () => {
+    if (totalTermOneMarks) {
+      console.warn(
+        "Student Marks",
+        studentEmail,
+        studentName,
+        studentRollNo,
+        studentStandard,
+        hindiTermOneMarks,
+        englishTermOneMarks,
+        scienceTermOneMarks,
+        socialScienceTermOneMarks,
+        mathTermOneMarks,
+        totalTermOneMarks,
+        percentage,
+        grade
+      );
+    }
+    alert("Data print hogya console me ");
 
-  //fetch Student Details
-  const UpdateStudentData = async (p) => {
-    console.log(studentName, studentEmail, studentStandard, studentRollNo);
-    let UpdateStudentData = await fetch(
-      `http://localhost:8085/studentUpdate/${p.studentId}`,
+    let addTermOneMarks = await fetch(
+      `http://localhost:8085/studentUpdate/${p.student_id}`,
       {
-        method: "Put",
+        method: "put",
         body: JSON.stringify({
           studentName,
           studentEmail,
           studentStandard,
           studentRollNo,
+          englishTermOneMarks,
+          hindiTermOneMarks,
+          scienceTermOneMarks,
+          socialScienceTermOneMarks,
+          mathTermOneMarks,
+          totalTermOneMarks,
         }),
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
-    UpdateStudentData = await UpdateStudentData.json();
-    console.log("Student update data");
-    if (UpdateStudentData) {
-      alert("student data update ");
+    addTermOneMarks = await addTermOneMarks.json();
+    if (addTermOneMarks) {
+      alert("success");
     }
-
     setModal(false);
   };
+
+  //fetch Student Details
+  // const UpdateStudentData = async (p) => {
+  //   console.log(studentName, studentEmail, studentStandard, studentRollNo);
+  //   let UpdateStudentData = await fetch(
+  //     `http://localhost:8085/studentUpdate/${p.student_id}`,
+  //     {
+  //       method: "Put",
+  //       body: JSON.stringify({
+  //         studentName,
+  //         studentEmail,
+  //         studentStandard,
+  //         studentRollNo,
+  //       }),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   );
+  //   UpdateStudentData = await UpdateStudentData.json();
+  //   console.log("Student update data");
+  //   if (UpdateStudentData) {
+  //     alert("student data update ");
+  //   }
+
+  //   setModal(false);
+  // };
 
   //fetch Student details on the list
   const getStudentDetails = async () => {
     let studentDetails = await fetch(
-      `http://localhost:8085/studentInfo/${p.studentId}`
+      `http://localhost:8085/studentInfo/${p.student_id}`
     );
 
     studentDetails = await studentDetails.json();
@@ -96,156 +145,112 @@ const StudentInformation = (p) => {
     setStudentEmail(studentDetails.studentEmail);
     setStudentStandard(studentDetails.studentStandard);
     setStudentRollNo(studentDetails.studentRollNo);
-    setStudentId(studentDetails.studentId);
-  };
-
-  //save Term one data
-  const addStudentMarks = () => {
-    if (Total) {
-      console.warn(
-        "Student Marks",
-        hindiMarks,
-        englishMarks,
-        science,
-        socialScience,
-        Total,
-        percentage,
-        grade
-      );
-      let StudentMarks = {
-        hindiMarks,
-        englishMarks,
-        science,
-        socialScience,
-        mathMarks,
-        Total,
-        percentage,
-        grade,
-        studentName,
-        studentEmail,
-        studentStandard,
-        studentRollNo,
-      };
-      fetch("http://localhost:8085/addStudentMarksStudent", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(StudentMarks),
-      }).then((result) => {
-        result.json().then((res) => {
-          console.warn("Student Response", res);
-          alert("Approved successfully");
-        });
-      });
-    } else {
-      alert("First Need to calculate Total Marks Of the Student ");
-    }
+    setStudent_id(studentDetails.student_id);
   };
 
   // Calling Term Two API for the  post  (saving) Data
-  const addStudentMarksTermTwo = () => {
-    if (TotalTermTwo) {
+  const addStudentMarksTermTwo = async () => {
+    if (totalTermTwoMarks) {
       console.warn(
         "Student Marks",
-
-        englishMarksTermTwo,
-        hindiMarksTermTwo,
-        scienceTermTwo,
-        socialScienceTermTwo,
-        mathMarksTermTwo,
-        TotalTermTwo,
-        percentageTermTwo,
-        gradeTermTwo
-      );
-      let StudentMarks = {
-        englishMarksTermTwo,
-        hindiMarksTermTwo,
-        scienceTermTwo,
-        socialScienceTermTwo,
-        mathMarksTermTwo,
-        TotalTermTwo,
-        percentageTermTwo,
-        gradeTermTwo,
-        studentName,
         studentEmail,
-        studentStandard,
+        studentName,
         studentRollNo,
-      };
-      fetch("http://localhost:8085/addStudentMarksStudentTermTwo", {
-        method: "POST",
+        studentStandard,
+        englishTermTwoMarks,
+        hindiTermTwoMarks,
+        scienceTermTwoMarks,
+        scienceTermTwoMarks,
+        socialScienceTermTwoMarks,
+        mathTermTwoMarks,
+        totalTermTwoMarks
+      );
+    }
+    alert("Data print hogya console me ");
+    let addTermTwoMarks = await fetch(
+      `http://localhost:8085/studentUpdate/${p.student_id}`,
+      {
+        method: "put",
+        body: JSON.stringify({
+          studentName,
+          studentEmail,
+          studentStandard,
+          studentRollNo,
+          englishTermTwoMarks,
+          hindiTermTwoMarks,
+          scienceTermTwoMarks,
+          scienceTermTwoMarks,
+          socialScienceTermTwoMarks,
+          mathTermTwoMarks,
+          totalTermTwoMarks,
+        }),
         headers: {
-          Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(StudentMarks),
-      }).then((result) => {
-        result.json().then((res) => {
-          console.warn("Student Response", res);
-          alert("Approved successfully");
-        });
-      });
-    } else {
-      alert("First Need to calculate Total Marks Of the Student ");
+      }
+    );
+    addTermTwoMarks = await addTermTwoMarks.json();
+    if (addTermTwoMarks) {
+      alert("Success");
     }
+    setModal(false);
   };
 
-  const addStudentMarksTermThree = () => {
-    if (TotalTermThree) {
-      console.warn(
-        "Student Marks",
-
-        englishMarksTermThree,
-        hindiMarksTermThree,
-        scienceTermThree,
-        socialScienceTermThree,
-        mathMarksTermThree,
-        TotalTermThree,
-        percentageTermThree,
-        gradeTermThree
-      );
-      let StudentMarks = {
-        englishMarksTermThree,
-        hindiMarksTermThree,
-        scienceTermThree,
-        socialScienceTermThree,
-        mathMarksTermThree,
-        TotalTermThree,
-        percentageTermThree,
-        gradeTermThree,
-        studentName,
+  const addStudentMarksTermThree = async () => {
+    if (totalTermThreeMarks) {
+      console.log(
+        "Student Term Three ",
         studentEmail,
-        studentStandard,
+        studentName,
         studentRollNo,
-      };
-      fetch("http://localhost:8085/addStudentMarksStudentTermThree", {
-        method: "POST",
+        studentStandard,
+        englishTermThreeMarks,
+        hindiTermThreeMarks,
+        scienceTermThreeMarks,
+        socialScienceTermThreeMarks,
+        mathTermThreeMarks,
+        totalTermThreeMarks
+      );
+    }
+
+    alert("Data Print in Console ");
+    let addTermThreeMarks = await fetch(
+      `http://localhost:8085/studentUpdate/${p.student_id}`,
+      {
+        method: "put",
+        body: JSON.stringify({
+          studentEmail,
+          studentName,
+          studentRollNo,
+          studentStandard,
+          englishTermThreeMarks,
+          hindiTermThreeMarks,
+          scienceTermThreeMarks,
+          socialScienceTermThreeMarks,
+          mathTermThreeMarks,
+          totalTermThreeMarks,
+        }),
         headers: {
-          Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(StudentMarks),
-      }).then((result) => {
-        result.json().then((res) => {
-          console.warn("Student Response", res);
-          alert("Approved successfully");
-        });
-      });
-    } else {
-      alert("First Need to calculate Total Marks Of the Student ");
+      }
+    );
+    addTermThreeMarks = await addTermThreeMarks.json();
+    if (addTermThreeMarks) {
+      alert("Success");
     }
+    setModal(false);
   };
 
   //calculating Term three Marks of the student
   const TotalMarksTermThree = () => {
     const TotalSumTermThree =
-      Number(englishMarksTermThree) +
-      Number(hindiMarksTermThree) +
-      Number(mathMarksTermThree) +
-      Number(scienceTermThree) +
-      Number(socialScienceTermThree);
-    setTotalTermThree(TotalSumTermThree);
+      Number(englishTermThreeMarks) +
+      Number(hindiTermThreeMarks) +
+      Number(mathTermThreeMarks) +
+      Number(scienceTermThreeMarks) +
+      Number(socialScienceTermThreeMarks);
+    setTotalTermThreeMarks(TotalSumTermThree);
     console.log("total Marks ", TotalSumTermThree);
     const percentageTermThree = (TotalSumTermThree / 500) * 100;
     setPercentageTermThree(percentageTermThree);
@@ -266,12 +271,12 @@ const StudentInformation = (p) => {
   //calculating term one marks of the student
   const TotalMarks = () => {
     const TotalSum =
-      Number(englishMarks) +
-      Number(hindiMarks) +
-      Number(mathMarks) +
-      Number(science) +
-      Number(socialScience);
-    setTotal(TotalSum);
+      Number(englishTermOneMarks) +
+      Number(hindiTermOneMarks) +
+      Number(mathTermOneMarks) +
+      Number(scienceTermOneMarks) +
+      Number(socialScienceTermOneMarks);
+    setTotalTermOneMarks(TotalSum);
     console.log("total Marks ", TotalSum);
     const percentage = (TotalSum / 500) * 100;
     setPercentage(percentage);
@@ -289,15 +294,17 @@ const StudentInformation = (p) => {
     }
   };
 
+  useEffect(() => {});
+
   //calculating term two marks of the student
   const TotalMarksTermTwo = () => {
     const TotalSumTermTwo =
-      Number(englishMarksTermTwo) +
-      Number(hindiMarksTermTwo) +
-      Number(mathMarksTermTwo) +
-      Number(scienceTermTwo) +
-      Number(socialScienceTermTwo);
-    setTotalTermTwo(TotalSumTermTwo);
+      Number(englishTermTwoMarks) +
+      Number(hindiTermTwoMarks) +
+      Number(mathTermTwoMarks) +
+      Number(scienceTermTwoMarks) +
+      Number(socialScienceTermTwoMarks);
+    setTotalTermTwoMarks(TotalSumTermTwo);
     console.log("total Marks ", TotalSumTermTwo);
     const percentageTermTwo = (TotalSumTermTwo / 500) * 100;
     setPercentageTermTwo(percentageTermTwo);
@@ -314,6 +321,7 @@ const StudentInformation = (p) => {
       setGradeTermTwo("A++");
     }
   };
+
   return (
     <>
       <Modal
@@ -403,11 +411,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={englishMarks}
+                              value={englishTermOneMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setEnglishMarks(e.target.value);
+                                setEnglishTermOneMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -418,11 +426,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={hindiMarks}
+                              value={hindiTermOneMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setHindiMarks(e.target.value);
+                                setHindiTermOneMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -433,11 +441,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={science}
+                              value={scienceTermOneMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setScience(e.target.value);
+                                setScienceTermOneMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -448,11 +456,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={socialScience}
+                              value={socialScienceTermOneMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setSocialScience(e.target.value);
+                                setSocialScienceTermOneMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -463,11 +471,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="text"
-                              value={mathMarks}
+                              value={mathTermOneMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setMathMarks(e.target.value);
+                                setMathTermOneMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -481,11 +489,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="text"
-                              value={Total}
+                              value={totalTermOneMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setTotal(e.target.value);
+                                setTotalTermOneMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -528,11 +536,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={englishMarksTermTwo}
+                              value={englishTermTwoMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setEnglishMarksTermTwo(e.target.value);
+                                setEnglishTermTwoMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -543,11 +551,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={hindiMarksTermTwo}
+                              value={hindiTermTwoMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setHindiMarksTermTwo(e.target.value);
+                                sethindiTermTwoMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -558,11 +566,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={scienceTermTwo}
+                              value={scienceTermTwoMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setScienceTermTwo(e.target.value);
+                                setScienceTermTwoMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -573,11 +581,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={socialScienceTermTwo}
+                              value={socialScienceTermTwoMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setSocialScienceTermTwo(e.target.value);
+                                setSocialScienceTermTwoMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -588,11 +596,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="text"
-                              value={mathMarksTermTwo}
+                              value={mathTermTwoMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setMathMarksTermTwo(e.target.value);
+                                setMathTermTwoMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -606,11 +614,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="text"
-                              value={TotalTermTwo}
+                              value={totalTermTwoMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setTotalTermTwo(e.target.value);
+                                setTotalTermTwoMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -655,11 +663,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={englishMarksTermThree}
+                              value={englishTermThreeMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setEnglishMarksTermThree(e.target.value);
+                                setEnglishTermThreeMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -670,11 +678,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={hindiMarksTermThree}
+                              value={hindiTermThreeMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setHindiMarksTermThree(e.target.value);
+                                setHindiTermThreeMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -685,11 +693,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={scienceTermThree}
+                              value={scienceTermThreeMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setScienceTermThree(e.target.value);
+                                setScienceTermThreeMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -700,11 +708,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={socialScienceTermThree}
+                              value={socialScienceTermThreeMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setSocialScienceTermThree(e.target.value);
+                                setSocialScienceTermThreeMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -715,11 +723,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="text"
-                              value={mathMarksTermThree}
+                              value={mathTermThreeMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setMathMarksTermThree(e.target.value);
+                                setMathTermThreeMarks(e.target.value);
                               }}
                             />
                           </td>
@@ -733,11 +741,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="text"
-                              value={TotalTermThree}
+                              value={totalTermThreeMarks}
                               type="text"
                               className="inputMarks"
                               onChange={(e) => {
-                                setTotalTermThree(e.target.value);
+                                setTotalTermThreeMarks(e.target.value);
                               }}
                             />
                           </td>
