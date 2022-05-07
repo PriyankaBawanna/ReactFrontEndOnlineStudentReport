@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../css/ParentDashboard.css";
+
+import { UserContext } from "../../../Common Components/LoginPage/js/ParentLogin";
 const TermOneMarkSheet = () => {
+  const [termOne, setTermOne] = useState("");
+  const studentRollNumber = useContext(UserContext);
+
+  useEffect(() => {
+    termOneResult();
+  }, []);
+  const termOneResult = () => {
+    fetch(`http://localhost:8085/StudentResultTermThree/786`).then((result) => {
+      result.json().then((res) => {
+        setTermOne(res);
+      });
+    });
+  };
+
   return (
     <>
       <div className="markSheet">
         <>
+          <div className="studentInfo">
+            <p>Student Name :</p>
+            <p>Student Roll No :</p>
+          </div>
           <h3>Term One</h3>
           <table>
             <tr>
@@ -55,7 +75,9 @@ const TermOneMarkSheet = () => {
                 <p>Grade</p>
               </td>
 
-              <td></td>
+              <td>
+                <h1> Student Roll {studentRollNumber}</h1>
+              </td>
             </tr>
             <tr></tr>
           </table>

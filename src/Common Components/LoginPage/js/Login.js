@@ -13,12 +13,13 @@ const LoginPage = ({ setLoginUser }) => {
 
   const navigate = useNavigate();
 
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
 
   const login = () => {
+    const user = { email, password };
     axios.post("http://localhost:8085/login", user).then((res) => {
       let LoginStatus = res.data.message;
       console.log("user data", res.data.user);
@@ -29,18 +30,6 @@ const LoginPage = ({ setLoginUser }) => {
         navigate("/SchoolAdmin", { replace: true });
       }
     });
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    console.log("Handle change console log ");
-    console.log("Handle change console log ", e.target.value);
-    setUser({
-      ...user,
-      [name]: value,
-    });
-    switch (e.target.value) {
-    }
   };
 
   const LoginHandler = (e) => {
@@ -54,24 +43,57 @@ const LoginPage = ({ setLoginUser }) => {
 
       <form onSubmit={LoginHandler}>
         <h1>Login</h1>
-        {console.log("user", user)}
+
         <div>
           <input
             name="email"
-            value={user.email}
+            value={email}
             type="email"
             placeholder="email"
-            onChange={handleChange}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              let emailValidation = e.target.value;
+              console.log("email Validation ", emailValidation);
+              const regEx =
+                /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+              if (regEx.test(emailValidation)) {
+                console.log("emailValidation is Valid");
+                setEmailError(false);
+              } else if (
+                !regEx.test(emailValidation) &&
+                emailValidation !== ""
+              ) {
+                console.log("emailValidation is Not Valid");
+                setEmailError(true);
+              }
+            }}
           />
+          {emailError ? <span>Email not valid</span> : <span></span>}
         </div>
         <div>
           <input
             name="password"
-            value={user.password}
+            value={password}
             type="password"
             placeholder="enter the password "
-            onChange={handleChange}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              let passwordError = e.target.value;
+              if (passwordError.length < 5) {
+                setPasswordError(true);
+              } else {
+                setPasswordError(false);
+              }
+              setPassword(passwordError);
+            }}
           />
+          {passwordError ? (
+            <span>Length must be greater than 5</span>
+          ) : (
+            <span></span>
+          )}
+        </div>
+        <div>
           <button type="submit" onClick={login}>
             Login
           </button>

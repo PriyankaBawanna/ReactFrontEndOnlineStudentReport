@@ -5,6 +5,10 @@ const TermTwoMarkSheet = () => {
     <>
       <div className="markSheet">
         <>
+          <div className="studentInfo">
+            <p>Student Name :</p>
+            <p>Student Roll No :</p>
+          </div>
           <h3> Term Two </h3>
           <table>
             <tr>

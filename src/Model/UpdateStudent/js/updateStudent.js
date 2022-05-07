@@ -13,6 +13,10 @@ const UpdateStudent = (props) => {
   const [studentStandard, setStudentStandard] = useState("");
   const [studentRollNo, setStudentRollNo] = useState("");
 
+  const [studentNameError, setStudentNameError] = useState(false);
+  const [studentEmailError, setStudentEmailError] = useState(false);
+  const [studentStandardError, setStudentStandardError] = useState(false);
+
   useEffect(() => {
     getStudentDetails();
   }, []);
@@ -71,8 +75,18 @@ const UpdateStudent = (props) => {
               value={studentName}
               type="text"
               placeholder="Student Name "
-              onChange={(e) => setStudentName(e.target.value)}
+              onChange={(e) => {
+                setStudentName(e.target.value);
+                let nameLength = e.target.value.length;
+                console.log("user Name ", nameLength);
+                if (nameLength < 3) {
+                  setStudentNameError(true);
+                } else {
+                  setStudentNameError(false);
+                }
+              }}
             />
+            {studentNameError ? <span>user not valid</span> : <span></span>}
           </div>
           <div>
             <input
@@ -82,8 +96,23 @@ const UpdateStudent = (props) => {
               placeholder="Enter Parent Email id "
               onChange={(e) => {
                 setStudentEmail(e.target.value);
+                let emailValidation = e.target.value;
+
+                const regEx =
+                  /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+                if (regEx.test(emailValidation)) {
+                  console.log("emailValidation is Valid");
+                  setStudentEmailError(false);
+                } else if (
+                  !regEx.test(emailValidation) &&
+                  emailValidation !== ""
+                ) {
+                  console.log("emailValidation is Not Valid");
+                  setStudentEmailError(true);
+                }
               }}
             />
+            {studentEmailError ? <span>Email not valid</span> : <span></span>}
           </div>
           <div>
             <input
@@ -93,8 +122,20 @@ const UpdateStudent = (props) => {
               placeholder="Enter student Standard "
               onChange={(e) => {
                 setStudentStandard(e.target.value);
+                let studentStandard = e.target.value;
+                console.log("student Standard", studentStandard);
+                if (studentStandard > 12) {
+                  setStudentStandardError(true);
+                } else {
+                  setStudentStandardError(false);
+                }
               }}
             />
+            {studentStandardError ? (
+              <span> class 1 st to 12 th </span>
+            ) : (
+              <span></span>
+            )}
           </div>
           <div>
             <input

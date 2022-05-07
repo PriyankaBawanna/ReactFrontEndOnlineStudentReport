@@ -23,7 +23,7 @@ const AddParent = () => {
 
     if (parentName && studentRollNo && mobileNumber && parentEmail) {
       axios
-        .post("http://localhost:8085/addParent", parentData)
+        .post(`http://localhost:8085/addParent/${studentRollNo}`, parentData)
         .then((res) => alert(res.data.message));
     } else {
       alert("Invalid");

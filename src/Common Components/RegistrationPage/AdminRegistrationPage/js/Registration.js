@@ -3,24 +3,24 @@ import { Link } from "react-router-dom";
 import HomeLink from "../../../../Components/Home/js/HomeLink";
 import axios from "axios";
 const Registration = () => {
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-    ReEnterPassword: "",
-  });
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [reEnterPassword, setReEnterPassword] = useState("");
+  const [nameError, setNameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [reEnterPasswordError, setReEnterPasswordError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value,
-    });
+    e.preventDefault();
   };
+  console.log("Input filed User Name", name.length);
+
   const register = () => {
-    const { name, email, password, ReEnterPassword } = user;
+    const user = { name, email, password, reEnterPassword };
+    console.log("user Name ", name.l);
     if (name && email && password) {
-      if (password === ReEnterPassword) {
+      if (password === reEnterPassword) {
         axios
           .post("http://localhost:8085/register", user)
           .then((res) => alert(res.data.message));
@@ -30,55 +30,118 @@ const Registration = () => {
     } else {
       alert("Invalid");
     }
+    setEmail("");
+    setName("");
+    setPassword("");
+    setReEnterPassword("");
   };
 
   return (
     <>
       <HomeLink />
       <h1>Admin Registration Page</h1>
-      {console.log("user", user)}
-      <div>
+      <form onSubmit={handleChange}>
         <div>
-          <input
-            name="name"
-            value={user.name}
-            type="text"
-            placeholder="user name"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <input
-            name="email"
-            value={user.email}
-            type="email"
-            placeholder="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <input
-            name="password"
-            value={user.password}
-            type="password"
-            placeholder="enter the password "
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <input
-            name="ReEnterPassword"
-            value={user.ReEnterPassword}
-            type="password"
-            placeholder="Re enter the password "
-            onChange={handleChange}
-          />
-        </div>
+          <div>
+            <input
+              name="name"
+              value={name}
+              type="text"
+              placeholder="user name"
+              onChange={(e) => {
+                setName(e.target.value);
+                let nameLength = e.target.value.length;
+                console.log("user Name ", nameLength);
+                if (nameLength < 3) {
+                  setNameError(true);
+                } else {
+                  setNameError(false);
+                }
+              }}
+            />
+            {nameError ? <span>user not valid</span> : <span></span>}
+          </div>
+          <div>
+            <input
+              name="email"
+              value={email}
+              type="email"
+              placeholder="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+                let emailValidation = e.target.value;
+                console.log("email Validation ", emailValidation);
+                const regEx =
+                  /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+                if (regEx.test(emailValidation)) {
+                  console.log("emailValidation is Valid");
+                  setEmailError(false);
+                } else if (
+                  !regEx.test(emailValidation) &&
+                  emailValidation !== ""
+                ) {
+                  console.log("emailValidation is Not Valid");
+                  setEmailError(true);
+                }
+              }}
+            />
+            {emailError ? <span>Email not valid</span> : <span></span>}
+          </div>
+          <div>
+            <input
+              name="password"
+              value={password}
+              type="password"
+              placeholder="enter the password "
+              onChange={(e) => {
+                setPassword(e.target.value);
+                let passwordError = e.target.value;
+                if (passwordError.length < 5) {
+                  setPasswordError(true);
+                } else {
+                  setPasswordError(false);
+                }
+                setPassword(passwordError);
+              }}
+            />
+            {passwordError ? (
+              <span>Length must be greater than 5</span>
+            ) : (
+              <span></span>
+            )}
+          </div>
+          <div>
+            <input
+              name="ReEnterPassword"
+              value={reEnterPassword}
+              type="password"
+              placeholder="Re enter the password "
+              onChange={(e) => {
+                setReEnterPassword(e.target.value);
+                let reenterPasswordValidation = e.target.value;
+                console.log("first pass word filed", password);
+                console.log("ReEnter PAss Word ", reenterPasswordValidation);
+                if (password === reEnterPassword) {
+                  console.log("true password match ");
+                  setReEnterPasswordError(true);
+                } else {
+                  console.log("password is not match ");
+                  setReEnterPasswordError(false);
+                }
+              }}
+            />
+            {reEnterPasswordError ? (
+              <span>password not match </span>
+            ) : (
+              <span></span>
+            )}
+          </div>
 
-        <button type="submit" onClick={register}>
-          Register
-        </button>
-      </div>
+          <button type="submit" onClick={register}>
+            Register
+          </button>
+        </div>
+      </form>
     </>
   );
 };

@@ -11,6 +11,10 @@ const UpdateTeacher = (prop) => {
   const [teacherMobileNo, setTeacherMobileNo] = useState("");
   const [teacherEmailId, setTeacherEmailId] = useState("");
 
+  const [teacherNameError, setTeacherNameError] = useState(false);
+  const [teacherMobileNoError, setTeacherMobileNoError] = useState(false);
+  const [teacherEmailError, setTeacherEmailError] = useState(false);
+  //
   useEffect(() => {
     getTeacherDetails();
   }, []);
@@ -66,8 +70,18 @@ const UpdateTeacher = (prop) => {
               value={teacherName}
               type="text"
               placeholder="Student Name "
-              onChange={(e) => setTeacherName(e.target.value)}
+              onChange={(e) => {
+                setTeacherName(e.target.value);
+                let nameLength = e.target.value.length;
+                console.log("user Name ", nameLength);
+                if (nameLength < 3) {
+                  setTeacherNameError(true);
+                } else {
+                  setTeacherNameError(false);
+                }
+              }}
             />
+            {teacherNameError ? <span>user not valid</span> : <span></span>}
           </div>
           <div>
             <input
@@ -77,8 +91,23 @@ const UpdateTeacher = (prop) => {
               placeholder="Enter Parent Email id "
               onChange={(e) => {
                 setTeacherEmailId(e.target.value);
+                let emailValidation = e.target.value;
+                console.log("email Validation ", emailValidation);
+                const regEx =
+                  /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+                if (regEx.test(emailValidation)) {
+                  console.log("emailValidation is Valid");
+                  setTeacherEmailError(false);
+                } else if (
+                  !regEx.test(emailValidation) &&
+                  emailValidation !== ""
+                ) {
+                  console.log("emailValidation is Not Valid");
+                  setTeacherEmailError(true);
+                }
               }}
             />
+            {teacherEmailError ? <span>Email not valid</span> : <span></span>}
           </div>
           <div>
             <input
@@ -88,8 +117,19 @@ const UpdateTeacher = (prop) => {
               placeholder="Mobile Number"
               onChange={(e) => {
                 setTeacherMobileNo(e.target.value);
+                let passwordError = e.target.value;
+                if (passwordError.length < 10) {
+                  setTeacherMobileNoError(true);
+                } else {
+                  setTeacherMobileNoError(false);
+                }
               }}
             />
+            {teacherMobileNoError ? (
+              <span>Mobile Number Must be equal to 10 digit</span>
+            ) : (
+              <span></span>
+            )}
           </div>
           <div>
             <input

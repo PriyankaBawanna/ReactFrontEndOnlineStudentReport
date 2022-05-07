@@ -7,7 +7,7 @@ const ParentDashboard = () => {
   return (
     <>
       <ParentHeader />
-      <StudentMarkSheet />
+
       <nav>
         <Link to="TermOneMarkSheet">Term One</Link>
         <Link to="TermTwoMarkSheet">Term Two</Link>

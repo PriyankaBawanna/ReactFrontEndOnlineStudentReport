@@ -4,6 +4,10 @@ const FinalExam = () => {
   return (
     <>
       <div className="markSheet">
+        <div className="studentInfo">
+          <p>Student Name :</p>
+          <p>Student Roll No :</p>
+        </div>
         <>
           <h3> Final Exam</h3>
           <table>

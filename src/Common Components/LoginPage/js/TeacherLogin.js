@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 const TeacherLogin = () => {
   const [teacherEmailId, setTeacherEmailId] = useState("");
   const [teacherNo, setTeacherNo] = useState("");
+  const [teacherEmailError, setTeacherEmailError] = useState(false);
+  const [teacherNoError, setTeacherNoError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -39,18 +41,49 @@ const TeacherLogin = () => {
             name="teacherEmailId"
             type="teacherEmailId"
             placeholder="Teacher teacherEmailId Id"
-            onChange={(e) => setTeacherEmailId(e.target.value)}
             value={teacherEmailId}
+            onChange={(e) => {
+              setTeacherEmailId(e.target.value);
+
+              let teacherEmailValidation = e.target.value;
+              const regEx =
+                /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+              if (regEx.test(teacherEmailValidation)) {
+                console.log("teacherEmailValidation is Valid");
+                setTeacherEmailError(false);
+              } else if (
+                !regEx.test(teacherEmailValidation) &&
+                teacherEmailValidation !== ""
+              ) {
+                console.log("emailValidation is Not Valid");
+                setTeacherEmailError(true);
+              }
+            }}
           />
+          {teacherEmailError ? <span>Email not valid</span> : <span></span>}
         </div>
         <div>
           <input
             name="text"
             type="text"
             placeholder="enter Teacher ID"
-            onChange={(e) => setTeacherNo(e.target.value)}
             value={teacherNo}
+            onChange={(e) => {
+              setTeacherNo(e.target.value);
+              let passwordError = e.target.value;
+              if (passwordError.length < 2) {
+                setTeacherNoError(true);
+              } else {
+                setTeacherNoError(false);
+              }
+              setTeacherNo(passwordError);
+            }}
           />
+          {teacherNoError ? (
+            <span>Teacher Id greater than 2</span>
+          ) : (
+            <span></span>
+          )}
         </div>
         <button type="submit" onClick={handleTeacherLogin}>
           Login
