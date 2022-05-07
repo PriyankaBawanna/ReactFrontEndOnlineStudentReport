@@ -25,6 +25,8 @@ const LoginPage = ({ setLoginUser }) => {
       console.log("user data", res.data.user);
       alert(LoginStatus);
 
+      localStorage.setItem("userDetails", JSON.stringify(user));
+
       if (LoginStatus === "Login Sucessfull") {
         setLoginUser(true);
         navigate("/SchoolAdmin", { replace: true });

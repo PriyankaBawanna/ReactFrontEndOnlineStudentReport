@@ -3,27 +3,55 @@ import "../css/ParentDashboard.css";
 
 import { UserContext } from "../../../Common Components/LoginPage/js/ParentLogin";
 const TermOneMarkSheet = () => {
-  const [termOne, setTermOne] = useState("");
+  const [termOne, setTermOne] = useState([]);
+  const [studentDetail, setStudentDetail] = useState([]);
   const studentRollNumber = useContext(UserContext);
 
   useEffect(() => {
     termOneResult();
+    studentDetails();
   }, []);
   const termOneResult = () => {
-    fetch(`http://localhost:8085/StudentResultTermThree/786`).then((result) => {
+    fetch(
+      `http://localhost:8085/StudentResultTermThree/${getStudentRollNo}`
+    ).then((result) => {
       result.json().then((res) => {
         setTermOne(res);
       });
     });
   };
+  console.log("TermOne Data ", termOne);
+  let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
+  console.log("Getting Student Details ", parentDetails);
+  const getStudentRollNo = parentDetails.studentRollNo;
 
+  const studentDetails = () => {
+    fetch(`http://localhost:8085/StudentResult/${getStudentRollNo}`).then(
+      (result) => {
+        result.json().then((res) => {
+          setStudentDetail(res);
+        });
+      }
+    );
+  };
+  console.log("student details is Term One ", studentDetail);
   return (
     <>
       <div className="markSheet">
         <>
           <div className="studentInfo">
-            <p>Student Name :</p>
-            <p>Student Roll No :</p>
+            <table id="customers">
+              <tbody>
+                {studentDetail.map((item, i) => (
+                  <tr key={i}>
+                    <p>Student Name : {item.studentName}</p>
+                    <p>Student Email : {item.studentEmail}</p>
+                    <p>Student Standard :{item.studentStandard}</p>
+                    <p>Student Roll Number : {item.studentRollNo}</p>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
           <h3>Term One</h3>
           <table>
@@ -74,13 +102,22 @@ const TermOneMarkSheet = () => {
               <td>
                 <p>Grade</p>
               </td>
-
-              <td>
-                <h1> Student Roll {studentRollNumber}</h1>
-              </td>
             </tr>
-            <tr></tr>
           </table>
+          <div>
+            {termOne.map((data, j) => {
+              <p key={j}>
+                <p>Student Name {data.studentName}</p>
+
+                <p>{data.studentStandard}</p>
+                <p>{data.studentRollNo}</p>
+
+                <p>{data.totalTermOneMarks}</p>
+                <p>{data.totalTermTwoMarks}</p>
+                <p>{data.totalTermThreeMarks}</p>
+              </p>;
+            })}
+          </div>
         </>
       </div>
     </>
