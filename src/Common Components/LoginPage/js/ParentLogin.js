@@ -7,7 +7,7 @@ const ParentLogin = () => {
   const [parentEmail, setParentEmail] = useState("");
   const [studentRollNo, setStudentRollNo] = useState("");
   const [parentEmailError, setParentEmailError] = useState(false);
-  const [studentRollNoError, setStudentRollNoError] = useState(false);
+
   const studentRollNumber = studentRollNo;
   console.log("Number ", studentRollNumber);
 
@@ -73,9 +73,7 @@ const ParentLogin = () => {
               type="text"
               placeholder="Enter Student Roll No "
               value={studentRollNo}
-              onChange={(e) => {
-                setStudentRollNo(e.target.value);
-              }}
+              onChange={(e) => setStudentRollNo(e.target.value)}
             />
           </div>
           <button type="submit" onClick={handleParentLogin}>

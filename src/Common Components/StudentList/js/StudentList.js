@@ -25,7 +25,7 @@ const StudentList = () => {
 
   const deleteStudent = async (id) => {
     console.log("user _id", id);
-    let result = await fetch(`http://localhost:8085/StudentSearch/${id}`, {
+    let result = await fetch(`${id}`, {
       method: "Delete",
     });
     result = await result.json();

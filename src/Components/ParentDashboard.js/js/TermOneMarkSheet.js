@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/ParentDashboard.css";
 
-import { UserContext } from "../../../Common Components/LoginPage/js/ParentLogin";
 const TermOneMarkSheet = () => {
   const [termOne, setTermOne] = useState([]);
   const [studentDetail, setStudentDetail] = useState([]);
-  const studentRollNumber = useContext(UserContext);
 
   useEffect(() => {
     termOneResult();
@@ -13,7 +11,7 @@ const TermOneMarkSheet = () => {
   }, []);
   const termOneResult = () => {
     fetch(
-      `http://localhost:8085/StudentResultTermThree/${getStudentRollNo}`
+      `http://localhost:8085/StudentResultTermOne/${getStudentRollNo}`
     ).then((result) => {
       result.json().then((res) => {
         setTermOne(res);
@@ -40,83 +38,74 @@ const TermOneMarkSheet = () => {
       <div className="markSheet">
         <>
           <div className="studentInfo">
-            <table id="customers">
-              <tbody>
-                {studentDetail.map((item, i) => (
-                  <tr key={i}>
-                    <p>Student Name : {item.studentName}</p>
-                    <p>Student Email : {item.studentEmail}</p>
-                    <p>Student Standard :{item.studentStandard}</p>
-                    <p>Student Roll Number : {item.studentRollNo}</p>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            {studentDetail.map((item, i) => (
+              <p key={i}>
+                <p>Student Name : {item.studentName}</p>
+                <p>Student Email : {item.studentEmail}</p>
+                <p>Student Standard :{item.studentStandard}</p>
+                <p>Student Roll Number : {item.studentRollNo}</p>
+              </p>
+            ))}
           </div>
-          <h3>Term One</h3>
-          <table>
-            <tr>
-              <th>Subject</th>
-              <th>MAX Marks</th>
-              <th>Marks Obtained</th>
-            </tr>
-            <tr>
-              <td>English</td>
-              <td>100</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Hindi</td>
-              <td>100</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Science</td>
-              <td>100</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Social Science</td>
-              <td>100</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Maths</td>
-              <td>100</td>
-              <td></td>
-            </tr>
 
-            <tr>
-              <td></td>
-              <td>500</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <p>percentage</p>
-              </td>
-
-              <td>%</td>
-            </tr>
-            <tr>
-              <td>
+          <div className="termMarks">
+            <div className="headingSubjects">
+              <div>
+                <p>
+                  <b>Subject</b>
+                </p>
+              </div>
+              <div>
+                <p>English</p>
+                <p>Hindi</p>
+                <p>Science</p>
+                <p>Social Science</p>
+                <p>Maths</p>
+                <p>Total</p>
+                <p>Percentage</p>
                 <p>Grade</p>
-              </td>
-            </tr>
-          </table>
-          <div>
-            {termOne.map((data, j) => {
-              <p key={j}>
-                <p>Student Name {data.studentName}</p>
+              </div>
+            </div>
+            <div className="marksHeading">
+              <div>
+                <p>
+                  <b>Max Marks</b>
+                </p>
+              </div>
+              <div>
+                <p>100</p>
+                <p>100</p>
+                <p>100</p>
+                <p>100</p>
+                <p>100</p>
+                <p>100</p>
+                <p>100%</p>
+                <p>-</p>
 
-                <p>{data.studentStandard}</p>
-                <p>{data.studentRollNo}</p>
-
-                <p>{data.totalTermOneMarks}</p>
-                <p>{data.totalTermTwoMarks}</p>
-                <p>{data.totalTermThreeMarks}</p>
-              </p>;
-            })}
+                <p></p>
+              </div>
+            </div>
+            <div className=">marksObtained">
+              <div>
+                <p>
+                  <b>Marks Obtained </b>
+                </p>
+              </div>
+              <div>
+                {termOne.map((item, i) => (
+                  <p key={i}>
+                    <p>{item.englishTermOneMarks}</p>
+                    <p>{item.hindiTermOneMarks}</p>
+                    <p>{item.scienceTermOneMarks}</p>
+                    <p>{item.socialScienceTermOneMarks}</p>
+                    <p> {item.mathTermOneMarks}</p>
+                    <p>{item.totalTermOneMarks}</p>
+                    <p>{item.percentage}</p>
+                    <p>{item.grade}</p>
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
         </>
       </div>

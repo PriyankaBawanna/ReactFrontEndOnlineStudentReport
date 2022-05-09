@@ -32,6 +32,12 @@ const AddStudent = () => {
     } else {
       alert("Invalid");
     }
+    setModal(false);
+    setStudentEmail("");
+    setStudentName("");
+    setStudentRollNo("");
+    setStudentStandard("");
+    localStorage.setItem("studentDetails", JSON.stringify(studentData));
   };
 
   return (

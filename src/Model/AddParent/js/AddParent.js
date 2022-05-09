@@ -30,6 +30,11 @@ const AddParent = () => {
     }
     console.log("Student Parent  Data ", parentData);
     localStorage.setItem("parentDetails", JSON.stringify(parentData));
+    setModal(false);
+    parentName("");
+    parentEmail("");
+    setStudentRollNo("");
+    setParentEmail("");
   };
   return (
     <>

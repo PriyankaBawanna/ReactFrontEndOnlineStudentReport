@@ -15,14 +15,6 @@ const StudentMarksList = (marksProps) => {
   //   termThreeData: {},
   // });
 
-  const [allTermData, setAllTermData] = useState([{}]);
-
-  const [marks, setMarks] = useState({
-    firstTerms: {},
-    secondTerms: {},
-    thirdTerms: {},
-  });
-
   // inside function
 
   useEffect(() => {

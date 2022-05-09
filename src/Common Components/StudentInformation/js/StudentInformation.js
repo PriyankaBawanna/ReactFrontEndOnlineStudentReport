@@ -58,6 +58,7 @@ const StudentInformation = (p) => {
     getStudentDetails();
     // UpdateStudentData();
   }, []);
+  //post Method for saving Term One Student data
   const addStudentMarks = async () => {
     if (totalTermOneMarks) {
       console.warn(
@@ -76,7 +77,6 @@ const StudentInformation = (p) => {
         grade
       );
     }
-    alert("Data print hogya console me ");
 
     let addTermOneMarks = await fetch(
       `http://localhost:8085/studentUpdate/${p.student_id}`,
@@ -93,6 +93,8 @@ const StudentInformation = (p) => {
           socialScienceTermOneMarks,
           mathTermOneMarks,
           totalTermOneMarks,
+          percentage,
+          grade,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -105,33 +107,6 @@ const StudentInformation = (p) => {
     }
     setModal(false);
   };
-
-  //fetch Student Details
-  // const UpdateStudentData = async (p) => {
-  //   console.log(studentName, studentEmail, studentStandard, studentRollNo);
-  //   let UpdateStudentData = await fetch(
-  //     `http://localhost:8085/studentUpdate/${p.student_id}`,
-  //     {
-  //       method: "Put",
-  //       body: JSON.stringify({
-  //         studentName,
-  //         studentEmail,
-  //         studentStandard,
-  //         studentRollNo,
-  //       }),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  //   UpdateStudentData = await UpdateStudentData.json();
-  //   console.log("Student update data");
-  //   if (UpdateStudentData) {
-  //     alert("student data update ");
-  //   }
-
-  //   setModal(false);
-  // };
 
   //fetch Student details on the list
   const getStudentDetails = async () => {
@@ -166,7 +141,7 @@ const StudentInformation = (p) => {
         totalTermTwoMarks
       );
     }
-    alert("Data print hogya console me ");
+
     let addTermTwoMarks = await fetch(
       `http://localhost:8085/studentUpdate/${p.student_id}`,
       {
@@ -183,6 +158,8 @@ const StudentInformation = (p) => {
           socialScienceTermTwoMarks,
           mathTermTwoMarks,
           totalTermTwoMarks,
+          percentageTermTwo,
+          gradeTermTwo,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -213,7 +190,6 @@ const StudentInformation = (p) => {
       );
     }
 
-    alert("Data Print in Console ");
     let addTermThreeMarks = await fetch(
       `http://localhost:8085/studentUpdate/${p.student_id}`,
       {
@@ -229,6 +205,8 @@ const StudentInformation = (p) => {
           socialScienceTermThreeMarks,
           mathTermThreeMarks,
           totalTermThreeMarks,
+          percentageTermThree,
+          gradeTermThree,
         }),
         headers: {
           "Content-Type": "application/json",

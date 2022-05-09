@@ -35,6 +35,11 @@ const AddTeacher = () => {
       alert("Invalid");
     }
     localStorage.setItem("teacherDetails", JSON.stringify(teacherData));
+    setModal(false);
+    setTeacherNo("");
+    setTeacherName("");
+    setTeacherEmailId("");
+    setTeacherMobileNo("");
   };
 
   return (

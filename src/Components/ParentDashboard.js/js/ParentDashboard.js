@@ -1,6 +1,6 @@
 import React from "react";
 import ParentHeader from "./ParentHeader";
-import StudentMarkSheet from "../js/StudentMarkSheet";
+
 import "../css/ParentDashboard.css";
 import { Link, Outlet } from "react-router-dom";
 const ParentDashboard = () => {
