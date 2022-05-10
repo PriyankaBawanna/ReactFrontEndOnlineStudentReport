@@ -15,6 +15,14 @@ const StudentMarksList = (marksProps) => {
   //   termThreeData: {},
   // });
 
+  const [allTermData, setAllTermData] = useState([{}]);
+
+  const [marks, setMarks] = useState({
+    firstTerms: {},
+    secondTerms: {},
+    thirdTerms: {},
+  });
+
   // inside function
 
   useEffect(() => {
@@ -28,98 +36,6 @@ const StudentMarksList = (marksProps) => {
       });
     });
   };
-
-  // useEffect(() => {
-  //   marksDetails();
-  // }, []);
-
-  // useEffect(() => {
-  //   fetchStudentMarksDetails();
-  // }, []);
-  // const addStudent = async () => {
-  //   const termOne = `http://localhost:8085/TermOneStudentMarksDetails`;
-  //   const termTwo = `http://localhost:8085/TermTwoStudentMarksDetails`;
-  //   const termThree = `http://localhost:8085/TermThreeStudentMarksDetails`;
-
-  //   const termOneMarks = axios.get(termOne);
-  //   const termTwoMarks = axios.get(termTwo);
-  //   const termThreeMarks = axios.get(termThree);
-
-  //   axios.all([termOneMarks, termTwoMarks, termThreeMarks]).then(
-  //     axios.spread((...allData) => {
-  //       console.log("all data", allData[1].data);
-  //       const termOneMarks = allData[0].data;
-  //       const termTwoMarks = allData[1].data;
-  //       const termThreeMarks = allData[2].data;
-
-  //       const termMarks = setMarks({
-  //         firstTerms: termOneMarks,
-  //         secondTerms: termTwoMarks,
-  //         thirdTerms: termThreeMarks,
-  //       });
-  //       console.log("Term", termMarks);
-
-  //       console.log("Term One  -----", termOneMarks, termTwoMarks, termThree);
-  //       console.log("Term Two mark", termTwoMarks);
-
-  //       const combine = termOneMarks.concat(termTwoMarks, termThreeMarks);
-
-  //       console.log("Combine", combine);
-  //       let deepCopy = JSON.parse(JSON.stringify(combine));
-  //       setUser(deepCopy);
-  //       console.log("Deep copy  ", deepCopy);
-  //     })
-  //   );
-  // };
-
-  //API
-  // fetch("http://localhost:8085/addStudent").then((result) => {
-  //   result.json().then((resp) => {
-  //     // console.warn(resp)
-  //     setUser(resp);
-  //   });
-  // });
-  // const addStudent = async () => {
-  //   const termOne = `http://localhost:8085/TermOneStudentMarksDetails`;
-  //   const termTwo = `http://localhost:8085/TermTwoStudentMarksDetails`;
-  //   const termThree = `http://localhost:8085/TermThreeStudentMarksDetails`;
-
-  //   const termOneMarks = axios.get(termOne);
-  //   const termTwoMarks = axios.get(termTwo);
-  //   const termThreeMarks = axios.get(termThree);
-
-  //   axios.all([termOneMarks, termTwoMarks, termThreeMarks]).then(
-  //     axios.spread((...allData) => {
-  //       console.log("all data", allData[1].data);
-  //       const termOneMarks = allData[0].data;
-  //       const termTwoMarks = allData[1].data;
-  //       const termThreeMarks = allData[2].data;
-  //       // setTermOneData(termOneMarks);
-  //       // console.log("Term One Student ", termOneMarks);
-  //       // setTermTwoData(termTwoMarks);
-  //       // console.log("Term Two Student Data", termTwoMarks);
-  //       // setTermThreeData(termThreeMarks);
-  //       // console.log("Term Three Student Data ", termThreeMarks);
-
-  //       const termMarks = setMarks({
-  //         firstTerms: termOneMarks,
-  //         secondTerms: termTwoMarks,
-  //         thirdTerms: termThreeMarks,
-  //       });
-  //       console.log("Term", termMarks);
-
-  //       console.log("Term One  -----", termOneMarks, termTwoMarks, termThree);
-  //       console.log("Term Two mark", termTwoMarks);
-
-  //       const combine = termOneMarks.concat(termTwoMarks, termThreeMarks);
-
-  //       console.log("Combine", combine);
-  //       let deepCopy = JSON.parse(JSON.stringify(combine));
-  //       setUser(deepCopy);
-  //       console.log("Deep copy  ", allTermData[0].data);
-  //     })
-  //   );
-  // };
 
   const deleteStudent = async (id) => {
     console.log("user _id", id);

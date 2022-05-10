@@ -37,7 +37,9 @@ const AddStudent = () => {
     setStudentName("");
     setStudentRollNo("");
     setStudentStandard("");
-    localStorage.setItem("studentDetails", JSON.stringify(studentData));
+
+    //save the Student Detail into Local Storage
+    // localStorage.setItem("studentDetails", JSON.stringify(studentData));
   };
 
   return (
