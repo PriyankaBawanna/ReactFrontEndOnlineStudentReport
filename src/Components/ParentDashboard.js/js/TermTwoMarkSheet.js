@@ -1,31 +1,34 @@
 import "../css/ParentDashboard.css";
-
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const TermTwoMarkSheet = () => {
-  const [termTwo, settermTwo] = useState([]);
+  const [termTwo, setTermTwo] = useState([]);
   const [studentDetail, setStudentDetail] = useState([]);
+  const [approveStatus, setApproveStatus] = useState("Approve");
+  const [rejectStatus, setRejectStatus] = useState("Reject");
+  const [termTwoResultStatus, setTermTwoResultStatus] = useState("");
 
   useEffect(() => {
     termTwoResult();
     studentDetails();
   }, []);
   const termTwoResult = () => {
-    fetch(
-      `http://localhost:8085/StudentResultTermTwo/${getStudentRollNo}`
-    ).then((result) => {
-      result.json().then((res) => {
-        settermTwo(res);
-      });
-    });
+    fetch(`http://localhost:8085/StudentResultTermTwo/${studentRollNo}`).then(
+      (result) => {
+        result.json().then((res) => {
+          setTermTwo(res);
+        });
+      }
+    );
   };
   console.log("termTwo Data ", termTwo);
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
   console.log("Getting Student Details ", parentDetails);
-  const getStudentRollNo = parentDetails.studentRollNo;
+  const studentRollNo = parentDetails.studentRollNo;
 
   const studentDetails = () => {
-    fetch(`http://localhost:8085/StudentResult/${getStudentRollNo}`).then(
+    fetch(`http://localhost:8085/StudentResult/${studentRollNo}`).then(
       (result) => {
         result.json().then((res) => {
           setStudentDetail(res);
@@ -34,6 +37,43 @@ const TermTwoMarkSheet = () => {
     );
   };
   console.log("student details is Term One ", studentDetail);
+
+  const termResultStatusApproveStatus = () => {
+    console.log("Result Status ", studentRollNo);
+    setTermTwoResultStatus(approveStatus);
+    console.log("term Two Status ", termTwoResultStatus);
+    const approveStats = { termTwoResultStatus, studentRollNo };
+    if (termTwoResultStatus && studentRollNo) {
+      console.log("Roll Number", studentRollNo);
+      axios
+
+        .post(
+          `http://localhost:8085/statusTermTwo/${studentRollNo}`,
+          approveStats
+        )
+        .then((res) => alert(res.data.message));
+    } else {
+      alert("error");
+    }
+  };
+
+  const termResultStatusRejectStatus = () => {
+    console.log("Result Status ");
+    const resultRejectStatus = { rejectStatus, studentRollNo };
+    setTermTwoResultStatus(rejectStatus);
+    if (rejectStatus && studentRollNo) {
+      console.log("Roll Number", studentRollNo);
+      axios
+
+        .post(
+          `http://localhost:8085/statusTermTwo/${studentRollNo}`,
+          resultRejectStatus
+        )
+        .then((res) => alert(res.data.message));
+    } else {
+      alert("error");
+    }
+  };
   return (
     <>
       <div className="markSheet">
@@ -109,6 +149,24 @@ const TermTwoMarkSheet = () => {
             </div>
           </div>
         </>
+      </div>
+      <div className="approvalStatusParent">
+        <div>
+          <button
+            className="approvalButton"
+            onClick={termResultStatusApproveStatus}
+          >
+            Approve
+          </button>
+        </div>
+        <div>
+          <button
+            className="rejectButton"
+            onClick={termResultStatusRejectStatus}
+          >
+            Reject
+          </button>
+        </div>
       </div>
     </>
   );
