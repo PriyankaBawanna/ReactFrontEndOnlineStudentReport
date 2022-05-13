@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UpdateTeacher from "../../Model/UpdateTeacher/js/UpdateTeacher";
+import AddTeacher from "../../Model/AddTeacher/js/AddTeacher";
 const TeacherList = () => {
   const [users, setUser] = useState([]);
   const [value, setValue] = useState("");
@@ -43,9 +44,13 @@ const TeacherList = () => {
       addTeacher();
     }
   };
+  function getData() {
+    addTeacher();
+  }
 
   return (
     <>
+      <AddTeacher teacherData={getData} />
       <input type="text" placeholder="Search Teacher" onChange={searchHandle} />
       <table id="customers">
         <tr>

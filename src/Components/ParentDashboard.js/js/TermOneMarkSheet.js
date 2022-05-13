@@ -5,8 +5,7 @@ import "../css/ParentDashboard.css";
 const TermOneMarkSheet = () => {
   const [termOne, setTermOne] = useState([]);
   const [studentDetail, setStudentDetail] = useState([]);
-  const [approveStatus, setApproveStatus] = useState("Approve");
-  const [rejectStatus, setRejectStatus] = useState("Reject");
+
   const [termOneResultStatus, setTermOneResultStatus] = useState("");
   useEffect(() => {
     termOneResult();
@@ -21,6 +20,7 @@ const TermOneMarkSheet = () => {
       }
     );
   };
+
   console.log("TermOne Data ", termOne);
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
   console.log("Getting Student Details ", parentDetails);
@@ -38,15 +38,33 @@ const TermOneMarkSheet = () => {
   console.log("student details is Term One ", studentDetail);
 
   const termResultStatusApproveStatus = () => {
-    setTermOneResultStatus(approveStatus);
+    setTermOneResultStatus("Approve");
     console.log("Result Status ", termOneResultStatus, studentRollNo);
-    const approveStats = { termOneResultStatus, studentRollNo };
+    const approveStatusResult = { termOneResultStatus, studentRollNo };
     if (termOneResultStatus && studentRollNo) {
       console.log("Roll Number", studentRollNo);
       axios
 
-        .post(`http://localhost:8085/status/${studentRollNo}`, approveStats)
-        .then((res) => alert(res.data.message));
+        .post(
+          `http://localhost:8085/status/${studentRollNo}`,
+          approveStatusResult
+        )
+        .then((res) => {
+          alert(res.data.message);
+          console.log("User Response --", res.data.message);
+          if (res.data.message === "Response Submitted") {
+            const studentRollNo = parentDetails.studentRollNo;
+            axios
+              .get(
+                `http://localhost:8085/getResultStatusTermOne/${studentRollNo}`
+              )
+              .then((resp) => {
+                console.log(resp.data);
+              });
+          } else {
+            console.log("OutSide ");
+          }
+        });
     } else {
       alert("error");
     }
@@ -54,7 +72,7 @@ const TermOneMarkSheet = () => {
 
   const termResultStatusRejectStatus = () => {
     console.log("Result Status ");
-    setTermOneResultStatus(rejectStatus);
+    setTermOneResultStatus("Reject");
     const resultRejectStatus = { termOneResultStatus, studentRollNo };
     if (termOneResultStatus && studentRollNo) {
       console.log("Roll Number", studentRollNo);
@@ -64,7 +82,20 @@ const TermOneMarkSheet = () => {
           `http://localhost:8085/status/${studentRollNo}`,
           resultRejectStatus
         )
-        .then((res) => alert(res.data.message));
+        .then((res) => {
+          alert(res.data.message);
+          console.log("User Response --", res.data.message);
+          if (res.data.message === "Response Submitted") {
+            const studentRollNo = parentDetails.studentRollNo;
+            axios
+              .get(`http://localhost:8085/getResultStatus/${studentRollNo}`)
+              .then((resp) => {
+                console.log(resp.data);
+              });
+          } else {
+            console.log("OutSide ");
+          }
+        });
     } else {
       alert("error");
     }

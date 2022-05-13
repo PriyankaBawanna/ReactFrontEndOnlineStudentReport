@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import { Link, UNSAFE_RouteContext } from "react-router-dom";
+import AddStudent from "../../../Model/AddStudent/js/AddStudent";
 import UpdateStudent from "../../../Model/UpdateStudent/js/updateStudent";
 
 import "../css/StudentList.css";
@@ -7,10 +8,14 @@ import "../css/StudentList.css";
 const StudentList = () => {
   const [users, setUser] = useState([]);
   const [value, setValue] = useState("");
+  const [studentDetails, setStudentDetails] = useState(0);
+  const [deleteStudentData, setDeleteStudentData] = useState("");
   const StudentContext = createContext();
   useEffect(() => {
     addStudent();
   }, []);
+
+  //use to Show Student  details /List
   const addStudent = async () => {
     const addStudent = fetch("http://localhost:8085/addStudent").then(
       (result) => {
@@ -23,17 +28,33 @@ const StudentList = () => {
   };
   console.warn(users);
 
-  const deleteStudent = async (id) => {
-    console.log("user _id", id);
-    let result = await fetch(`http://localhost:8085/student/${id}`, {
-      method: "Delete",
-    });
+  //delete the student data as well as parent data
+  const deleteStudent = async (studentRollNo) => {
+    console.log("user _id", studentRollNo);
+    let result = await fetch(
+      `http://localhost:8085/StudentDelete/${studentRollNo}`,
+      {
+        method: "Delete",
+      }
+    );
     result = await result.json();
-    if (result) {
-      console.log("record is deleted ");
-      addStudent();
-    }
+
+    console.log("record is deleted ");
+    console.log("deleteStudentData", deleteStudentData);
+    setDeleteStudentData("true");
+    console.log("deleteStudentData", deleteStudentData);
+
+    let parentData = await fetch(
+      `http://localhost:8085/parentDelete/${studentRollNo}`,
+      {
+        method: "Delete",
+      }
+    );
+    parentData = await parentData.json();
+
+    addStudent();
   };
+  //search on the basis od student name
   const searchHandle = async (e) => {
     console.warn(e.target.value);
     let key = e.target.value;
@@ -48,8 +69,12 @@ const StudentList = () => {
       addStudent();
     }
   };
+  function getData() {
+    addStudent();
+  }
   return (
     <>
+      <AddStudent data={getData} />
       <input type="text" placeholder="Search student" onChange={searchHandle} />
       <table id="customers">
         <h3>List of Student</h3>
@@ -74,7 +99,7 @@ const StudentList = () => {
               <td>
                 <button
                   onClick={() => {
-                    deleteStudent(item._id);
+                    deleteStudent(item.studentRollNo);
                   }}
                 >
                   Delete

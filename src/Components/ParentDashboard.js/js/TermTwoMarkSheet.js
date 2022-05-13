@@ -8,6 +8,7 @@ const TermTwoMarkSheet = () => {
   const [approveStatus, setApproveStatus] = useState("Approve");
   const [rejectStatus, setRejectStatus] = useState("Reject");
   const [termTwoResultStatus, setTermTwoResultStatus] = useState("");
+  const [noResult, setNoResult] = useState("");
 
   useEffect(() => {
     termTwoResult();
@@ -23,6 +24,11 @@ const TermTwoMarkSheet = () => {
     );
   };
   console.log("termTwo Data ", termTwo);
+  if (termTwo[0]) {
+    console.log("Inside");
+  } else {
+    console.log("OutSide");
+  }
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
   console.log("Getting Student Details ", parentDetails);
   const studentRollNo = parentDetails.studentRollNo;
@@ -51,7 +57,21 @@ const TermTwoMarkSheet = () => {
           `http://localhost:8085/statusTermTwo/${studentRollNo}`,
           approveStats
         )
-        .then((res) => alert(res.data.message));
+        .then((res) => {
+          alert(res.data.message);
+          console.log("User Response --", res.data.message);
+          if (res.data.message === "Response Submitted") {
+            const studentRollNo = parentDetails.studentRollNo;
+            axios
+              .get(
+                `http://localhost:8085/getResultStatusTermTwo/${studentRollNo}`
+              )
+              .then((resp) => {
+                console.log(resp.data);
+              });
+          } else {
+          }
+        });
     } else {
       alert("error");
     }
@@ -59,7 +79,7 @@ const TermTwoMarkSheet = () => {
 
   const termResultStatusRejectStatus = () => {
     console.log("Result Status ");
-    const resultRejectStatus = { rejectStatus, studentRollNo };
+    const resultRejectStatus = { termTwoResultStatus, studentRollNo };
     setTermTwoResultStatus(rejectStatus);
     if (rejectStatus && studentRollNo) {
       console.log("Roll Number", studentRollNo);
@@ -69,7 +89,20 @@ const TermTwoMarkSheet = () => {
           `http://localhost:8085/statusTermTwo/${studentRollNo}`,
           resultRejectStatus
         )
-        .then((res) => alert(res.data.message));
+        .then((res) => {
+          alert(res.data.message);
+          console.log("User Response --", res.data.message);
+          if (res.data.message === "Response Submitted") {
+            const studentRollNo = parentDetails.studentRollNo;
+            axios
+              .get(`http://localhost:8085/getResultStatus/${studentRollNo}`)
+              .then((resp) => {
+                console.log(resp.data);
+              });
+          } else {
+            console.log("OutSide ");
+          }
+        });
     } else {
       alert("error");
     }

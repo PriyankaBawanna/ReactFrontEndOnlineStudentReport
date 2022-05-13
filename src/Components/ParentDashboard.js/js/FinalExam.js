@@ -50,7 +50,20 @@ const FinalExam = () => {
           `http://localhost:8085/statusTermThree/${studentRollNo}`,
           approveStats
         )
-        .then((res) => alert(res.data.message));
+        .then((res) => {
+          alert(res.data.message);
+          console.log("User Response --", res.data.message);
+          if (res.data.message === "Response Submitted") {
+            const studentRollNo = parentDetails.studentRollNo;
+            axios
+              .get(`http://localhost:8085/getResultStatus/${studentRollNo}`)
+              .then((resp) => {
+                console.log(resp.data);
+              });
+          } else {
+            console.log("OutSide ");
+          }
+        });
     } else {
       alert("error");
     }
@@ -68,7 +81,20 @@ const FinalExam = () => {
           `http://localhost:8085/statusTermThree/${studentRollNo}`,
           resultRejectStatus
         )
-        .then((res) => alert(res.data.message));
+        .then((res) => {
+          alert(res.data.message);
+          console.log("User Response --", res.data.message);
+          if (res.data.message === "Response Submitted") {
+            const studentRollNo = parentDetails.studentRollNo;
+            axios
+              .get(`http://localhost:8085/getResultStatus/${studentRollNo}`)
+              .then((resp) => {
+                console.log(resp.data);
+              });
+          } else {
+            console.log("OutSide ");
+          }
+        });
     } else {
       alert("error");
     }

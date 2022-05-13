@@ -1,19 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import StudentInformation from "../../../Common Components/StudentInformation/js/StudentInformation";
+import AddStudent from "../../../Model/AddStudent/js/AddStudent";
 import TermTwoMarkSheet from "../../ParentDashboard.js/js/TermTwoMarkSheet";
 
 const StudentMarksList = (marksProps) => {
   const [users, setUser] = useState([]);
-  // const [termOneData, setTermOneData] = useState("");
-  // const [termTwoData, setTermTwoData] = useState("");
-  // const [termThreeData, setTermThreeData] = useState("");
-
-  // const [mark, setMarks] = useState({
-  //   termOneData: {},
-  //   termTwoData: {},
-  //   termThreeData: {},
-  // });
 
   const [allTermData, setAllTermData] = useState([{}]);
 
@@ -37,16 +29,20 @@ const StudentMarksList = (marksProps) => {
     });
   };
 
-  const deleteStudent = async (id) => {
-    console.log("user _id", id);
-    let result = await fetch(`http://localhost:8085/student/${id}`, {
-      method: "Delete",
-    });
+  const deleteStudent = async (studentRollNo) => {
+    console.log("studentRollNo", studentRollNo);
+    let result = await fetch(
+      `http://localhost:8085/StudentDelete/${studentRollNo}`,
+      {
+        method: "Delete",
+      }
+    );
     result = await result.json();
     if (result) {
       console.log("record is deleted ");
       addStudent();
     }
+    console.log("parent delete karo");
   };
 
   const searchHandle = async (e) => {
@@ -64,8 +60,13 @@ const StudentMarksList = (marksProps) => {
     }
   };
 
+  function getData() {
+    addStudent();
+  }
+
   return (
     <>
+      <AddStudent data={getData} />
       <table id="customers">
         <h3>List of Student</h3>
         <input
@@ -97,7 +98,7 @@ const StudentMarksList = (marksProps) => {
               <td>
                 <button
                   onClick={() => {
-                    deleteStudent(item._id);
+                    deleteStudent(item.studentRollNo);
                   }}
                 >
                   Delete

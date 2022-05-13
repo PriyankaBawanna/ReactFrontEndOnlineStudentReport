@@ -9,9 +9,7 @@ const TeacherDashBoard = () => {
     <>
       <h1>Teacher Dashboard </h1>
       <div className="teacher-header">
-        <div>
-          <AddStudent />
-        </div>
+        <div></div>
 
         <div>
           <TeacherProfile />

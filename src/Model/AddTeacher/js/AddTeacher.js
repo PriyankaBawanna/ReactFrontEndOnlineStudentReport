@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-const AddTeacher = () => {
+const AddTeacher = (props) => {
   /*modal useState*/
   const [modal, setModal] = useState(false);
 
@@ -30,16 +30,12 @@ const AddTeacher = () => {
     if (teacherNo && teacherName && teacherEmailId && teacherMobileNo) {
       axios
         .post("http://localhost:8085/addTeacher", teacherData)
-        .then((res) => alert(res.data.message));
+        .then((res) => alert(res.data.message))
+        .then(alert("please confirm "));
     } else {
       alert("Invalid");
     }
     localStorage.setItem("teacherDetails", JSON.stringify(teacherData));
-    setModal(false);
-    setTeacherNo("");
-    setTeacherName("");
-    setTeacherEmailId("");
-    setTeacherMobileNo("");
   };
 
   return (
@@ -138,6 +134,7 @@ const AddTeacher = () => {
           <button type="submit" onClick={addTeacherData}>
             Add
           </button>
+          <button onClick={props.teacherData}>Confirm</button>
         </ModalBody>
       </Modal>
       <button onClick={() => setModal(true)}>Add Teacher</button>

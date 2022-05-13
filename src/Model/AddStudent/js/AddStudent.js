@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 // import "../css/AddStudent.css";
 import "../css/AddStudent.css";
-const AddStudent = () => {
+const AddStudent = (prop) => {
   /*modal useState*/
   const [modal, setModal] = useState(false);
   /*input form state validation use state*/
@@ -17,7 +17,7 @@ const AddStudent = () => {
   const [studentStandardError, setStudentStandardError] = useState(false);
 
   ////function use to save student data into data base using post API
-  const addStudentData = () => {
+  const addStudentData = (prop) => {
     console.log(studentName, studentEmail, studentStandard, studentRollNo);
     const studentData = {
       studentName,
@@ -28,18 +28,15 @@ const AddStudent = () => {
     if (studentName && studentEmail && studentStandard && studentRollNo) {
       axios
         .post(`http://localhost:8085/addStudent`, studentData)
-        .then((res) => alert(res.data.message));
+        .then((res) => alert(res.data.message))
+        .then(alert("please confirm "));
     } else {
       alert("Invalid");
     }
-    setModal(false);
-    setStudentEmail("");
-    setStudentName("");
-    setStudentRollNo("");
-    setStudentStandard("");
+    //setModal(false);
 
     //save the Student Detail into Local Storage
-    // localStorage.setItem("studentDetails", JSON.stringify(studentData));
+    localStorage.setItem("studentDetails", JSON.stringify(studentData));
   };
 
   return (
@@ -138,6 +135,7 @@ const AddStudent = () => {
           <button type="submit" onClick={addStudentData}>
             Add
           </button>
+          <button onClick={prop.data}>Confirm</button>
         </ModalBody>
       </Modal>
       <button onClick={() => setModal(true)}>Add Student</button>

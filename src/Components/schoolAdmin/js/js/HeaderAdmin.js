@@ -11,8 +11,6 @@ const HeaderAdmin = () => {
       <div className="adminHeader ">
         <div className="addUser">
           <AddParent />
-          <AddStudent />
-          <AddTeacher />
         </div>
         <div className="profile">
           <AdminProfile />
