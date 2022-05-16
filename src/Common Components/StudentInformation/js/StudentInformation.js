@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-
+//This Component is part of the teacher dashboard where with help of this  component teacher can be enter the Student Marks And make Result
 import "../css/studentInfo.css";
 const StudentInformation = (p) => {
   const [termTotal, setTermTotal] = useState("");
@@ -58,7 +58,7 @@ const StudentInformation = (p) => {
     getStudentDetails();
     // UpdateStudentData();
   }, []);
-  //post Method for saving Term One Student data
+  //post Method for saving Term One Student data (Student Subject Mark's and Student Information )
   const addStudentMarks = async () => {
     if (totalTermOneMarks) {
       console.warn(
@@ -77,38 +77,53 @@ const StudentInformation = (p) => {
         grade
       );
     }
-
-    let addTermOneMarks = await fetch(
-      `http://localhost:8085/studentUpdate/${p.student_id}`,
-      {
-        method: "put",
-        body: JSON.stringify({
-          studentName,
-          studentEmail,
-          studentStandard,
-          studentRollNo,
-          englishTermOneMarks,
-          hindiTermOneMarks,
-          scienceTermOneMarks,
-          socialScienceTermOneMarks,
-          mathTermOneMarks,
-          totalTermOneMarks,
-          percentage,
-          grade,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    if (
+      studentEmail &&
+      studentName &&
+      studentRollNo &&
+      studentStandard &&
+      hindiTermOneMarks &&
+      englishTermOneMarks &&
+      scienceTermOneMarks &&
+      socialScienceTermOneMarks &&
+      mathTermOneMarks &&
+      totalTermOneMarks &&
+      percentage &&
+      grade
+    ) {
+      let addTermOneMarks = await fetch(
+        `http://localhost:8085/studentUpdate/${p.student_id}`,
+        {
+          method: "put",
+          body: JSON.stringify({
+            studentName,
+            studentEmail,
+            studentStandard,
+            studentRollNo,
+            englishTermOneMarks,
+            hindiTermOneMarks,
+            scienceTermOneMarks,
+            socialScienceTermOneMarks,
+            mathTermOneMarks,
+            totalTermOneMarks,
+            percentage,
+            grade,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      addTermOneMarks = await addTermOneMarks.json();
+      if (addTermOneMarks) {
+        alert("Please Confirm ");
       }
-    );
-    addTermOneMarks = await addTermOneMarks.json();
-    if (addTermOneMarks) {
-      alert("success");
+    } else {
+      alert("Please enter all filed ");
     }
-    setModal(false);
   };
 
-  //fetch Student details on the list
+  //fetch Student details on the list  which is show the student Name ,Roll Number and Marks
   const getStudentDetails = async () => {
     let studentDetails = await fetch(
       `http://localhost:8085/studentInfo/${p.student_id}`
@@ -168,10 +183,13 @@ const StudentInformation = (p) => {
     );
     addTermTwoMarks = await addTermTwoMarks.json();
     if (addTermTwoMarks) {
-      alert("Success");
+      alert("Please Confirm ");
+    } else {
+      alert("Please enter all filed ");
     }
-    setModal(false);
   };
+
+  //Term Three is used To Print
 
   const addStudentMarksTermThree = async () => {
     if (totalTermThreeMarks) {
@@ -215,9 +233,10 @@ const StudentInformation = (p) => {
     );
     addTermThreeMarks = await addTermThreeMarks.json();
     if (addTermThreeMarks) {
-      alert("Success");
+      alert("Please Confirm ");
+    } else {
+      alert("Please enter all filed ");
     }
-    setModal(false);
   };
 
   //calculating Term three Marks of the student
@@ -246,60 +265,7 @@ const StudentInformation = (p) => {
     }
   };
 
-  //calculating term one marks of the student
-  const TotalMarks = () => {
-    const TotalSum =
-      Number(englishTermOneMarks) +
-      Number(hindiTermOneMarks) +
-      Number(mathTermOneMarks) +
-      Number(scienceTermOneMarks) +
-      Number(socialScienceTermOneMarks);
-    setTotalTermOneMarks(TotalSum);
-    console.log("total Marks ", TotalSum);
-    const percentage = (TotalSum / 500) * 100;
-    setPercentage(percentage);
-
-    if (percentage < 29) {
-      setGrade("FAIL");
-    } else if (percentage >= 30 && percentage <= 45) {
-      setGrade("c");
-    } else if (percentage >= 46 && percentage <= 59) {
-      setGrade("B");
-    } else if (percentage >= 60 && percentage <= 79) {
-      setGrade("A");
-    } else if (percentage >= 80) {
-      setGrade("A++");
-    }
-  };
-
   useEffect(() => {});
-
-  //calculating term two marks of the student
-  const TotalMarksTermTwo = () => {
-    const TotalSumTermTwo =
-      Number(englishTermTwoMarks) +
-      Number(hindiTermTwoMarks) +
-      Number(mathTermTwoMarks) +
-      Number(scienceTermTwoMarks) +
-      Number(socialScienceTermTwoMarks);
-    setTotalTermTwoMarks(TotalSumTermTwo);
-    console.log("total Marks ", TotalSumTermTwo);
-    const percentageTermTwo = (TotalSumTermTwo / 500) * 100;
-    setPercentageTermTwo(percentageTermTwo);
-
-    if (percentageTermTwo < 29) {
-      setGradeTermTwo("FAIL");
-    } else if (percentageTermTwo >= 30 && percentageTermTwo <= 45) {
-      setGradeTermTwo("c");
-    } else if (percentageTermTwo >= 46 && percentageTermTwo <= 59) {
-      setGradeTermTwo("B");
-    } else if (percentageTermTwo >= 60 && percentageTermTwo <= 79) {
-      setGradeTermTwo("A");
-    } else if (percentageTermTwo >= 80) {
-      setGradeTermTwo("A++");
-    }
-  };
-
   return (
     <>
       <Modal
@@ -361,6 +327,7 @@ const StudentInformation = (p) => {
               />
             </div>
           </div>
+
           <div className="resultOfStudent">
             <select
               value={selects}
@@ -374,6 +341,31 @@ const StudentInformation = (p) => {
             {(() => {
               switch (selects) {
                 case "Term One":
+                  const TotalMarks = () => {
+                    const TotalSum =
+                      Number(englishTermOneMarks) +
+                      Number(hindiTermOneMarks) +
+                      Number(mathTermOneMarks) +
+                      Number(scienceTermOneMarks) +
+                      Number(socialScienceTermOneMarks);
+                    setTotalTermOneMarks(TotalSum);
+                    console.log("total Marks ", TotalSum);
+                    const percentage = (TotalSum / 500) * 100;
+                    setPercentage(percentage);
+
+                    if (percentage < 29) {
+                      setGrade("FAIL");
+                    } else if (percentage >= 30 && percentage <= 45) {
+                      setGrade("c");
+                    } else if (percentage >= 46 && percentage <= 59) {
+                      setGrade("B");
+                    } else if (percentage >= 60 && percentage <= 79) {
+                      setGrade("A");
+                    } else if (percentage >= 80) {
+                      setGrade("A++");
+                    }
+                  };
+
                   return (
                     <>
                       <h3>Term One </h3>
@@ -493,12 +485,48 @@ const StudentInformation = (p) => {
                         <tr>
                           <td>
                             <button onClick={addStudentMarks}>Approve</button>
+                            <button onClick={p.studentList}>Confirm</button>
                           </td>
                         </tr>
                       </table>
                     </>
                   );
                 case "Term Two":
+                  const TotalMarksTermTwo = () => {
+                    const TotalSumTermTwo =
+                      Number(englishTermTwoMarks) +
+                      Number(hindiTermTwoMarks) +
+                      Number(mathTermTwoMarks) +
+                      Number(scienceTermTwoMarks) +
+                      Number(socialScienceTermTwoMarks);
+                    setTotalTermTwoMarks(TotalSumTermTwo);
+                    console.log("total Marks ", TotalSumTermTwo);
+                    const percentageTermTwo = (TotalSumTermTwo / 500) * 100;
+                    setPercentageTermTwo(percentageTermTwo);
+
+                    if (percentageTermTwo < 29) {
+                      setGradeTermTwo("FAIL");
+                    } else if (
+                      percentageTermTwo >= 30 &&
+                      percentageTermTwo <= 45
+                    ) {
+                      setGradeTermTwo("c");
+                    } else if (
+                      percentageTermTwo >= 46 &&
+                      percentageTermTwo <= 59
+                    ) {
+                      setGradeTermTwo("B");
+                    } else if (
+                      percentageTermTwo >= 60 &&
+                      percentageTermTwo <= 79
+                    ) {
+                      setGradeTermTwo("A");
+                    } else if (percentageTermTwo >= 80) {
+                      setGradeTermTwo("A++");
+                    }
+                    console.log("Student Grader Term Two", gradeTermTwo);
+                  };
+
                   return (
                     <>
                       <h3>Term Two </h3>
@@ -613,18 +641,20 @@ const StudentInformation = (p) => {
                             <p>Grade</p>
                           </td>
 
-                          <td>{grade}</td>
+                          <td>{gradeTermTwo}</td>
                         </tr>
                         <tr>
                           <td>
                             <button onClick={addStudentMarksTermTwo}>
                               Approve
                             </button>
+                            <button onClick={p.studentList}>Confirm</button>
                           </td>
                         </tr>
                       </table>
                     </>
                   );
+
                 case "Term Three":
                   return (
                     <>
@@ -747,6 +777,7 @@ const StudentInformation = (p) => {
                             <button onClick={addStudentMarksTermThree}>
                               Approve
                             </button>
+                            <button onClick={p.studentList}>Confirm</button>
                           </td>
                         </tr>
                       </table>
@@ -759,7 +790,13 @@ const StudentInformation = (p) => {
             })()}
           </div>
           <div className="btngroup">
-            <button onClick={() => setModal(false)}>Cancel </button>
+            <button
+              onClick={() => {
+                setModal(false);
+              }}
+            >
+              Cancel{" "}
+            </button>
             {/* <button type="submit" onClick={UpdateStudentData}>
               Submit
             </button> */}

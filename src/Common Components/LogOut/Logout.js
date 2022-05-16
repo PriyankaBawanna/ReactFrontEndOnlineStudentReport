@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
+//for clear the session and logout
 const Logout = () => {
   const navigate = useNavigate();
   function handleLogOut() {

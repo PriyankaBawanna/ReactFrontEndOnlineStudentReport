@@ -8,6 +8,7 @@ const TeacherLogin = () => {
 
   const navigate = useNavigate();
 
+  //post the teacher login credentials teacher's Email Id and Teacher's Id
   const handleTeacherLogin = async () => {
     console.log("Teacher Login ", teacherEmailId, teacherNo);
 
@@ -34,8 +35,8 @@ const TeacherLogin = () => {
 
   return (
     <>
-      <h1>Teacher Login </h1>
-      <div className="">
+      <div className="userLogin">
+        <h1>Teacher Login </h1>
         <div>
           <input
             name="teacherEmailId"

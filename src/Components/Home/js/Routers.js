@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import LoginPage from "../../../Common Components/LoginPage/js/Login";
 import Registration from "../../../Common Components/RegistrationPage/AdminRegistrationPage/js/Registration";
 import HomePage from "./HomePage";
@@ -13,6 +14,7 @@ import FinalExam from "../../ParentDashboard.js/js/FinalExam";
 import TeacherLogin from "../../../Common Components/LoginPage/js/TeacherLogin";
 import ParentLogin from "../../../Common Components/LoginPage/js/ParentLogin";
 import TeacherDashBoard from "../../TeacherDashboard/js/TeacherDashboard";
+import "../css/HomePage.css";
 
 const Routers = () => {
   const [user, setLoginUser] = useState({});
@@ -38,6 +40,7 @@ const Routers = () => {
             <Route path="/TeacherLogin" element={<TeacherLogin />} />
             <Route path="/ParentLogin" element={<ParentLogin />} />
           </Route>
+
           <Route path="/SchoolAdmin" element={<SchoolAdmin />}>
             <Route index element={<StudentList />} />
             <Route path="StudentList" element={<StudentList />}></Route>

@@ -63,7 +63,10 @@ const StudentMarksList = (marksProps) => {
   function getData() {
     addStudent();
   }
-
+  function studentMarksData() {
+    addStudent();
+    alert("Student Marks Add successfully");
+  }
   return (
     <>
       <AddStudent data={getData} />
@@ -104,7 +107,10 @@ const StudentMarksList = (marksProps) => {
                   Delete
                 </button>
 
-                <StudentInformation student_id={item._id} />
+                <StudentInformation
+                  student_id={item._id}
+                  studentList={studentMarksData}
+                />
               </td>
             </tr>
           ))}

@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import TermOneMarkSheet from "../../../Components/ParentDashboard.js/js/TermOneMarkSheet";
+import "../css/login.css";
 
 const UserContext = createContext();
 const ParentLogin = () => {
@@ -12,7 +13,7 @@ const ParentLogin = () => {
   console.log("Number ", studentRollNumber);
 
   const navigate = useNavigate();
-
+  //post Login Details of Parent According to Student Roll Number and Parent Email Id
   const handleParentLogin = async () => {
     console.log("Teacher Login ", parentEmail, studentRollNo);
     let loginParent = await fetch(`http://localhost:8085/parentLogin`, {
@@ -38,9 +39,10 @@ const ParentLogin = () => {
 
   return (
     <>
-      <UserContext.Provider value={"Hi Priyanka"}>
-        <h1>Parent Login </h1>
-        <div className="">
+      <UserContext.Provider value={"user"}>
+        {/* Take input  Parent email and as well apply validation for email  */}
+        <div className="userLogin">
+          <h1>Parent Login </h1>
           <div>
             <input
               name="parentEmail"
