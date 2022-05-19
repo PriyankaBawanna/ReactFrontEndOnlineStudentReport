@@ -12,13 +12,6 @@ const AddParent = () => {
 
   //function use to save parent data into data base using post API
   const addParentData = () => {
-    console.log(
-      "Parent Data ",
-      parentName,
-      studentRollNo,
-      mobileNumber,
-      parentEmail
-    );
     const parentData = { parentName, studentRollNo, mobileNumber, parentEmail };
 
     if (parentName && studentRollNo && mobileNumber && parentEmail) {
@@ -28,12 +21,12 @@ const AddParent = () => {
     } else {
       alert("Invalid");
     }
-    console.log("Student Parent  Data ", parentData);
+    //set the parent Data into Local storage
     localStorage.setItem("parentDetails", JSON.stringify(parentData));
     setModal(false);
-    parentName("");
-    parentEmail("");
+    setParentName("");
     setStudentRollNo("");
+    setMobileNumber("");
     setParentEmail("");
   };
   return (
@@ -49,6 +42,7 @@ const AddParent = () => {
         </ModalHeader>
         <ModalBody>
           <div>
+            <label>Parent Name</label>
             <input
               name="parentName"
               type="text"
@@ -60,6 +54,7 @@ const AddParent = () => {
             />
           </div>
           <div>
+            <label>Student Roll No</label>
             <input
               name="studentRollNo"
               type="text"
@@ -72,6 +67,7 @@ const AddParent = () => {
           </div>
 
           <div>
+            <label>Mobile No</label>
             <input
               name=" mobileNumber"
               type="number"
@@ -84,6 +80,7 @@ const AddParent = () => {
           </div>
 
           <div>
+            <label>Parent Email</label>
             <input
               name="parentEmail"
               value={parentEmail}

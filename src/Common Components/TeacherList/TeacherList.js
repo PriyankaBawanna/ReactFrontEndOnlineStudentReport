@@ -3,13 +3,12 @@ import UpdateTeacher from "../../Model/UpdateTeacher/js/UpdateTeacher";
 import AddTeacher from "../../Model/AddTeacher/js/AddTeacher";
 const TeacherList = () => {
   const [users, setUser] = useState([]);
-  const [value, setValue] = useState("");
-  const [response, setresponse] = useState("");
 
   useEffect(() => {
     addTeacher();
   }, []);
 
+  //Teacher List rerender
   const addTeacher = async () => {
     await fetch("http://localhost:8085/addTeacher").then((result) => {
       result.json().then((resp) => {
@@ -18,6 +17,7 @@ const TeacherList = () => {
     });
   };
 
+  //Delete The teacher
   const deleteTeacher = async (id) => {
     console.log("user _id", id);
     let result = await fetch(`http://localhost:8085/teacher/${id}`, {
@@ -30,6 +30,7 @@ const TeacherList = () => {
     }
   };
 
+  //Search The Teacher
   const searchHandle = async (e) => {
     console.warn(e.target.value);
     let key = e.target.value;
@@ -44,12 +45,15 @@ const TeacherList = () => {
       addTeacher();
     }
   };
+
+  //this function is pass as props to AddTeacher After Add new Teacher this Function will reRender and display the updated list of the Teacher
   function getData() {
     addTeacher();
   }
 
   return (
     <>
+      {/* for Add new Teacher */}
       <AddTeacher teacherData={getData} />
       <input type="text" placeholder="Search Teacher" onChange={searchHandle} />
       <table id="customers">
@@ -68,7 +72,7 @@ const TeacherList = () => {
             <td>{item.teacherMobileNo}</td>
             <td>{item.teacherEmailId}</td>
             <td>
-              <UpdateTeacher teacherId={item._id} />
+              <UpdateTeacher teacherId={item._id} data={getData} />
             </td>
             <td>
               <button onClick={() => deleteTeacher(item._id)}>Delete</button>

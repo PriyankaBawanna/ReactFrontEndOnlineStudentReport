@@ -3,15 +3,14 @@ import { useNavigate } from "react-router-dom";
 import TermOneMarkSheet from "../../../Components/ParentDashboard.js/js/TermOneMarkSheet";
 import "../css/login.css";
 
-const UserContext = createContext();
 const ParentLogin = () => {
+  //for parent Email and Student Roll no
   const [parentEmail, setParentEmail] = useState("");
   const [studentRollNo, setStudentRollNo] = useState("");
+  //if parent email is not correct than show error
   const [parentEmailError, setParentEmailError] = useState(false);
 
-  const studentRollNumber = studentRollNo;
-  console.log("Number ", studentRollNumber);
-
+  //navigate to home page of parent
   const navigate = useNavigate();
   //post Login Details of Parent According to Student Roll Number and Parent Email Id
   const handleParentLogin = async () => {
@@ -24,50 +23,47 @@ const ParentLogin = () => {
       },
     });
     loginParent = await loginParent.json();
-    console.log("parent Login Result", loginParent);
+
     if (loginParent.parentEmail && loginParent.studentRollNo) {
-      console.log(
-        "PArent Data for local Storage ",
-        JSON.stringify(loginParent)
-      );
+      //save the current user Login details into Local Storage
       localStorage.setItem("parentDetails", JSON.stringify(loginParent));
       navigate("/ParentDashboard");
     } else {
       alert("Please enter correct details ");
     }
   };
+  //Check the parent Email
+  const handleParentEmail = (e) => {
+    const { value } = e.target;
+    setParentEmail(value);
 
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    if (regEx.test(value)) {
+      setParentEmailError(false);
+    } else if (!regEx.test(value) && value !== "") {
+      setParentEmailError(true);
+    }
+  };
   return (
     <>
-      <UserContext.Provider value={"user"}>
-        {/* Take input  Parent email and as well apply validation for email  */}
-        <div className="userLogin">
-          <h1>Parent Login </h1>
+      {/* Take input  Parent email and as well apply validation for email  */}
+      <div className="userLogin">
+        <h1 className="introLoginUser">Parent Login </h1>
+        <div className="loginInput">
           <div>
             <input
               name="parentEmail"
               type="parentEmail"
-              placeholder=" parent Email Id"
+              placeholder=" Parent Email Id"
               value={parentEmail}
-              onChange={(e) => {
-                setParentEmail(e.target.value);
-                let emailValidation = e.target.value;
-                console.log("email Validation ", emailValidation);
-                const regEx =
-                  /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
-                if (regEx.test(emailValidation)) {
-                  console.log("emailValidation is Valid");
-                  setParentEmailError(false);
-                } else if (
-                  !regEx.test(emailValidation) &&
-                  emailValidation !== ""
-                ) {
-                  console.log("emailValidation is Not Valid");
-                  setParentEmailError(true);
-                }
-              }}
+              className="inputLogin"
+              onChange={handleParentEmail}
             />
-            {parentEmailError ? <span>Email not valid</span> : <span></span>}
+            {parentEmailError ? (
+              <span className="loginError">Email not valid</span>
+            ) : (
+              <span></span>
+            )}
           </div>
           <div>
             <input
@@ -75,16 +71,20 @@ const ParentLogin = () => {
               type="text"
               placeholder="Enter Student Roll No "
               value={studentRollNo}
+              className="inputLogin"
               onChange={(e) => setStudentRollNo(e.target.value)}
             />
           </div>
-          <button type="submit" onClick={handleParentLogin}>
+          <button
+            type="submit"
+            className="loginBtn"
+            onClick={handleParentLogin}
+          >
             Login
           </button>
         </div>
-      </UserContext.Provider>
+      </div>
     </>
   );
 };
 export default ParentLogin;
-export { UserContext };

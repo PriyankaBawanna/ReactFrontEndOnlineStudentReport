@@ -1,12 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+/*Edit And Update Student data*/
 const UpdateStudent = (props) => {
-  //   console.log("Student Id ", props.studentId);
-
   /*modal useState*/
   const [modal, setModal] = useState(false);
-  /*input form state validattion use state*/
+  /*input form state validation use state*/
 
   const [studentName, setStudentName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
@@ -21,8 +20,8 @@ const UpdateStudent = (props) => {
     getStudentDetails();
   }, []);
 
+  //getting Student details for edit
   const getStudentDetails = async () => {
-    console.log("Student Update Props ", props.studentId);
     let studentDetails = await fetch(
       `http://localhost:8085/studentInfo/${props.studentId}`
     );
@@ -33,9 +32,8 @@ const UpdateStudent = (props) => {
     setStudentStandard(studentDetails.studentStandard);
     setStudentRollNo(studentDetails.studentRollNo);
   };
-
+  //updated data Add into the Data Base
   const UpdateStudentData = async () => {
-    console.log(studentName, studentEmail, studentStandard, studentRollNo);
     let UpdateStudentData = await fetch(
       `http://localhost:8085/studentUpdate/${props.studentId}`,
       {
@@ -52,8 +50,44 @@ const UpdateStudent = (props) => {
       }
     );
     UpdateStudentData = await UpdateStudentData.json();
-    console.log("Student update data");
-    setModal(false);
+
+    alert("please Confirm");
+  };
+  //Input handle Student Name
+  const handleInputStudentName = (e) => {
+    const { value } = e.target;
+    setStudentName(value);
+    if (value.length < 3) {
+      setStudentNameError(true);
+    } else {
+      setStudentNameError(false);
+    }
+  };
+
+  //Input handle Student Email
+  const handleStudentEmail = (e) => {
+    const { value } = e.target;
+    setStudentEmail(value);
+
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    if (regEx.test(value)) {
+      setStudentEmailError(false);
+    } else if (!regEx.test(value) && value !== "") {
+      setStudentEmailError(true);
+    }
+  };
+
+  //student Input for handle standard
+  const handleStudentStandard = (e) => {
+    const { value } = e.target;
+    setStudentStandard(value);
+    let studentStandard = e.target.value;
+
+    if (studentStandard > 12) {
+      setStudentStandardError(true);
+    } else {
+      setStudentStandardError(false);
+    }
   };
 
   return (
@@ -70,66 +104,35 @@ const UpdateStudent = (props) => {
 
         <ModalBody>
           <div>
+            <label>Student Name</label>
             <input
               name="studentName"
               value={studentName}
               type="text"
               placeholder="Student Name "
-              onChange={(e) => {
-                setStudentName(e.target.value);
-                let nameLength = e.target.value.length;
-                console.log("user Name ", nameLength);
-                if (nameLength < 3) {
-                  setStudentNameError(true);
-                } else {
-                  setStudentNameError(false);
-                }
-              }}
+              onChange={handleInputStudentName}
             />
             {studentNameError ? <span>user not valid</span> : <span></span>}
           </div>
           <div>
+            <label>Student Email</label>
             <input
               name="studentEmail"
               value={studentEmail}
               type="email"
               placeholder="Enter Parent Email id "
-              onChange={(e) => {
-                setStudentEmail(e.target.value);
-                let emailValidation = e.target.value;
-
-                const regEx =
-                  /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
-                if (regEx.test(emailValidation)) {
-                  console.log("emailValidation is Valid");
-                  setStudentEmailError(false);
-                } else if (
-                  !regEx.test(emailValidation) &&
-                  emailValidation !== ""
-                ) {
-                  console.log("emailValidation is Not Valid");
-                  setStudentEmailError(true);
-                }
-              }}
+              onChange={handleStudentEmail}
             />
             {studentEmailError ? <span>Email not valid</span> : <span></span>}
           </div>
           <div>
+            <label>Student Standard</label>
             <input
               name="studentStandard"
               value={studentStandard}
               type="Number"
               placeholder="Enter student Standard "
-              onChange={(e) => {
-                setStudentStandard(e.target.value);
-                let studentStandard = e.target.value;
-                console.log("student Standard", studentStandard);
-                if (studentStandard > 12) {
-                  setStudentStandardError(true);
-                } else {
-                  setStudentStandardError(false);
-                }
-              }}
+              onChange={handleStudentStandard}
             />
             {studentStandardError ? (
               <span> class 1 st to 12 th </span>
@@ -138,6 +141,7 @@ const UpdateStudent = (props) => {
             )}
           </div>
           <div>
+            <label>Student Roll No </label>
             <input
               name="studentRollNo"
               value={studentRollNo}
@@ -152,6 +156,8 @@ const UpdateStudent = (props) => {
           <button type="submit" onClick={UpdateStudentData}>
             Update
           </button>
+          {/*function receive as  props  from StudentList Component   for rerender the updated  Student List  */}
+          <button onClick={props.data}>Confirm</button>
           <button onClick={() => setModal(false)}>cancel</button>
         </ModalBody>
       </Modal>

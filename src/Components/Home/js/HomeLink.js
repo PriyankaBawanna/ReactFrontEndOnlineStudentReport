@@ -2,19 +2,23 @@ import { Link, useLocation } from "react-router-dom";
 function HomeLink() {
   const location = useLocation();
   console.log("UseLocation in Header", location);
+  //links to Teacher Parent And School Admin Login Which i show in The Home page
   return (
-    <>
-      <div>
-        {/* <Link to="/">Home Page </Link> */}
-        {/* <Link to="/Login">Login</Link>
-        <Link to="/TeacherLogin">Teacher Login </Link>
-        <Link to="/ParentLogin">Parent Login </Link>
+    <nav className="homePageRoute">
+      <Link to="/TeacherLogin" className="loginLink">
+        Teacher Login
+      </Link>
+      <Link to="/ParentLogin" className="loginLink">
+        Parent Login
+      </Link>
+      <Link to="/Login" className="loginLink">
+        School Admin Login
+      </Link>
 
-        <Link to="/Registration">Registration</Link> */}
-        {/*  */}
-        {/* <Link to="/ParentDashBoard">Parent Dashboard</Link> */}
-      </div>
-    </>
+      <Link to="/Registration" className="loginLink">
+        School Admin Registration
+      </Link>
+    </nav>
   );
 }
 export default HomeLink;

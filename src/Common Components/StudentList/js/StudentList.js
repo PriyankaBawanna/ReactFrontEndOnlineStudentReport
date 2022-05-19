@@ -4,13 +4,12 @@ import AddStudent from "../../../Model/AddStudent/js/AddStudent";
 import UpdateStudent from "../../../Model/UpdateStudent/js/updateStudent";
 
 import "../css/StudentList.css";
+import DeleteStudent from "./DeleteStudent";
 
 const StudentList = () => {
   const [users, setUser] = useState([]);
-  const [value, setValue] = useState("");
-  const [studentDetails, setStudentDetails] = useState(0);
-  const [deleteStudentData, setDeleteStudentData] = useState("");
-  const StudentContext = createContext();
+  const [modal, setModal] = useState(false);
+
   useEffect(() => {
     addStudent();
   }, []);
@@ -28,32 +27,6 @@ const StudentList = () => {
   };
   console.warn(users);
 
-  //delete the student data as well as parent data
-  const deleteStudent = async (studentRollNo) => {
-    console.log("user _id", studentRollNo);
-    let result = await fetch(
-      `http://localhost:8085/StudentDelete/${studentRollNo}`,
-      {
-        method: "Delete",
-      }
-    );
-    result = await result.json();
-
-    console.log("record is deleted ");
-    console.log("deleteStudentData", deleteStudentData);
-    setDeleteStudentData("true");
-    console.log("deleteStudentData", deleteStudentData);
-
-    let parentData = await fetch(
-      `http://localhost:8085/parentDelete/${studentRollNo}`,
-      {
-        method: "Delete",
-      }
-    );
-    parentData = await parentData.json();
-
-    addStudent();
-  };
   //search on the basis od student name
   const searchHandle = async (e) => {
     console.warn(e.target.value);
@@ -71,9 +44,11 @@ const StudentList = () => {
   };
   function getData() {
     addStudent();
+    alert("Confirm");
   }
   return (
     <>
+      {/** function pass as props to   AddStudent Component for render the list  */}
       <AddStudent data={getData} />
       <input type="text" placeholder="Search student" onChange={searchHandle} />
       <table id="customers">
@@ -94,16 +69,15 @@ const StudentList = () => {
               <td>{item.studentStandard}</td>
               <td>{item.studentRollNo}</td>
               <td>
-                <UpdateStudent studentId={item._id} />
+                <UpdateStudent studentId={item._id} data={getData} />
               </td>
+
               <td>
-                <button
-                  onClick={() => {
-                    deleteStudent(item.studentRollNo);
-                  }}
-                >
-                  Delete
-                </button>
+                {/** function pass as props to   Delete student Component for render the list  */}
+                <DeleteStudent
+                  studentRollNo={item.studentRollNo}
+                  data={getData}
+                />
               </td>
             </tr>
           ))}

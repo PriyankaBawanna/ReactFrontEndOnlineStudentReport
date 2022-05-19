@@ -11,6 +11,8 @@ const TermOneMarkSheet = () => {
     termOneResult();
     studentDetails();
   }, []);
+
+  //Term One Result
   const termOneResult = () => {
     fetch(`http://localhost:8085/StudentResultTermOne/${studentRollNo}`).then(
       (result) => {
@@ -20,11 +22,10 @@ const TermOneMarkSheet = () => {
       }
     );
   };
-
-  console.log("TermOne Data ", termOne);
+  //get The login Parent Details into the local storage
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
-  console.log("Getting Student Details ", parentDetails);
   const studentRollNo = parentDetails.studentRollNo;
+
   //const studentRollNo= parentDetails.studentRollNo;
   const studentDetails = () => {
     fetch(`http://localhost:8085/StudentResult/${studentRollNo}`).then(
@@ -35,14 +36,13 @@ const TermOneMarkSheet = () => {
       }
     );
   };
-  console.log("student details is Term One ", studentDetail);
 
+  //if Result Status Approve than API Called and Approve Message Send To School Admin Email
   const termResultStatusApproveStatus = () => {
     setTermOneResultStatus("Approve");
-    console.log("Result Status ", termOneResultStatus, studentRollNo);
+
     const approveStatusResult = { termOneResultStatus, studentRollNo };
     if (termOneResultStatus && studentRollNo) {
-      console.log("Roll Number", studentRollNo);
       axios
 
         .post(
@@ -51,18 +51,15 @@ const TermOneMarkSheet = () => {
         )
         .then((res) => {
           alert(res.data.message);
-          console.log("User Response --", res.data.message);
+
           if (res.data.message === "Response Submitted") {
             const studentRollNo = parentDetails.studentRollNo;
             axios
               .get(
                 `http://localhost:8085/getResultStatusTermOne/${studentRollNo}`
               )
-              .then((resp) => {
-                console.log(resp.data);
-              });
+              .then((resp) => {});
           } else {
-            console.log("OutSide ");
           }
         });
     } else {
@@ -70,12 +67,12 @@ const TermOneMarkSheet = () => {
     }
   };
 
+  //if Result Status Reject  than API Called and Reject  Message Send To School Admin Email
+
   const termResultStatusRejectStatus = () => {
-    console.log("Result Status ");
     setTermOneResultStatus("Reject");
     const resultRejectStatus = { termOneResultStatus, studentRollNo };
     if (termOneResultStatus && studentRollNo) {
-      console.log("Roll Number", studentRollNo);
       axios
 
         .post(
@@ -84,16 +81,12 @@ const TermOneMarkSheet = () => {
         )
         .then((res) => {
           alert(res.data.message);
-          console.log("User Response --", res.data.message);
+
           if (res.data.message === "Response Submitted") {
             const studentRollNo = parentDetails.studentRollNo;
             axios
               .get(`http://localhost:8085/getResultStatus/${studentRollNo}`)
-              .then((resp) => {
-                console.log(resp.data);
-              });
-          } else {
-            console.log("OutSide ");
+              .then((resp) => {});
           }
         });
     } else {

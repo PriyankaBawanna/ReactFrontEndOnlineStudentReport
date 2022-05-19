@@ -1,8 +1,44 @@
 .userLogin {
   display: flex;
   flex-direction: column;
-  height: 10rem;
-  justify-content: space-between;
+  height: 25rem;
   align-items: center;
+  margin-top: 5rem;
+}
+.introLoginUser {
+  color: gray;
+}
+.inputLogin {
+  height: 2.5rem;
+}
+.loginBtn {
+  width: 8rem;
+  height: 2.5rem;
+  border-style: none;
+  color: gray;
+  font-size: 1rem;
+  background-color: rgb(225, 225, 225);
+  border-radius: 12%;
+}
+.loginInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 10rem;
+}
+.loginError {
+  color: red;
+}
+.inputRegistration {
+  height: 2.5rem;
+  margin: 1rem;
+}
+.registerUser {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 10rem;
   margin-top: 5rem;
 }

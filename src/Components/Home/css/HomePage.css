@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  margin-top: 5rem;
 }
 .link {
   display: flex;
@@ -14,5 +15,75 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  height: 35rem;
+  width: 100%;
+  background-image: url("../../../Img/imgSchool.png");
+  background-repeat: no-repeat;
+}
+.homePage {
+  display: flex;
+  flex-direction: column;
+}
+.homePageImage {
+  width: 100%;
+  height: 30rem;
+  border: 1px solid black;
+  position: absolute;
+}
+.loginIntro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  color: grey;
+}
+.introHeading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+  padding: 1.5rem;
+}
+.loginLink {
+  text-decoration: none;
+  font-size: 1.5rem;
   color: gray;
+}
+.introParent {
+  display: flex;
+  flex-direction: column;
+  background-color: #eceaea;
+}
+
+@media screen and (max-width: 816px) {
+  .homePageRoute {
+    display: flex;
+    flex-direction: column;
+    background-color: lightgreen;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .loginLink {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .loginIntro {
+    font-size: 1.5rem;
+  }
+  .intro {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5rem;
+    background-image: url("../../../Img/mobileImg.png");
+    background-repeat: no-repeat;
+  }
+  .introHeading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4rem;
+  }
 }

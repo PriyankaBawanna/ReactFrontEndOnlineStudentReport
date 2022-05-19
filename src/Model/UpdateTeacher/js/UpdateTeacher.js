@@ -1,9 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-
+//Edit Teacher data
 const UpdateTeacher = (prop) => {
-  console.log("Teacher Id  is :", prop.teacherId);
   const [modal, setModal] = useState(false);
 
   const [teacherNo, setTeacherNo] = useState("");
@@ -14,10 +12,12 @@ const UpdateTeacher = (prop) => {
   const [teacherNameError, setTeacherNameError] = useState(false);
   const [teacherMobileNoError, setTeacherMobileNoError] = useState(false);
   const [teacherEmailError, setTeacherEmailError] = useState(false);
-  //
+
   useEffect(() => {
     getTeacherDetails();
   }, []);
+
+  //fetch Teacher details based on the user click
 
   const getTeacherDetails = async () => {
     let teacherDetails = await fetch(
@@ -30,6 +30,8 @@ const UpdateTeacher = (prop) => {
     setTeacherMobileNo(teacherDetails.teacherMobileNo);
     setTeacherNo(teacherDetails.teacherNo);
   };
+
+  //update the Teacher Data
   const updateTeacherInfo = async () => {
     let updateTeacherData = await fetch(
       `http://localhost:8085/teacherUpdate/${prop.teacherId}`,
@@ -47,8 +49,40 @@ const UpdateTeacher = (prop) => {
       }
     );
     updateTeacherData = await updateTeacherData.json();
-    console.log("teacher data is update ");
-    setModal(false);
+    alert("please Confirm ");
+  };
+  //Input Name handle
+  const inputHandleTeacherName = (e) => {
+    setTeacherName(e.target.value);
+    let nameLength = e.target.value.length;
+
+    if (nameLength < 3) {
+      setTeacherNameError(true);
+    } else {
+      setTeacherNameError(false);
+    }
+  };
+  //Input Teacher Email Handle
+  const inputHandleTeacherEmail = (e) => {
+    setTeacherEmailId(e.target.value);
+    let emailValidation = e.target.value;
+
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    if (regEx.test(emailValidation)) {
+      setTeacherEmailError(false);
+    } else if (!regEx.test(emailValidation) && emailValidation !== "") {
+      setTeacherEmailError(true);
+    }
+  };
+  //Teacher mobile no handle
+  const inputHandleTeacherMobileNo = (e) => {
+    setTeacherMobileNo(e.target.value);
+    let passwordError = e.target.value;
+    if (passwordError.length < 10) {
+      setTeacherMobileNoError(true);
+    } else {
+      setTeacherMobileNoError(false);
+    }
   };
 
   return (
@@ -65,65 +99,35 @@ const UpdateTeacher = (prop) => {
 
         <ModalBody>
           <div>
+            <label>Teacher Name</label>
             <input
               name="teacherName"
               value={teacherName}
               type="text"
               placeholder="Student Name "
-              onChange={(e) => {
-                setTeacherName(e.target.value);
-                let nameLength = e.target.value.length;
-                console.log("user Name ", nameLength);
-                if (nameLength < 3) {
-                  setTeacherNameError(true);
-                } else {
-                  setTeacherNameError(false);
-                }
-              }}
+              onChange={inputHandleTeacherName}
             />
             {teacherNameError ? <span>user not valid</span> : <span></span>}
           </div>
           <div>
+            <label>Teacher Email Id </label>
             <input
               name="teacherEmailId"
               value={teacherEmailId}
               type="email"
               placeholder="Enter Parent Email id "
-              onChange={(e) => {
-                setTeacherEmailId(e.target.value);
-                let emailValidation = e.target.value;
-                console.log("email Validation ", emailValidation);
-                const regEx =
-                  /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
-                if (regEx.test(emailValidation)) {
-                  console.log("emailValidation is Valid");
-                  setTeacherEmailError(false);
-                } else if (
-                  !regEx.test(emailValidation) &&
-                  emailValidation !== ""
-                ) {
-                  console.log("emailValidation is Not Valid");
-                  setTeacherEmailError(true);
-                }
-              }}
+              onChange={inputHandleTeacherEmail}
             />
             {teacherEmailError ? <span>Email not valid</span> : <span></span>}
           </div>
           <div>
+            <label>Teacher Mobile No </label>
             <input
               name="teacherMobileNo"
               value={teacherMobileNo}
               type="Number"
               placeholder="Mobile Number"
-              onChange={(e) => {
-                setTeacherMobileNo(e.target.value);
-                let passwordError = e.target.value;
-                if (passwordError.length < 10) {
-                  setTeacherMobileNoError(true);
-                } else {
-                  setTeacherMobileNoError(false);
-                }
-              }}
+              onChange={inputHandleTeacherMobileNo}
             />
             {teacherMobileNoError ? (
               <span>Mobile Number Must be equal to 10 digit</span>
@@ -132,6 +136,7 @@ const UpdateTeacher = (prop) => {
             )}
           </div>
           <div>
+            <label>Teacher Id </label>
             <input
               name="teacherNo"
               value={teacherNo}
@@ -147,6 +152,8 @@ const UpdateTeacher = (prop) => {
             Update
           </button>
           <button onClick={() => setModal(false)}>cancel</button>
+          {/** receive Function As props from  TeacherList to re render the Teacher List  */}
+          <button onClick={prop.data}>Confirm</button>
         </ModalBody>
       </Modal>
       <button onClick={() => setModal(true)}>Edit</button>

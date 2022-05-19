@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../css/ParentDashboard.css";
 import axios from "axios";
 const FinalExam = () => {
+  //final Exam  Result
   const [termThree, setTermThree] = useState([]);
   const [studentDetail, setStudentDetail] = useState([]);
 
@@ -13,6 +14,7 @@ const FinalExam = () => {
     termThreeResult();
     studentDetails();
   }, []);
+  //get the student's Term Three Marks
   const termThreeResult = () => {
     fetch(`http://localhost:8085/StudentResultTermThree/${studentRollNo}`).then(
       (result) => {
@@ -22,11 +24,10 @@ const FinalExam = () => {
       }
     );
   };
-  console.log(" termThree Data ", termThree);
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
-  console.log("Getting Student Details ", parentDetails);
-  const studentRollNo = parentDetails.studentRollNo;
 
+  const studentRollNo = parentDetails.studentRollNo;
+  //get the Student Details
   const studentDetails = () => {
     fetch(`http://localhost:8085/StudentResult/${studentRollNo}`).then(
       (result) => {
@@ -37,13 +38,12 @@ const FinalExam = () => {
     );
   };
 
+  //if parent Approve the Result
   const termResultStatusApproveStatus = () => {
-    console.log("Result Status ", studentRollNo);
     setTermTwoResultStatus(approveStatus);
-    console.log("term Two Status ", termThreeResultStatus);
+
     const approveStats = { termThreeResultStatus, studentRollNo };
     if (termThreeResultStatus && studentRollNo) {
-      console.log("Roll Number", studentRollNo);
       axios
 
         .post(
@@ -52,7 +52,6 @@ const FinalExam = () => {
         )
         .then((res) => {
           alert(res.data.message);
-          console.log("User Response --", res.data.message);
           if (res.data.message === "Response Submitted") {
             const studentRollNo = parentDetails.studentRollNo;
             axios
@@ -70,36 +69,30 @@ const FinalExam = () => {
   };
 
   const termResultStatusRejectStatus = () => {
-    console.log("Result Status ");
     const resultRejectStatus = { termThreeResultStatus, studentRollNo };
     setTermTwoResultStatus(rejectStatus);
     if (termThreeResultStatus && studentRollNo) {
-      console.log("Roll Number", studentRollNo);
       axios
-
         .post(
           `http://localhost:8085/statusTermThree/${studentRollNo}`,
           resultRejectStatus
         )
         .then((res) => {
           alert(res.data.message);
-          console.log("User Response --", res.data.message);
+
           if (res.data.message === "Response Submitted") {
             const studentRollNo = parentDetails.studentRollNo;
             axios
               .get(`http://localhost:8085/getResultStatus/${studentRollNo}`)
-              .then((resp) => {
-                console.log(resp.data);
-              });
+              .then((resp) => {});
           } else {
-            console.log("OutSide ");
           }
         });
     } else {
       alert("error");
     }
   };
-  console.log("student details is Term One ", studentDetail);
+
   return (
     <>
       <div className="markSheet">

@@ -11,14 +11,14 @@ const AddStudent = (prop) => {
   const [studentEmail, setStudentEmail] = useState("");
   const [studentStandard, setStudentStandard] = useState("");
   const [studentRollNo, setStudentRollNo] = useState("");
+  const [confirm, setConfirm] = useState(false);
 
   const [studentNameError, setStudentNameError] = useState(false);
   const [studentEmailError, setStudentEmailError] = useState(false);
   const [studentStandardError, setStudentStandardError] = useState(false);
 
-  ////function use to save student data into data base using post API
-  const addStudentData = (prop) => {
-    console.log(studentName, studentEmail, studentStandard, studentRollNo);
+  //function use to save student data into data base using post API
+  const addStudentData = () => {
     const studentData = {
       studentName,
       studentEmail,
@@ -33,10 +33,54 @@ const AddStudent = (prop) => {
     } else {
       alert("Invalid");
     }
-    //setModal(false);
 
     //save the Student Detail into Local Storage
     localStorage.setItem("studentDetails", JSON.stringify(studentData));
+  };
+
+  //function for handle Student Name Input With Validation
+  const handleInputStudentName = (e) => {
+    const { value } = e.target;
+    setStudentName(value);
+    let nameLength = value.length;
+
+    if (nameLength < 3) {
+      setStudentNameError(true);
+    }
+    setStudentNameError(false);
+  };
+
+  //function For Input Student Email with email  Validation
+
+  const handleInputStudentEmail = (e) => {
+    const { value } = e.target;
+    setStudentEmail(value);
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    if (regEx.test(value)) {
+      setStudentEmailError(false);
+    } else if (!regEx.test(value) && value !== "") {
+      setStudentEmailError(true);
+    }
+  };
+
+  //function for Input Student standard 1 st to 12 th
+  const handleInputStudentStandard = (e) => {
+    const { value } = e.target;
+    setStudentStandard(value);
+    if (value > 12) {
+      setStudentStandardError(true);
+    } else {
+      setStudentStandardError(false);
+    }
+  };
+
+  const addStudentChange = () => {
+    setModal(true);
+
+    setStudentName("");
+    setStudentEmail("");
+    setStudentStandard("");
+    setStudentRollNo("");
   };
 
   return (
@@ -53,78 +97,54 @@ const AddStudent = (prop) => {
 
         <ModalBody>
           <div>
+            <label>Student Name </label>
             <input
               name="studentName"
               value={studentName}
               type="text"
               placeholder="Student Name "
-              onChange={(e) => {
-                setStudentName(e.target.value);
-                let nameLength = e.target.value.length;
-                console.log("user Name ", nameLength);
-                if (nameLength < 3) {
-                  setStudentNameError(true);
-                } else {
-                  setStudentNameError(false);
-                }
-              }}
+              autocomplete="off"
+              onChange={handleInputStudentName}
             />
             {studentNameError ? <span>user not valid</span> : <span></span>}
           </div>
           <div>
+            <label>Student Email </label>
             <input
               name="studentEmail"
               value={studentEmail}
               type="email"
               placeholder="Enter Parent Email id "
-              onChange={(e) => {
-                setStudentEmail(e.target.value);
-                let emailValidation = e.target.value;
-
-                const regEx =
-                  /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
-                if (regEx.test(emailValidation)) {
-                  console.log("emailValidation is Valid");
-                  setStudentEmailError(false);
-                } else if (
-                  !regEx.test(emailValidation) &&
-                  emailValidation !== ""
-                ) {
-                  console.log("emailValidation is Not Valid");
-                  setStudentEmailError(true);
-                }
-              }}
+              autocomplete="off"
+              onChange={handleInputStudentEmail}
             />
             {studentEmailError ? <span>Email not valid</span> : <span></span>}
           </div>
           <div>
+            <label>Student Standard</label>
             <input
               name="studentStandard"
               value={studentStandard}
               type="Number"
+              autocomplete="off"
               placeholder="Enter student Standard "
-              onChange={(e) => {
-                setStudentStandard(e.target.value);
-                let studentStandard = e.target.value;
-                console.log("student Standard", studentStandard);
-                if (studentStandard > 12) {
-                  setStudentStandardError(true);
-                } else {
-                  setStudentStandardError(false);
-                }
-              }}
+              onChange={handleInputStudentStandard}
             />
             {studentStandardError ? (
-              <span> class 1 st to 12 th </span>
+              <span>
+                class 1 <sup>st</sup> to 12 <sup>th</sup>
+              </span>
             ) : (
               <span></span>
             )}
           </div>
           <div>
+            <label>Student Roll No.</label>
             <input
               name="studentRollNo"
               value={studentRollNo}
               type="text"
+              autocomplete="off"
               placeholder="Enter student RollNo "
               onChange={(e) => {
                 setStudentRollNo(e.target.value);
@@ -135,10 +155,11 @@ const AddStudent = (prop) => {
           <button type="submit" onClick={addStudentData}>
             Add
           </button>
+          {/*props Receive  from StudentMarkList   and Student List  for Display new add Item into the list */}
           <button onClick={prop.data}>Confirm</button>
         </ModalBody>
       </Modal>
-      <button onClick={() => setModal(true)}>Add Student</button>
+      <button onClick={addStudentChange}>Add Student</button>
     </>
   );
 };

@@ -21,7 +21,6 @@ const Registration = () => {
   //POST School Admin name , email , password and reenter Password
   const register = () => {
     const user = { name, email, password, reEnterPassword };
-    console.log("user Name ", name.l);
     if (name && email && password) {
       if (password === reEnterPassword) {
         axios
@@ -39,31 +38,73 @@ const Registration = () => {
     setReEnterPassword("");
   };
 
+  //School Admin Input Check
+  //check Name Input
+  const handleInputName = (e) => {
+    const { value } = e.target;
+    setName(value);
+    if (value.length < 3) {
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
+  };
+  //checking the Email of School Admin
+  const handleInputEmail = (e) => {
+    const { value } = e.target;
+    setEmail(value);
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    if (regEx.test(value)) {
+      setEmailError(false);
+    } else if (!regEx.test(value) && value !== "") {
+      setEmailError(true);
+    }
+  };
+  //check PassWord
+  const handleInputPAssword = (e) => {
+    const { value } = e.target;
+    setPassword(value);
+
+    if (value.length < 5) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+  };
+  //check ReEnter Password
+  const handleInputCheckReEnterPassword = (e) => {
+    setReEnterPassword(e.target.value);
+    let reenterPasswordValidation = e.target.value;
+    console.log("first pass word filed", password);
+    console.log("ReEnter PAss Word ", reenterPasswordValidation);
+    if (password === reEnterPassword) {
+      console.log("true password match ");
+      setReEnterPasswordError(true);
+    } else {
+      console.log("password is not match ");
+      setReEnterPasswordError(false);
+    }
+  };
   return (
     <>
-      <HomeLink />
       <div className="userLogin">
-        <h1>Admin Registration Page</h1>
+        <h1 className="introLoginUser">Admin Registration Page</h1>
         <form onSubmit={handleChange}>
-          <div>
+          <div className="loginInput">
             <div>
               <input
                 name="name"
                 value={name}
                 type="text"
                 placeholder="user name"
-                onChange={(e) => {
-                  setName(e.target.value);
-                  let nameLength = e.target.value.length;
-                  console.log("user Name ", nameLength);
-                  if (nameLength < 3) {
-                    setNameError(true);
-                  } else {
-                    setNameError(false);
-                  }
-                }}
+                className="inputRegistration"
+                onChange={handleInputName}
               />
-              {nameError ? <span>user not valid</span> : <span></span>}
+              {nameError ? (
+                <span className="loginError">user not valid</span>
+              ) : (
+                <span></span>
+              )}
             </div>
             <div>
               <input
@@ -71,25 +112,14 @@ const Registration = () => {
                 value={email}
                 type="email"
                 placeholder="email"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  let emailValidation = e.target.value;
-                  console.log("email Validation ", emailValidation);
-                  const regEx =
-                    /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
-                  if (regEx.test(emailValidation)) {
-                    console.log("emailValidation is Valid");
-                    setEmailError(false);
-                  } else if (
-                    !regEx.test(emailValidation) &&
-                    emailValidation !== ""
-                  ) {
-                    console.log("emailValidation is Not Valid");
-                    setEmailError(true);
-                  }
-                }}
+                className="inputRegistration"
+                onChange={handleInputEmail}
               />
-              {emailError ? <span>Email not valid</span> : <span></span>}
+              {emailError ? (
+                <span className="loginError">Email not valid</span>
+              ) : (
+                <span></span>
+              )}
             </div>
             <div>
               <input
@@ -97,19 +127,13 @@ const Registration = () => {
                 value={password}
                 type="password"
                 placeholder="enter the password "
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  let passwordError = e.target.value;
-                  if (passwordError.length < 5) {
-                    setPasswordError(true);
-                  } else {
-                    setPasswordError(false);
-                  }
-                  setPassword(passwordError);
-                }}
+                className="inputRegistration"
+                onChange={handleInputPAssword}
               />
               {passwordError ? (
-                <span>Length must be greater than 5</span>
+                <span className="loginError">
+                  Length must be greater than 5
+                </span>
               ) : (
                 <span></span>
               )}
@@ -119,29 +143,18 @@ const Registration = () => {
                 name="ReEnterPassword"
                 value={reEnterPassword}
                 type="password"
+                className="inputRegistration"
                 placeholder="Re enter the password "
-                onChange={(e) => {
-                  setReEnterPassword(e.target.value);
-                  let reenterPasswordValidation = e.target.value;
-                  console.log("first pass word filed", password);
-                  console.log("ReEnter PAss Word ", reenterPasswordValidation);
-                  if (password === reEnterPassword) {
-                    console.log("true password match ");
-                    setReEnterPasswordError(true);
-                  } else {
-                    console.log("password is not match ");
-                    setReEnterPasswordError(false);
-                  }
-                }}
+                onChange={handleInputCheckReEnterPassword}
               />
               {reEnterPasswordError ? (
-                <span>password not match </span>
+                <span className="loginError">password not match </span>
               ) : (
                 <span></span>
               )}
             </div>
 
-            <button type="submit" onClick={register}>
+            <button type="submit" className="loginBtn" onClick={register}>
               Register
             </button>
           </div>

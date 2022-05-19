@@ -14,13 +14,6 @@ const AddTeacher = (props) => {
   const [teacherEmailError, setTeacherEmailError] = useState(false);
   //function use to save teacher data into data base using post API
   const addTeacherData = () => {
-    console.log(
-      "Teacher Data ",
-      teacherNo,
-      teacherName,
-      teacherEmailId,
-      teacherMobileNo
-    );
     const teacherData = {
       teacherNo,
       teacherName,
@@ -38,6 +31,38 @@ const AddTeacher = (props) => {
     localStorage.setItem("teacherDetails", JSON.stringify(teacherData));
   };
 
+  //handle Teacher Name Input
+  const handleTeacherNameInput = (e) => {
+    const { value } = e.target;
+    setTeacherName(value);
+    if (value.length < 3) {
+      setTeacherNameError(true);
+    } else {
+      setTeacherNameError(false);
+    }
+  };
+
+  //handle Teacher 10 digit  Mobile No \
+  const handleMobileNumber = (e) => {
+    const { value } = e.target;
+    setTeacherMobileNo(value);
+    if (value.length < 10) {
+      setTeacherMobileNoError(true);
+    } else {
+      setTeacherMobileNoError(false);
+    }
+  };
+
+  const handleTeacherEmailId = (e) => {
+    const { value } = e.target;
+    setTeacherEmailId(value);
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    if (regEx.test(value)) {
+      setTeacherEmailError(false);
+    } else if (!regEx.test(value) && value !== "") {
+      setTeacherEmailError(true);
+    }
+  };
   return (
     <>
       <Modal
@@ -51,25 +76,18 @@ const AddTeacher = (props) => {
         </ModalHeader>
         <ModalBody>
           <div>
+            <label>Teacher Name </label>
             <input
               name="teacherName"
               type="text"
               placeholder="teacher name"
               value={teacherName}
-              onChange={(e) => {
-                setTeacherName(e.target.value);
-                let nameLength = e.target.value.length;
-                console.log("user Name ", nameLength);
-                if (nameLength < 3) {
-                  setTeacherNameError(true);
-                } else {
-                  setTeacherNameError(false);
-                }
-              }}
+              onChange={handleTeacherNameInput}
             />
             {teacherNameError ? <span>user not valid</span> : <span></span>}
           </div>
           <div>
+            <label>Teacher Id </label>
             <input
               name="teacherNo"
               type="text"
@@ -82,20 +100,13 @@ const AddTeacher = (props) => {
           </div>
 
           <div>
+            <label>Teacher Mobile No </label>
             <input
               name="teacherMobileNo"
               type="number"
               placeholder="Mobile No."
               value={teacherMobileNo}
-              onChange={(e) => {
-                setTeacherMobileNo(e.target.value);
-                let passwordError = e.target.value;
-                if (passwordError.length < 10) {
-                  setTeacherMobileNoError(true);
-                } else {
-                  setTeacherMobileNoError(false);
-                }
-              }}
+              onChange={handleMobileNumber}
             />
             {teacherMobileNoError ? (
               <span>Mobile Number Must be equal to 10 digit</span>
@@ -105,28 +116,13 @@ const AddTeacher = (props) => {
           </div>
 
           <div>
+            <label>Teacher Email Id </label>
             <input
               name="teacherEmailId"
               type="text"
               placeholder=" Email Id"
               value={teacherEmailId}
-              onChange={(e) => {
-                setTeacherEmailId(e.target.value);
-                let emailValidation = e.target.value;
-                console.log("email Validation ", emailValidation);
-                const regEx =
-                  /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
-                if (regEx.test(emailValidation)) {
-                  console.log("emailValidation is Valid");
-                  setTeacherEmailError(false);
-                } else if (
-                  !regEx.test(emailValidation) &&
-                  emailValidation !== ""
-                ) {
-                  console.log("emailValidation is Not Valid");
-                  setTeacherEmailError(true);
-                }
-              }}
+              onChange={handleTeacherEmailId}
             />
             {teacherEmailError ? <span>Email not valid</span> : <span></span>}
           </div>

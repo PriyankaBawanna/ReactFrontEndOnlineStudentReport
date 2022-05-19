@@ -1,50 +1,26 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import StudentInformation from "../../../Common Components/StudentInformation/js/StudentInformation";
+import DeleteStudent from "../../../Common Components/StudentList/js/DeleteStudent";
 import AddStudent from "../../../Model/AddStudent/js/AddStudent";
-import TermTwoMarkSheet from "../../ParentDashboard.js/js/TermTwoMarkSheet";
 
-const StudentMarksList = (marksProps) => {
+//StudentMarksList component is used to Display the Student's Term One,two and Final Exam with student Name and Roll No
+const StudentMarksList = () => {
   const [users, setUser] = useState([]);
-
-  const [allTermData, setAllTermData] = useState([{}]);
-
-  const [marks, setMarks] = useState({
-    firstTerms: {},
-    secondTerms: {},
-    thirdTerms: {},
-  });
-
-  // inside function
 
   useEffect(() => {
     addStudent();
   }, []);
+
+  //use to render StudentList with student Name and Exam Marks
   const addStudent = async () => {
     fetch("http://localhost:8085/addStudent").then((result) => {
       result.json().then((resp) => {
-        // console.warn(resp)
         setUser(resp);
       });
     });
   };
 
-  const deleteStudent = async (studentRollNo) => {
-    console.log("studentRollNo", studentRollNo);
-    let result = await fetch(
-      `http://localhost:8085/StudentDelete/${studentRollNo}`,
-      {
-        method: "Delete",
-      }
-    );
-    result = await result.json();
-    if (result) {
-      console.log("record is deleted ");
-      addStudent();
-    }
-    console.log("parent delete karo");
-  };
-
+  //Search by the student Name into the list
   const searchHandle = async (e) => {
     console.warn(e.target.value);
     let key = e.target.value;
@@ -60,15 +36,20 @@ const StudentMarksList = (marksProps) => {
     }
   };
 
+  //function pass as props to Term One, Term Two and Final Exam for When result would be update then list will be render
+  // and also pass as props to AddStudent When new Student will be Add than List will be render and getData also pass as props to delete Student
   function getData() {
     addStudent();
+    alert("Confirm");
   }
+  // function pass as props to Student information when teacher Edit The Result Marks will we be Add  to the Student Marks lit
   function studentMarksData() {
     addStudent();
     alert("Student Marks Add successfully");
   }
   return (
     <>
+      {/* Add student  for Add New Student into the List  */}
       <AddStudent data={getData} />
       <table id="customers">
         <h3>List of Student</h3>
@@ -99,14 +80,13 @@ const StudentMarksList = (marksProps) => {
               <td>{item.totalTermThreeMarks}</td>
 
               <td>
-                <button
-                  onClick={() => {
-                    deleteStudent(item.studentRollNo);
-                  }}
-                >
-                  Delete
-                </button>
-
+                {/* student will be delete according to Roll No
+                 */}
+                <DeleteStudent
+                  studentRollNo={item.studentRollNo}
+                  data={getData}
+                />
+                {/* Student Marks will be Add according  to student ID  */}
                 <StudentInformation
                   student_id={item._id}
                   studentList={studentMarksData}

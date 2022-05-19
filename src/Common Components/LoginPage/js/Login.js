@@ -4,19 +4,17 @@ import "../css/login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import { Link } from "react-router-dom";
-
-import { useParams } from "react-router-dom";
-
-const LoginPage = ({ setLoginUser }) => {
+const LoginPage = () => {
+  //Login page for School Admin
   const navigate = useNavigate();
+  // Email and password of school Admin
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
+  //if email and password not correct than for error message
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
 
-  //Post  login Details of the School Admin
-
+  //Post  login Details() of the School Admin
   const login = () => {
     const user = { email, password };
     axios.post("http://localhost:8085/login", user).then((res) => {
@@ -27,80 +25,73 @@ const LoginPage = ({ setLoginUser }) => {
       localStorage.setItem("userDetails", JSON.stringify(user));
 
       if (LoginStatus === "Login Sucessfull") {
-        setLoginUser(true);
         navigate("/SchoolAdmin", { replace: true });
       }
     });
   };
+  //check Email format
+  const handleInputChangeLogin = (e) => {
+    const { value } = e.target;
+    setEmail(value);
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    if (regEx.test(value)) {
+      setEmailError(false);
+    } else if (!regEx.test(value) && value !== "") {
+      setEmailError(true);
+    }
+  };
+  //check password
+  const handleInputChangePassword = (e) => {
+    const { value } = e.target;
+    setPassword(value);
 
-  const LoginHandler = (e) => {
-    e.preventDefault();
-    // navigate("/SchoolAdmin", { replace: true });
+    if (value.length < 5) {
+      setPasswordError(true);
+    } else setPasswordError(false);
   };
 
   return (
     <>
-      <HomeLink />
-
-      <form onSubmit={LoginHandler}>
-        <div className="userLogin">
-          <h1>Login</h1>
+      <div className="userLogin">
+        <h1 className="introLoginUser">School Admin Login </h1>
+        <div className="loginInput">
           <div>
             <input
               name="email"
               value={email}
               type="email"
+              className="inputLogin"
               placeholder="email"
-              onChange={(e) => {
-                setEmail(e.target.value);
-                let emailValidation = e.target.value;
-                console.log("email Validation ", emailValidation);
-                const regEx =
-                  /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
-                if (regEx.test(emailValidation)) {
-                  console.log("emailValidation is Valid");
-                  setEmailError(false);
-                } else if (
-                  !regEx.test(emailValidation) &&
-                  emailValidation !== ""
-                ) {
-                  console.log("emailValidation is Not Valid");
-                  setEmailError(true);
-                }
-              }}
+              onChange={handleInputChangeLogin}
             />
-            {emailError ? <span>Email not valid</span> : <span></span>}
+            {emailError ? (
+              <span className="loginError">Email not valid</span>
+            ) : (
+              <span></span>
+            )}
           </div>
           <div>
             <input
               name="password"
               value={password}
               type="password"
+              className="inputLogin"
               placeholder="enter the password "
-              onChange={(e) => {
-                setPassword(e.target.value);
-                let passwordError = e.target.value;
-                if (passwordError.length < 5) {
-                  setPasswordError(true);
-                } else {
-                  setPasswordError(false);
-                }
-                setPassword(passwordError);
-              }}
+              onChange={handleInputChangePassword}
             />
             {passwordError ? (
-              <span>Length must be greater than 5</span>
+              <span className="loginError">Length must be greater than 5</span>
             ) : (
               <span></span>
             )}
           </div>
           <div>
-            <button type="submit" onClick={login}>
+            <button className="loginBtn" type="submit" onClick={login}>
               Login
             </button>
           </div>
         </div>
-      </form>
+      </div>
     </>
   );
 };

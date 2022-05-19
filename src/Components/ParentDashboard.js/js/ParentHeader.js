@@ -4,7 +4,7 @@ import "../css/ParentDashboard.css";
 const ParentHeader = () => {
   //const loginParent = JSON.parse(localStorage.getItem("loginParent"));
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
-  console.log("Login Parent ", parentDetails);
+
   let parentName = parentDetails.parentName;
   let parentId = parentDetails._id;
   let parentEmail = parentDetails.parentEmail;
