@@ -1,25 +1,81 @@
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
+table {
   width: 100%;
 }
 
-#customers td,
-#customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
+.table td,
+.table th {
+  padding: 12px 15px;
+  border: 1px solid rgb(106, 175, 198);
+  text-align: center;
+  font-size: 16px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(106, 175, 198);
 }
 
-#customers tr:nth-child(even) {
-  background-color: #f2f2f2;
+.table th {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(106, 175, 198);
 }
 
-#customers tr:hover {
-  background-color: #ddd;
+.table tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
 }
 
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
+/*responsive*/
+
+@media (max-width: 500px) {
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+  .table tr {
+    margin-bottom: 15px;
+  }
+  .table td {
+    text-align: right;
+    padding-left: 50%;
+    text-align: right;
+    position: relative;
+  }
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+.inputSearchStudent {
+  height: 3rem;
+  width: 20rem;
+  border: 1px solid rgb(106, 175, 198);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(106, 175, 198);
+}
+h3 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(106, 175, 198);
+}
+.deleteStudentBtn {
+  background-image: url("../../../Img/bgTeacherDashBoard\ \(2\).jpg");
+  color: rgb(106, 175, 198);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1rem;
+  border-style: none;
+  border: 1px rgb(106, 175, 198) solid;
+}
+.listOfUser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

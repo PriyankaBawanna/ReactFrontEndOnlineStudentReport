@@ -48,17 +48,23 @@ const StudentMarksList = () => {
     alert("Student Marks Add successfully");
   }
   return (
-    <>
+    <div className="studentMarksInfoTable">
       {/* Add student  for Add New Student into the List  */}
       <AddStudent data={getData} />
-      <table id="customers">
-        <h3>List of Student</h3>
+
+      <div className="search">
+        <h3 className="studentListHeading">List of Student</h3>
+
         <input
           type="text"
           placeholder="Search student"
           onChange={searchHandle}
+          className="searchStudent"
         />
-        <tbody>
+      </div>
+
+      <table class="table">
+        <thead>
           <tr>
             <td>Student Name</td>
             <td>Student Standard</td>
@@ -68,18 +74,20 @@ const StudentMarksList = () => {
             <td>Term Three</td>
             <td>Operation</td>
           </tr>
-          {users.map((item, i) => (
+        </thead>
+
+        {users.map((item, i) => (
+          <tbody>
             <tr key={i}>
-              <td>{item.studentName}</td>
+              <td data-label="Student Name">{item.studentName}</td>
+              <td data-label="Student Standard">{item.studentStandard}</td>
+              <td data-label="Student Roll No ">{item.studentRollNo}</td>
 
-              <td>{item.studentStandard}</td>
-              <td>{item.studentRollNo}</td>
+              <td data-label="Term One">{item.totalTermOneMarks}</td>
+              <td data-label="Term Two">{item.totalTermTwoMarks}</td>
+              <td data-label="Term Three">{item.totalTermThreeMarks}</td>
 
-              <td>{item.totalTermOneMarks}</td>
-              <td>{item.totalTermTwoMarks}</td>
-              <td>{item.totalTermThreeMarks}</td>
-
-              <td>
+              <td data-label="Operation">
                 {/* student will be delete according to Roll No
                  */}
                 <DeleteStudent
@@ -93,10 +101,10 @@ const StudentMarksList = () => {
                 />
               </td>
             </tr>
-          ))}
-        </tbody>
+          </tbody>
+        ))}
       </table>
-    </>
+    </div>
   );
 };
 export default StudentMarksList;

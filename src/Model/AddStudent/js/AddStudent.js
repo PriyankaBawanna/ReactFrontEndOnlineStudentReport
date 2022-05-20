@@ -92,74 +92,93 @@ const AddStudent = (prop) => {
         className="ModelOutLine"
       >
         <ModalHeader toggle={() => setModal(!modal)}>
-          <div>ADD Student</div>
+          <div>
+            <h1>Add Student</h1>
+          </div>
         </ModalHeader>
 
         <ModalBody>
-          <div>
-            <label>Student Name </label>
-            <input
-              name="studentName"
-              value={studentName}
-              type="text"
-              placeholder="Student Name "
-              autocomplete="off"
-              onChange={handleInputStudentName}
-            />
-            {studentNameError ? <span>user not valid</span> : <span></span>}
+          <div className="addStudentModal">
+            <div>
+              <label className="inputStudentLabel">Student Name </label>
+              <input
+                name="studentName"
+                value={studentName}
+                type="text"
+                className="studentInput"
+                autocomplete="off"
+                onChange={handleInputStudentName}
+              />
+              {studentNameError ? (
+                <span className="inputError">user not valid</span>
+              ) : (
+                <span></span>
+              )}
+            </div>
+            <div>
+              <label className="inputStudentLabel"> Student Email </label>
+              <input
+                name="studentEmail"
+                value={studentEmail}
+                type="email"
+                className="studentInput"
+                autocomplete="off"
+                onChange={handleInputStudentEmail}
+              />
+              {studentEmailError ? (
+                <span className="inputError">Email not valid</span>
+              ) : (
+                <span></span>
+              )}
+            </div>
+            <div>
+              <label className="inputStudentLabel">Student Standard</label>
+              <input
+                name="studentStandard"
+                value={studentStandard}
+                type="Number"
+                autocomplete="off"
+                className="studentInput"
+                onChange={handleInputStudentStandard}
+              />
+              {studentStandardError ? (
+                <span className="inputError">
+                  class 1 <sup>st</sup> to 12 <sup>th</sup>
+                </span>
+              ) : (
+                <span></span>
+              )}
+            </div>
+            <div>
+              <label className="inputStudentLabel">Student Roll No.</label>
+              <input
+                name="studentRollNo"
+                value={studentRollNo}
+                type="text"
+                autocomplete="off"
+                className="studentInput"
+                onChange={(e) => {
+                  setStudentRollNo(e.target.value);
+                }}
+              />
+            </div>
           </div>
-          <div>
-            <label>Student Email </label>
-            <input
-              name="studentEmail"
-              value={studentEmail}
-              type="email"
-              placeholder="Enter Parent Email id "
-              autocomplete="off"
-              onChange={handleInputStudentEmail}
-            />
-            {studentEmailError ? <span>Email not valid</span> : <span></span>}
-          </div>
-          <div>
-            <label>Student Standard</label>
-            <input
-              name="studentStandard"
-              value={studentStandard}
-              type="Number"
-              autocomplete="off"
-              placeholder="Enter student Standard "
-              onChange={handleInputStudentStandard}
-            />
-            {studentStandardError ? (
-              <span>
-                class 1 <sup>st</sup> to 12 <sup>th</sup>
-              </span>
-            ) : (
-              <span></span>
-            )}
-          </div>
-          <div>
-            <label>Student Roll No.</label>
-            <input
-              name="studentRollNo"
-              value={studentRollNo}
-              type="text"
-              autocomplete="off"
-              placeholder="Enter student RollNo "
-              onChange={(e) => {
-                setStudentRollNo(e.target.value);
-              }}
-            />
-          </div>
-
-          <button type="submit" onClick={addStudentData}>
+          <button
+            type="submit"
+            onClick={addStudentData}
+            className="addStudentBtn"
+          >
             Add
           </button>
           {/*props Receive  from StudentMarkList   and Student List  for Display new add Item into the list */}
-          <button onClick={prop.data}>Confirm</button>
+          <button onClick={prop.data} className="addStudentBtn">
+            Confirm
+          </button>
         </ModalBody>
       </Modal>
-      <button onClick={addStudentChange}>Add Student</button>
+      <button onClick={addStudentChange} className="addStudentBtn">
+        Add Student
+      </button>
     </>
   );
 };

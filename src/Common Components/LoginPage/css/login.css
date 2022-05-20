@@ -32,7 +32,8 @@
 }
 .inputRegistration {
   height: 2.5rem;
-  margin: 1rem;
+  margin: 0.5rem;
+  width: 15rem;
 }
 .registerUser {
   display: flex;
@@ -41,4 +42,20 @@
   align-items: center;
   height: 10rem;
   margin-top: 5rem;
+}
+.registerBtn {
+  width: 8rem;
+  height: 2.5rem;
+  border-style: none;
+  color: gray;
+  font-size: 1rem;
+  background-color: rgb(225, 225, 225);
+  border-radius: 12%;
+  margin-top: 1rem;
+}
+.logOutBtn {
+  border: none;
+  background-color: white;
+  margin: 1rem;
+  color: rgb(106, 175, 198);
 }

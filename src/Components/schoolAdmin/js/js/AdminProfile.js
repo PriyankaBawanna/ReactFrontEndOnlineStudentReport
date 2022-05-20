@@ -8,9 +8,12 @@ const AdminProfile = () => {
   return (
     <>
       <div className="dropdown">
-        <span className="userProfile">User</span>
+        <span className="userProfile">
+          <b>SA</b>
+        </span>
 
-        <div className="dropdown-content">
+        <div className="triangle-up"></div>
+        <div className="dropdownContentForAdmin">
           <p> Admin: {schoolAdminDetails.email}</p>
           {/**Logout for the clear the Session  */}
           <Logout />

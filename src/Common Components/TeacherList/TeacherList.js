@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UpdateTeacher from "../../Model/UpdateTeacher/js/UpdateTeacher";
 import AddTeacher from "../../Model/AddTeacher/js/AddTeacher";
+import "../StudentList/css/StudentList.css";
 const TeacherList = () => {
   const [users, setUser] = useState([]);
 
@@ -55,29 +56,48 @@ const TeacherList = () => {
     <>
       {/* for Add new Teacher */}
       <AddTeacher teacherData={getData} />
-      <input type="text" placeholder="Search Teacher" onChange={searchHandle} />
-      <table id="customers">
-        <tr>
-          <th>Teacher Name</th>
-          <th>Teacher Id</th>
-          <th>Mobile No</th>
-          <th>Email Id </th>
-          <th>Operation</th>
-          <th>Operation</th>
-        </tr>
-        {users.map((item, i) => (
-          <tr key={i}>
-            <td>{item.teacherName}</td>
-            <td>{item.teacherNo}</td>
-            <td>{item.teacherMobileNo}</td>
-            <td>{item.teacherEmailId}</td>
-            <td>
-              <UpdateTeacher teacherId={item._id} data={getData} />
-            </td>
-            <td>
-              <button onClick={() => deleteTeacher(item._id)}>Delete</button>
-            </td>
+
+      <input
+        type="text"
+        placeholder="Search Teacher"
+        onChange={searchHandle}
+        className="inputSearchStudent"
+      />
+      <div className="listOfUser">
+        <h3>List Of Teachers </h3>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Teacher Name</th>
+            <th>Teacher Id</th>
+            <th>Mobile No</th>
+            <th>Email Id </th>
+            <th>Operation</th>
+            <th>Operation</th>
           </tr>
+        </thead>
+        {users.map((item, i) => (
+          <tbody>
+            <tr key={i}>
+              <td data-label="Teacher Name">{item.teacherName}</td>
+              <td data-label="Teacher ID">{item.teacherNo}</td>
+              <td data-label="Mobile No.">{item.teacherMobileNo}</td>
+              <td data-label="Email ID ">{item.teacherEmailId}</td>
+              <td data-label="Update">
+                <UpdateTeacher teacherId={item._id} data={getData} />
+              </td>
+              <td data-label="Delete">
+                <button
+                  onClick={() => deleteTeacher(item._id)}
+                  className="deleteStudentBtn"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
         ))}
       </table>
     </>

@@ -170,7 +170,7 @@ const FinalExam = () => {
           <div className="approvalStatusParent">
             <div>
               <button
-                className="approvalButton"
+                className="approvalButton resultBtn"
                 onClick={termResultStatusApproveStatus}
               >
                 Approve
@@ -178,7 +178,7 @@ const FinalExam = () => {
             </div>
             <div>
               <button
-                className="rejectButton"
+                className="rejectButton resultBtn"
                 onClick={termResultStatusRejectStatus}
               >
                 Reject

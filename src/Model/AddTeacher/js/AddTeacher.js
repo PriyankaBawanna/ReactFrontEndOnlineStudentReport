@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import "../css/AddTeacher.css";
+import "../../AddStudent/css/AddStudent.css";
 const AddTeacher = (props) => {
   /*modal useState*/
   const [modal, setModal] = useState(false);
@@ -72,27 +74,35 @@ const AddTeacher = (props) => {
         className="ModelOutLine"
       >
         <ModalHeader toggle={() => setModal(!modal)}>
-          <div>ADD Teacher</div>
+          <div>
+            <h1>ADD Teacher</h1>
+          </div>
         </ModalHeader>
         <ModalBody>
           <div>
-            <label>Teacher Name </label>
+            <label className="inputStudentLabel">Teacher Name </label>
             <input
               name="teacherName"
               type="text"
               placeholder="teacher name"
               value={teacherName}
+              className="studentInput"
               onChange={handleTeacherNameInput}
             />
-            {teacherNameError ? <span>user not valid</span> : <span></span>}
+            {teacherNameError ? (
+              <span className="inputError">user not valid</span>
+            ) : (
+              <span></span>
+            )}
           </div>
           <div>
-            <label>Teacher Id </label>
+            <label className="inputStudentLabel">Teacher Id </label>
             <input
               name="teacherNo"
               type="text"
               placeholder="enter the teacher Id "
               value={teacherNo}
+              className="studentInput"
               onChange={(e) => {
                 setTeacherNo(e.target.value);
               }}
@@ -100,40 +110,56 @@ const AddTeacher = (props) => {
           </div>
 
           <div>
-            <label>Teacher Mobile No </label>
+            <label className="inputStudentLabel">Teacher Mobile No </label>
             <input
               name="teacherMobileNo"
               type="number"
               placeholder="Mobile No."
               value={teacherMobileNo}
+              className="studentInput"
               onChange={handleMobileNumber}
             />
             {teacherMobileNoError ? (
-              <span>Mobile Number Must be equal to 10 digit</span>
+              <span className="inputError">
+                Mobile Number Must be equal to 10 digit
+              </span>
             ) : (
               <span></span>
             )}
           </div>
 
           <div>
-            <label>Teacher Email Id </label>
+            <label className="inputStudentLabel">Teacher Email Id </label>
             <input
               name="teacherEmailId"
               type="text"
               placeholder=" Email Id"
+              className="studentInput"
               value={teacherEmailId}
               onChange={handleTeacherEmailId}
             />
-            {teacherEmailError ? <span>Email not valid</span> : <span></span>}
+            {teacherEmailError ? (
+              <span className="inputError">Email not valid</span>
+            ) : (
+              <span></span>
+            )}
           </div>
 
-          <button type="submit" onClick={addTeacherData}>
+          <button
+            type="submit"
+            onClick={addTeacherData}
+            className="addStudentBtn"
+          >
             Add
           </button>
-          <button onClick={props.teacherData}>Confirm</button>
+          <button onClick={props.teacherData} className="addStudentBtn">
+            Confirm
+          </button>
         </ModalBody>
       </Modal>
-      <button onClick={() => setModal(true)}>Add Teacher</button>
+      <button onClick={() => setModal(true)} className="addTeacherBtn">
+        Add Teacher
+      </button>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import AddStudent from "../../../Model/AddStudent/js/AddStudent";
+import "../css/StudentList.css";
+import "../../../Model/AddStudent/css/AddStudent.css";
 
 //props receive from StudentList and StudentMarksList for Delete the Student Data as well As Parent Data
 const DeleteStudent = (props) => {
@@ -41,13 +42,19 @@ const DeleteStudent = (props) => {
       >
         <ModalHeader toggle={() => setModal(!modal)}></ModalHeader>
         <ModalBody>
-          <b>Do you Want Delete Student Data ?</b>
-          <p>!!!..Parent Data will be also Delete </p>
-          <button onClick={deleteStudent}>Ok</button>
-          <button onClick={props.data}>Confirm</button>
+          <h5>Do you Want Delete Student Data ?</h5>
+          <p>!!!..Parent Data will be also Deleted </p>
+          <button className="addStudentBtn" onClick={deleteStudent}>
+            Ok
+          </button>
+          <button className="addStudentBtn" onClick={props.data}>
+            Confirm
+          </button>
         </ModalBody>
       </Modal>
-      <button onClick={() => setModal(true)}>Delete</button>
+      <button onClick={() => setModal(true)} className="deleteStudentBtn">
+        Delete
+      </button>
     </>
   );
 };

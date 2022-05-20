@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "../../../Model/AddStudent/css/AddStudent.css";
 const TermThree = (p) => {
   //student details
   const [studentName, setStudentName] = useState("");
@@ -184,7 +184,9 @@ const TermThree = (p) => {
 
           <tr>
             <td>
-              <button onClick={TotalMarksTermThree}>Total</button>
+              <button className="markSheetBtn " onClick={TotalMarksTermThree}>
+                Total
+              </button>
             </td>
             <td>500</td>
             <td>
@@ -215,9 +217,16 @@ const TermThree = (p) => {
           </tr>
           <tr>
             <td>
-              <button onClick={addStudentMarksTermThree}>Approve</button>
+              <button
+                className="markSheetBtn "
+                onClick={addStudentMarksTermThree}
+              >
+                Approve
+              </button>
               {/*function props Receive  from the studentMarksList Component  for render the  Student Mark List */}
-              <button onClick={p.studentList}>Confirm</button>
+              <button className="markSheetBtn " onClick={p.studentList}>
+                Confirm
+              </button>
             </td>
           </tr>
         </table>

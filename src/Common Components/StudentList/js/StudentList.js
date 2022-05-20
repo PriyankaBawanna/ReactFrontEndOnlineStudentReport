@@ -1,8 +1,8 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import { Link, UNSAFE_RouteContext } from "react-router-dom";
+import AddParent from "../../../Model/AddParent/js/AddParent";
 import AddStudent from "../../../Model/AddStudent/js/AddStudent";
 import UpdateStudent from "../../../Model/UpdateStudent/js/updateStudent";
-
 import "../css/StudentList.css";
 import DeleteStudent from "./DeleteStudent";
 
@@ -50,38 +50,48 @@ const StudentList = () => {
     <>
       {/** function pass as props to   AddStudent Component for render the list  */}
       <AddStudent data={getData} />
-      <input type="text" placeholder="Search student" onChange={searchHandle} />
-      <table id="customers">
+      <AddParent />
+      <input
+        type="text"
+        placeholder="Search student"
+        onChange={searchHandle}
+        className="inputSearchStudent"
+      />
+      <table>
         <h3>List of Student</h3>
-        <tbody>
-          <tr>
-            <td>Student Name</td>
-            <td>Parent Email</td>
-            <td>Student Standard</td>
-            <td>Student Roll Number</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          {users.map((item, i) => (
-            <tr key={i}>
-              <td>{item.studentName}</td>
-              <td>{item.studentEmail}</td>
-              <td>{item.studentStandard}</td>
-              <td>{item.studentRollNo}</td>
-              <td>
-                <UpdateStudent studentId={item._id} data={getData} />
-              </td>
-
-              <td>
-                {/** function pass as props to   Delete student Component for render the list  */}
-                <DeleteStudent
-                  studentRollNo={item.studentRollNo}
-                  data={getData}
-                />
-              </td>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Parent Email</th>
+              <th>Student Standard</th>
+              <th>Student Roll Number</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
+          </thead>
+          {users.map((item, i) => (
+            <tbody>
+              <tr key={i}>
+                <td data-label="Student Name">{item.studentName}</td>
+                <td data-label="Student Email">{item.studentEmail}</td>
+                <td data-label="Student Standard">{item.studentStandard}</td>
+                <td data-label="Student Roll No ">{item.studentRollNo}</td>
+                <td data-label="Update Student Data">
+                  <UpdateStudent studentId={item._id} data={getData} />
+                </td>
+
+                <td data-label="Delete Student Data">
+                  {/** function pass as props to   Delete student Component for render the list  */}
+                  <DeleteStudent
+                    studentRollNo={item.studentRollNo}
+                    data={getData}
+                  />
+                </td>
+              </tr>
+            </tbody>
           ))}
-        </tbody>
+        </table>
       </table>
     </>
   );

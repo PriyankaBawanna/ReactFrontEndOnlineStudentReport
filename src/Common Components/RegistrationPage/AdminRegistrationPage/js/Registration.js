@@ -90,7 +90,7 @@ const Registration = () => {
       <div className="userLogin">
         <h1 className="introLoginUser">Admin Registration Page</h1>
         <form onSubmit={handleChange}>
-          <div className="loginInput">
+          <div className="registerUser">
             <div>
               <input
                 name="name"
@@ -154,7 +154,7 @@ const Registration = () => {
               )}
             </div>
 
-            <button type="submit" className="loginBtn" onClick={register}>
+            <button type="submit" className="registerBtn" onClick={register}>
               Register
             </button>
           </div>

@@ -16,8 +16,8 @@ const ParentHeader = () => {
         <h1>Parent Dashboard </h1>
         <div className="dropdown">
           <span className="userProfile">User</span>
-
-          <div className="dropdown-content">
+          <div className="triangle-up"></div>
+          <div className="dropdownContentParent">
             <p>Parent Name : {parentName}</p>
             <p>Paren Email :{parentEmail}</p>
             <p>parent Mobile No:{parentMobileNo}</p>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 //This Component is part of the teacher dashboard where with help of this  component teacher can be enter the Student Marks And make Result
 import "../css/studentInfo.css";
+import "../../../Model/AddStudent/css/AddStudent.css";
 import TermThree from "./TermThree";
 import TermTwo from "./TermTwo";
 const StudentInformation = (p) => {
@@ -101,27 +102,31 @@ const StudentInformation = (p) => {
         className="ModelOutLine"
       >
         <ModalHeader toggle={() => setModal(!modal)}>
-          <div>Student Marks Sheet</div>
+          <div>
+            <h1>Student Mark Sheet</h1>
+          </div>
         </ModalHeader>
 
         <ModalBody>
           <div className="StudentInfo">
             <div>
-              <b>Student Name</b>
+              <b className="inputStudentLabel">Student Name</b>
               <input
                 name="studentName"
                 value={studentName}
                 type="text"
+                className="studentInput"
                 placeholder="Student Name "
                 onChange={(e) => setStudentName(e.target.value)}
               />
             </div>
             <div>
-              <b>Parent Email</b>
+              <b className="inputStudentLabel">Parent Email</b>
               <input
                 name="studentEmail"
                 value={studentEmail}
                 type="email"
+                className="studentInput"
                 placeholder="Enter Parent Email id "
                 onChange={(e) => {
                   setStudentEmail(e.target.value);
@@ -129,11 +134,12 @@ const StudentInformation = (p) => {
               />
             </div>
             <div>
-              <b>Student Standard</b>
+              <b className="inputStudentLabel">Student Standard</b>
               <input
                 name="studentStandard"
                 value={studentStandard}
                 type="Number"
+                className="studentInput"
                 placeholder="Enter student Standard "
                 onChange={(e) => {
                   setStudentStandard(e.target.value);
@@ -141,11 +147,12 @@ const StudentInformation = (p) => {
               />
             </div>
             <div className="studentdetailscol">
-              <b>Roll No </b>
+              <b className="inputStudentLabel">Roll No </b>
               <input
                 name="studentRollNo"
                 value={studentRollNo}
                 type="text"
+                className="studentInput"
                 placeholder="Enter student RollNo "
                 onChange={(e) => {
                   setStudentRollNo(e.target.value);
@@ -158,6 +165,7 @@ const StudentInformation = (p) => {
             <select
               value={selects}
               onChange={(e) => setSelectTerm(e.target.value)}
+              className="selectTerm"
             >
               <option>select the Term</option>
               <option>Term One</option>
@@ -279,7 +287,12 @@ const StudentInformation = (p) => {
 
                         <tr>
                           <td>
-                            <button onClick={TotalMarks}>Total</button>
+                            <button
+                              className="markSheetBtn "
+                              onClick={TotalMarks}
+                            >
+                              Total
+                            </button>
                           </td>
                           <td>500</td>
                           <td>
@@ -310,8 +323,18 @@ const StudentInformation = (p) => {
                         </tr>
                         <tr>
                           <td>
-                            <button onClick={addStudentMarks}>Approve</button>
-                            <button onClick={p.studentList}>Confirm</button>
+                            <button
+                              className="markSheetBtn "
+                              onClick={addStudentMarks}
+                            >
+                              Approve
+                            </button>
+                            <button
+                              className="markSheetBtn "
+                              onClick={p.studentList}
+                            >
+                              Confirm
+                            </button>
                           </td>
                         </tr>
                       </table>
@@ -340,6 +363,7 @@ const StudentInformation = (p) => {
           </div>
           <div className="btngroup">
             <button
+              className="markSheetBtn "
               onClick={() => {
                 setModal(false);
               }}
@@ -349,7 +373,9 @@ const StudentInformation = (p) => {
           </div>
         </ModalBody>
       </Modal>
-      <button onClick={() => setModal(true)}>Edit </button>
+      <button onClick={() => setModal(true)} className="studentInfoEdit">
+        Edit
+      </button>
     </>
   );
 };

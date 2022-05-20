@@ -7,7 +7,7 @@ import TeacherProfile from "./TeacherProfile";
 const TeacherDashBoard = () => {
   return (
     <>
-      <div className="teacher-header">
+      <div className="teacherHeader">
         <div>
           <h1>Teacher Dashboard </h1>
         </div>

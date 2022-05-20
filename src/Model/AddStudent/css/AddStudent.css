@@ -1,1 +1,40 @@
-
+.addStudentBtn {
+  height: 3rem;
+  width: 10rem;
+  background-image: url("../../../Img/bgTeacherDashBoard\ \(2\).jpg");
+  color: rgb(106, 175, 198);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1rem;
+  border-style: none;
+  margin: 2rem;
+  border: 1px rgb(106, 175, 198) solid;
+}
+.updateStudentBtn {
+  background-image: url("../../../Img/bgTeacherDashBoard\ \(2\).jpg");
+  color: rgb(106, 175, 198);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1rem;
+  border-style: none;
+  border: 1px rgb(106, 175, 198) solid;
+}
+.addStudentModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.inputStudentLabel {
+  margin: 1rem;
+  color: rgb(106, 175, 198);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.studentInput {
+  border: 1px rgb(106, 175, 198) solid;
+  color: rgb(106, 175, 198);
+}
+.inputError {
+  color: red;
+}
+h5,
+p {
+  color: rgb(106, 175, 198);
+}

@@ -3,19 +3,42 @@
   flex-direction: row;
   height: 5rem;
   width: 100%;
-  border: 5px solid;
-  justify-content: space-around;
-}
-.addUser {
-  display: flex;
-  flex-direction: row;
-  height: 5rem;
-  width: 15rem;
-  border: 1px solid;
   justify-content: space-between;
 }
+
 .profile {
   height: 5rem;
   width: 5rem;
   margin-top: 1.5rem;
+}
+.schoolAdminHeading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  padding-top: 1rem;
+}
+h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(106, 175, 198);
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  background-image: url("../../../../Img/bgTeacherDashBoard\ \(2\).jpg");
+}
+.userListLink {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.studentListLink {
+  text-decoration: none;
+  margin: 1rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(106, 175, 198);
+  font-size: 2rem;
 }

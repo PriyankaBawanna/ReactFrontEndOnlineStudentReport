@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../../Common Components/LoginPage/css/login.css";
 import { useNavigate } from "react-router-dom";
 //for clear the session and logout
 const Logout = () => {
@@ -11,7 +11,9 @@ const Logout = () => {
   }
   return (
     <>
-      <button onClick={handleLogOut}>LogOut</button>
+      <button onClick={handleLogOut} className="logOutBtn">
+        LogOut
+      </button>
     </>
   );
 };

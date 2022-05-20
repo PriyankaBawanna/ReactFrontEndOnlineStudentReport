@@ -174,7 +174,7 @@ const TermTwoMarkSheet = () => {
       <div className="approvalStatusParent">
         <div>
           <button
-            className="approvalButton"
+            className="approvalButton  resultBtn"
             onClick={termResultStatusApproveStatus}
           >
             Approve
@@ -182,7 +182,7 @@ const TermTwoMarkSheet = () => {
         </div>
         <div>
           <button
-            className="rejectButton"
+            className="rejectButton resultBtn"
             onClick={termResultStatusRejectStatus}
           >
             Reject

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import "../../UpdateTeacher/js/UpdateTeacher.css";
+import "../../AddStudent/css/AddStudent.css";
 //Edit Teacher data
 const UpdateTeacher = (prop) => {
   const [modal, setModal] = useState(false);
@@ -94,53 +96,69 @@ const UpdateTeacher = (prop) => {
         className="ModelOutLine"
       >
         <ModalHeader toggle={() => setModal(!modal)}>
-          <div>Update Teacher Data</div>
+          <div>
+            <h1>Update Teacher Data</h1>
+          </div>
         </ModalHeader>
 
         <ModalBody>
           <div>
-            <label>Teacher Name</label>
+            <label className="inputStudentLabel">Teacher Name</label>
             <input
               name="teacherName"
               value={teacherName}
               type="text"
+              className="studentInput"
               placeholder="Student Name "
               onChange={inputHandleTeacherName}
             />
-            {teacherNameError ? <span>user not valid</span> : <span></span>}
-          </div>
-          <div>
-            <label>Teacher Email Id </label>
-            <input
-              name="teacherEmailId"
-              value={teacherEmailId}
-              type="email"
-              placeholder="Enter Parent Email id "
-              onChange={inputHandleTeacherEmail}
-            />
-            {teacherEmailError ? <span>Email not valid</span> : <span></span>}
-          </div>
-          <div>
-            <label>Teacher Mobile No </label>
-            <input
-              name="teacherMobileNo"
-              value={teacherMobileNo}
-              type="Number"
-              placeholder="Mobile Number"
-              onChange={inputHandleTeacherMobileNo}
-            />
-            {teacherMobileNoError ? (
-              <span>Mobile Number Must be equal to 10 digit</span>
+            {teacherNameError ? (
+              <span className="inputError">user not valid</span>
             ) : (
               <span></span>
             )}
           </div>
           <div>
-            <label>Teacher Id </label>
+            <label className="inputStudentLabel">Teacher Email Id </label>
+            <input
+              name="teacherEmailId"
+              value={teacherEmailId}
+              type="email"
+              className="studentInput"
+              placeholder="Enter Parent Email id "
+              onChange={inputHandleTeacherEmail}
+            />
+            {teacherEmailError ? (
+              <span className="inputError">Email not valid</span>
+            ) : (
+              <span></span>
+            )}
+          </div>
+          <div>
+            <label className="inputStudentLabel">Teacher Mobile No </label>
+            <input
+              name="teacherMobileNo"
+              value={teacherMobileNo}
+              type="Number"
+              className="studentInput"
+              placeholder="Mobile Number"
+              onChange={inputHandleTeacherMobileNo}
+            />
+            {teacherMobileNoError ? (
+              <span className="inputError">
+                Mobile Number Must be equal to 10 digit
+              </span>
+            ) : (
+              <span></span>
+            )}
+          </div>
+          <div>
+            <label className="inputStudentLabel">Teacher Id </label>
             <input
               name="teacherNo"
               value={teacherNo}
               type="text"
+              className="studentInput"
               placeholder="Teacher's ID "
               onChange={(e) => {
                 setTeacherNo(e.target.value);
@@ -148,15 +166,25 @@ const UpdateTeacher = (prop) => {
             />
           </div>
 
-          <button type="submit" onClick={updateTeacherInfo}>
+          <button
+            className="addStudentBtn"
+            type="submit"
+            onClick={updateTeacherInfo}
+          >
             Update
           </button>
-          <button onClick={() => setModal(false)}>cancel</button>
+          <button className="addStudentBtn" onClick={() => setModal(false)}>
+            cancel
+          </button>
           {/** receive Function As props from  TeacherList to re render the Teacher List  */}
-          <button onClick={prop.data}>Confirm</button>
+          <button className="addStudentBtn" onClick={prop.data}>
+            Confirm
+          </button>
         </ModalBody>
       </Modal>
-      <button onClick={() => setModal(true)}>Edit</button>
+      <button onClick={() => setModal(true)} className="updateTeacher">
+        Edit
+      </button>
     </>
   );
 };

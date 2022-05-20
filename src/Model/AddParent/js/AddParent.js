@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import "../css/AddParent.css";
+import "../../AddStudent/css/AddStudent.css";
 import axios from "axios";
 const AddParent = () => {
   /*modal useState*/
@@ -41,63 +42,74 @@ const AddParent = () => {
           <div>ADD Parent</div>
         </ModalHeader>
         <ModalBody>
-          <div>
-            <label>Parent Name</label>
-            <input
-              name="parentName"
-              type="text"
-              value={parentName}
-              placeholder="user name"
-              onChange={(e) => {
-                setParentName(e.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <label>Student Roll No</label>
-            <input
-              name="studentRollNo"
-              type="text"
-              value={studentRollNo}
-              placeholder="student Roll No. "
-              onChange={(e) => {
-                setStudentRollNo(e.target.value);
-              }}
-            />
-          </div>
+          <div className="addStudentModal">
+            <div>
+              <label className="inputStudentLabel">Parent Name</label>
+              <input
+                name="parentName"
+                type="text"
+                value={parentName}
+                className="studentInput"
+                placeholder="user name"
+                onChange={(e) => {
+                  setParentName(e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <label className="inputStudentLabel">Student Roll No</label>
+              <input
+                name="studentRollNo"
+                type="text"
+                value={studentRollNo}
+                className="studentInput"
+                placeholder="student Roll No. "
+                onChange={(e) => {
+                  setStudentRollNo(e.target.value);
+                }}
+              />
+            </div>
 
-          <div>
-            <label>Mobile No</label>
-            <input
-              name=" mobileNumber"
-              type="number"
-              placeholder=" mobileNumber"
-              value={mobileNumber}
-              onChange={(e) => {
-                setMobileNumber(e.target.value);
-              }}
-            />
-          </div>
+            <div>
+              <label className="inputStudentLabel">Mobile No</label>
+              <input
+                name=" mobileNumber"
+                type="number"
+                placeholder=" mobileNumber"
+                value={mobileNumber}
+                className="studentInput"
+                onChange={(e) => {
+                  setMobileNumber(e.target.value);
+                }}
+              />
+            </div>
 
-          <div>
-            <label>Parent Email</label>
-            <input
-              name="parentEmail"
-              value={parentEmail}
-              type="email"
-              placeholder="email"
-              onChange={(e) => {
-                setParentEmail(e.target.value);
-              }}
-            />
+            <div>
+              <label className="inputStudentLabel">Parent Email</label>
+              <input
+                name="parentEmail"
+                value={parentEmail}
+                type="email"
+                className="studentInput"
+                placeholder="email"
+                onChange={(e) => {
+                  setParentEmail(e.target.value);
+                }}
+              />
+            </div>
           </div>
-
-          <button type="submit" onClick={addParentData}>
+          <button
+            className="addStudentBtn"
+            type="submit"
+            onClick={addParentData}
+          >
             Add Parent Details
           </button>
         </ModalBody>
       </Modal>
-      <button onClick={() => setModal(true)}>Add Parent</button>
+      <button onClick={() => setModal(true)} className="addParentBtn">
+        Add Parent
+      </button>
     </>
   );
 };
