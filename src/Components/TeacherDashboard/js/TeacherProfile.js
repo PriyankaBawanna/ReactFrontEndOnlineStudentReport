@@ -16,17 +16,9 @@ const TeacherProfile = () => {
         <div className="triangle-up"></div>
         <div className="dropdown-content">
           <p className="teacherDetails">
-            Teacher Name : {teacherDetails.teacherName}
-          </p>
-          <p className="teacherDetails">
             Teacher Email:{teacherDetails.teacherEmailId}
           </p>
-          <p className="teacherDetails">
-            Teacher ID:{teacherDetails.teacherNo}
-          </p>
-          <p className="teacherDetails">
-            Teacher Mobile No. {teacherDetails.teacherMobileNo}
-          </p>
+
           {/*Log out for clear the session  */}
 
           <Logout />

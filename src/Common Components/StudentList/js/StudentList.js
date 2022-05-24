@@ -49,14 +49,17 @@ const StudentList = () => {
   return (
     <>
       {/** function pass as props to   AddStudent Component for render the list  */}
-      <AddStudent data={getData} />
-      <AddParent />
-      <input
-        type="text"
-        placeholder="Search student"
-        onChange={searchHandle}
-        className="inputSearchStudent"
-      />
+      <div className="studentDataAddBtn">
+        <AddStudent data={getData} />
+        <AddParent />
+
+        <input
+          type="text"
+          placeholder="Search student"
+          onChange={searchHandle}
+          className="inputSearchStudent"
+        />
+      </div>
       <table>
         <h3>List of Student</h3>
         <table class="table">

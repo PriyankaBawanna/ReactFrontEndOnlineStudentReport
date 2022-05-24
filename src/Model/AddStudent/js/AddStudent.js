@@ -176,7 +176,10 @@ const AddStudent = (prop) => {
           </button>
         </ModalBody>
       </Modal>
-      <button onClick={addStudentChange} className="addStudentBtn">
+      <button
+        onClick={addStudentChange}
+        className="addStudentBtn mobileViewAddStudentBtn"
+      >
         Add Student
       </button>
     </>

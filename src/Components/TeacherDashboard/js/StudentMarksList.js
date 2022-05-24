@@ -53,13 +53,15 @@ const StudentMarksList = () => {
       <AddStudent data={getData} />
 
       <div className="search">
-        <h3 className="studentListHeading">List of Student</h3>
+        <h3 className="studentListHeading  mobileViewStudentListHeading ">
+          List of Student
+        </h3>
 
         <input
           type="text"
           placeholder="Search student"
           onChange={searchHandle}
-          className="searchStudent"
+          className="searchStudent mobileViewSearchStudent"
         />
       </div>
 

@@ -29,8 +29,8 @@
   display: none;
   margin-top: -0.5rem;
   position: absolute;
-  background-color: #f9f9f9;
-  margin-left: -13rem;
+  background-color: white;
+  margin-left: -11rem;
   min-width: 160px;
   padding: 12px 16px;
   z-index: 1;
@@ -72,7 +72,7 @@
   align-items: center;
   height: 5rem;
   width: 100%;
-  border: 1px solid (106, 175, 198);
+  border: 1px solid rgb(106, 175, 198);
 }
 .termResult {
   display: flex;
@@ -94,27 +94,38 @@
   margin: 1rem;
 }
 
-.sideNaveParentDashboard {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 .parentProfileIcon {
   display: block;
 }
-.rightSideNav {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 40rem;
-  width: 15rem;
-  border: 1px rgb(106, 175, 198) solid;
+.sideNaveParentDashboard {
+  display: none;
 }
-/**ye code mobile view me add karna hai */
-.mobileViewOfMArkSheet {
-  background-color: pink;
-  margin-top: 5rem;
-}
-@media screen and (max-width: 816px) {
+
+@media screen and (max-width: 600px) {
+  .sideNaveParentDashboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    width: 100%;
+    border: 1px solid rgb(106, 175, 198);
+  }
+  .mobileViewParentDashBoard {
+    display: block;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    color: rgb(106, 175, 198);
+  }
+  .parentProfileIcon {
+    display: none;
+  }
+  .termResult {
+    display: none;
+  }
+  .mobileViewTermResult {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

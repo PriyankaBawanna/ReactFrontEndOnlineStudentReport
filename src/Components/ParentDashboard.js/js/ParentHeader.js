@@ -9,6 +9,7 @@ const ParentHeader = () => {
   let parentId = parentDetails._id;
   let parentEmail = parentDetails.parentEmail;
   let parentMobileNo = parentDetails.mobileNumber;
+  let studentRollNo = parentDetails.studentRollNo;
   console.log("Parent Id", parentId, parentName, parentMobileNo, parentEmail);
   return (
     <>
@@ -18,9 +19,8 @@ const ParentHeader = () => {
           <span className="userProfile">User</span>
           <div className="triangle-up"></div>
           <div className="dropdownContentParent">
-            <p>Parent Name : {parentName}</p>
             <p>Paren Email :{parentEmail}</p>
-            <p>parent Mobile No:{parentMobileNo}</p>
+            <p>Student Roll No : {studentRollNo}</p>
             <Logout />
           </div>
         </div>

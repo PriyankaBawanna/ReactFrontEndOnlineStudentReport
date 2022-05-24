@@ -14,6 +14,10 @@ function HomeLink() {
       <Link to="/Login" className="loginLink">
         School Admin Login
       </Link>
+      <Link to="/UserLogin" className="loginLink">
+        {" "}
+        User Login{" "}
+      </Link>
 
       <Link to="/Registration" className="loginLink">
         School Admin Registration
