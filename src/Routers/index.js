@@ -23,10 +23,8 @@ const Routers = () => {
         <Route path="/" element={<HomePage />}>
           <Route index element={<Registration />} />
           <Route path="/Registration" element={<Registration />} />
-          <Route path="/Login" element={<LoginPage />} />
+
           <Route path="/UserLogin" element={<UserLogin />} />
-          <Route path="/TeacherLogin" element={<TeacherLogin />} />
-          <Route path="/ParentLogin" element={<ParentLogin />} />
         </Route>
 
         <Route path="/SchoolAdmin" element={<SchoolAdmin />}>

@@ -1,8 +1,10 @@
 import React, { useState, createContext, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../css/login.css";
 import axios from "axios";
 const ParentLogin = () => {
+  const location = useLocation();
+
   //for parent Email and Student Roll no
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,10 +13,10 @@ const ParentLogin = () => {
   const [emailError, setEmailError] = useState(false);
 
   const [parentEmail, setParentEmail] = useState("");
-  const [studentRollNo, setStudentRollNo] = useState("");
+  const [parentPassword, setParentPassword] = useState("");
 
   const [teacherEmailId, setTeacherEmailId] = useState("");
-  const [teacherNo, setTeacherNo] = useState("");
+  const [teacherPassword, setTeacherPassword] = useState("");
   //navigate to home page of parent
   const navigate = useNavigate();
   //post Login Details of Parent According to Student Roll Number and Parent Email Id
@@ -30,7 +32,7 @@ const ParentLogin = () => {
           localStorage.setItem("userDetails", JSON.stringify(user));
           navigate("/SchoolAdmin", { replace: true });
         } else {
-          let parentLogin = { parentEmail, studentRollNo };
+          let parentLogin = { parentEmail, parentPassword };
           if (parentLogin) {
             console.log("Inside the Parent Login ");
             axios
@@ -47,7 +49,7 @@ const ParentLogin = () => {
 
                   navigate("/ParentDashboard");
                 } /** */ else {
-                  let teacherLogin = { teacherEmailId, teacherNo };
+                  let teacherLogin = { teacherEmailId, teacherPassword };
                   if (teacherLogin) {
                     console.log("Inside the Teacher Login ");
                     axios
@@ -90,8 +92,8 @@ const ParentLogin = () => {
   const handleInput = (e) => {
     const { value } = e.target;
     setPassword(value);
-    setStudentRollNo(value);
-    setTeacherNo(value);
+    setParentPassword(value);
+    setTeacherPassword(value);
   };
   return (
     <>
@@ -104,6 +106,7 @@ const ParentLogin = () => {
               name="email"
               type="email"
               className="inputLogin"
+              placeholder="Enter Email"
               onChange={handleemail}
             />
             {emailError ? (
@@ -116,6 +119,7 @@ const ParentLogin = () => {
             <input
               name="text"
               type="text"
+              placeholder="Enter Password"
               className="inputLogin"
               onChange={handleInput}
             />
@@ -123,6 +127,11 @@ const ParentLogin = () => {
           <button type="submit" className="loginBtn" onClick={handleUserLogin}>
             Login
           </button>
+        </div>
+        <div className="userRegister">
+          <Link to="/Registration" className="loginLink">
+            Registration for School Admin
+          </Link>
         </div>
       </div>
     </>

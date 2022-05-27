@@ -27,9 +27,9 @@ const DeleteStudent = (props) => {
       {
         method: "Delete",
       }
-    );
+    ).then(props.data);
+    setModal(false);
     parentData = await parentData.json();
-    alert("Please Confirm ");
   };
 
   return (
@@ -46,9 +46,6 @@ const DeleteStudent = (props) => {
           <p>!!!..Parent Data will be also Deleted </p>
           <button className="addStudentBtn" onClick={deleteStudent}>
             Ok
-          </button>
-          <button className="addStudentBtn" onClick={props.data}>
-            Confirm
           </button>
         </ModalBody>
       </Modal>

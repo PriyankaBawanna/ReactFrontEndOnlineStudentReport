@@ -40,7 +40,6 @@ const StudentMarksList = () => {
   // and also pass as props to AddStudent When new Student will be Add than List will be render and getData also pass as props to delete Student
   function getData() {
     addStudent();
-    alert("Confirm");
   }
   // function pass as props to Student information when teacher Edit The Result Marks will we be Add  to the Student Marks lit
   function studentMarksData() {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import { Link, UNSAFE_RouteContext } from "react-router-dom";
+import HeaderAdmin from "../../../Components/schoolAdmin/js/js/HeaderAdmin";
 import AddParent from "../../../Model/AddParent/js/AddParent";
 import AddStudent from "../../../Model/AddStudent/js/AddStudent";
 import UpdateStudent from "../../../Model/UpdateStudent/js/updateStudent";
@@ -44,7 +45,6 @@ const StudentList = () => {
   };
   function getData() {
     addStudent();
-    alert("Confirm");
   }
   return (
     <>

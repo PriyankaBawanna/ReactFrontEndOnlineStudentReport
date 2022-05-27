@@ -14,6 +14,8 @@ const AddTeacher = (props) => {
   const [teacherNameError, setTeacherNameError] = useState(false);
   const [teacherMobileNoError, setTeacherMobileNoError] = useState(false);
   const [teacherEmailError, setTeacherEmailError] = useState(false);
+  const [teacherPassword, setTeacherPassword] = useState("");
+  const [teacherPasswordError, setTeacherPasswordError] = useState(false);
   //function use to save teacher data into data base using post API
   const addTeacherData = () => {
     const teacherData = {
@@ -21,16 +23,23 @@ const AddTeacher = (props) => {
       teacherName,
       teacherEmailId,
       teacherMobileNo,
+      teacherPassword,
     };
     if (teacherNo && teacherName && teacherEmailId && teacherMobileNo) {
       axios
         .post("http://localhost:8085/addTeacher", teacherData)
         .then((res) => alert(res.data.message))
-        .then(alert("please confirm "));
+        .then(props.teacherData);
     } else {
       alert("Invalid");
     }
     localStorage.setItem("teacherDetails", JSON.stringify(teacherData));
+    setModal(false);
+    setTeacherNo("");
+    setTeacherName("");
+    setTeacherMobileNo("");
+    setTeacherEmailId("");
+    setTeacherPassword("");
   };
 
   //handle Teacher Name Input
@@ -65,6 +74,16 @@ const AddTeacher = (props) => {
       setTeacherEmailError(true);
     }
   };
+
+  const handleInputTeacherPassword = (e) => {
+    const { value } = e.target;
+    setTeacherPassword(value);
+
+    if (value.length < 5) {
+      setTeacherPasswordError(true);
+    } else setTeacherPasswordError(false);
+  };
+
   return (
     <>
       <Modal
@@ -145,15 +164,29 @@ const AddTeacher = (props) => {
             )}
           </div>
 
+          <div>
+            <label className="inputStudentLabel">Teacher Password </label>
+            <input
+              name="teacherPassword"
+              type="Password"
+              placeholder="Teacher Password "
+              className="studentInput"
+              value={teacherPassword}
+              onChange={handleInputTeacherPassword}
+            />
+            {teacherPasswordError ? (
+              <span className="inputError">minimum five characters</span>
+            ) : (
+              <span></span>
+            )}
+          </div>
+
           <button
             type="submit"
             onClick={addTeacherData}
             className="addStudentBtn"
           >
             Add
-          </button>
-          <button onClick={props.teacherData} className="addStudentBtn">
-            Confirm
           </button>
         </ModalBody>
       </Modal>

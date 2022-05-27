@@ -59,3 +59,9 @@
   margin: 1rem;
   color: rgb(106, 175, 198);
 }
+.userRegister {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

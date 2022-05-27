@@ -29,13 +29,15 @@ const AddStudent = (prop) => {
       axios
         .post(`http://localhost:8085/addStudent`, studentData)
         .then((res) => alert(res.data.message))
-        .then(alert("please confirm "));
+        .then(prop.data);
     } else {
       alert("Invalid");
     }
 
     //save the Student Detail into Local Storage
     localStorage.setItem("studentDetails", JSON.stringify(studentData));
+
+    setModal(false);
   };
 
   //function for handle Student Name Input With Validation
@@ -105,6 +107,7 @@ const AddStudent = (prop) => {
                 name="studentName"
                 value={studentName}
                 type="text"
+                required
                 className="studentInput"
                 autocomplete="off"
                 onChange={handleInputStudentName}
@@ -171,9 +174,9 @@ const AddStudent = (prop) => {
             Add
           </button>
           {/*props Receive  from StudentMarkList   and Student List  for Display new add Item into the list */}
-          <button onClick={prop.data} className="addStudentBtn">
+          {/* <button onClick={prop.data} className="addStudentBtn">
             Confirm
-          </button>
+          </button> */}
         </ModalBody>
       </Modal>
       <button
