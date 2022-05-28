@@ -14,6 +14,7 @@ import FinalExam from "../Components/ParentDashboard.js/js/FinalExam";
 import TeacherLogin from "../Common Components/LoginPage/js/TeacherLogin";
 import ParentLogin from "../Common Components/LoginPage/js/ParentLogin";
 import TeacherDashBoard from "../Components/TeacherDashboard/js/TeacherDashboard";
+import UserLogin from "../Common Components/LoginPage/js/UserLogin";
 
 const Routers = () => {
   return (
@@ -23,6 +24,7 @@ const Routers = () => {
           <Route index element={<Registration />} />
           <Route path="/Registration" element={<Registration />} />
           <Route path="/Login" element={<LoginPage />} />
+          <Route path="/UserLogin" element={<UserLogin />} />
           <Route path="/TeacherLogin" element={<TeacherLogin />} />
           <Route path="/ParentLogin" element={<ParentLogin />} />
         </Route>

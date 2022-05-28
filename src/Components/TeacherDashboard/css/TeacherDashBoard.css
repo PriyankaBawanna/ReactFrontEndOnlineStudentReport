@@ -1,6 +1,3 @@
-body {
-  background-image: url("../../../Img/bgTeacherDashBoard\ \(2\).jpg");
-}
 .teacherHeader {
   display: flex;
   flex-direction: row;

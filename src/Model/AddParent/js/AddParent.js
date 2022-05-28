@@ -9,13 +9,23 @@ const AddParent = () => {
   const [parentName, setParentName] = useState("");
   const [studentRollNo, setStudentRollNo] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+  const [mobileNumberError, setMobileNumberError] = useState(false);
   const [parentEmail, setParentEmail] = useState("");
-
-  //function use to save parent data into data base using post API
+  const [parentPassword, setParentPassword] = useState("");
+  const [parentPasswordError, setParentPasswordError] = useState(false);
+  const [parentEmailError, setParentEmailError] = useState(false);
+  const [parentNameError, setParentNameError] = useState(false);
+  //function use  to save parent data into data base using post API
   const addParentData = () => {
-    const parentData = { parentName, studentRollNo, mobileNumber, parentEmail };
+    const parentData = {
+      parentName,
+      studentRollNo,
+      mobileNumber,
+      parentEmail,
+      parentPassword,
+    };
 
-    if (parentName && studentRollNo && mobileNumber && parentEmail) {
+    if (parentName && studentRollNo && mobileNumber && parentPassword) {
       axios
         .post(`http://localhost:8085/addParent/${studentRollNo}`, parentData)
         .then((res) => alert(res.data.message));
@@ -29,6 +39,47 @@ const AddParent = () => {
     setStudentRollNo("");
     setMobileNumber("");
     setParentEmail("");
+  };
+
+  const handleInputParentEmail = (e) => {
+    const { value } = e.target;
+    setParentEmail(value);
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    if (regEx.test(value)) {
+      setParentEmailError(false);
+    } else if (!regEx.test(value) && value !== "") {
+      setParentEmailError(true);
+    }
+  };
+
+  const handleInputParentPassword = (e) => {
+    const { value } = e.target;
+    setParentPassword(value);
+
+    if (value.length < 5) {
+      setParentPasswordError(true);
+    } else setParentPasswordError(false);
+  };
+
+  //handle Teacher 10 digit  Mobile No \
+  const handleMobileNumber = (e) => {
+    const { value } = e.target;
+    setMobileNumber(value);
+    if (value.length === 10) {
+      setMobileNumberError(false);
+    } else {
+      setMobileNumberError(true);
+    }
+  };
+
+  const handleParentNameInput = (e) => {
+    const { value } = e.target;
+    setParentName(value);
+    if (value.length < 3) {
+      setParentNameError(true);
+    } else {
+      setParentNameError(false);
+    }
   };
   return (
     <>
@@ -51,10 +102,13 @@ const AddParent = () => {
                 value={parentName}
                 className="studentInput"
                 placeholder="user name"
-                onChange={(e) => {
-                  setParentName(e.target.value);
-                }}
+                onChange={handleParentNameInput}
               />
+              {parentNameError ? (
+                <span className="inputError">user not valid</span>
+              ) : (
+                <span></span>
+              )}
             </div>
             <div>
               <label className="inputStudentLabel">Student Roll No</label>
@@ -78,10 +132,15 @@ const AddParent = () => {
                 placeholder=" mobileNumber"
                 value={mobileNumber}
                 className="studentInput"
-                onChange={(e) => {
-                  setMobileNumber(e.target.value);
-                }}
+                onChange={handleMobileNumber}
               />
+              {mobileNumberError ? (
+                <span className="inputError">
+                  Mobile Number Must be equal to 10 digit
+                </span>
+              ) : (
+                <span></span>
+              )}
             </div>
 
             <div>
@@ -92,10 +151,29 @@ const AddParent = () => {
                 type="email"
                 className="studentInput"
                 placeholder="email"
-                onChange={(e) => {
-                  setParentEmail(e.target.value);
-                }}
+                onChange={handleInputParentEmail}
               />
+              {parentEmailError ? (
+                <span className="inputError">Email not valid</span>
+              ) : (
+                <span></span>
+              )}
+            </div>
+            <div>
+              <label className="inputStudentLabel">Parent Password </label>
+              <input
+                name="parentPassword"
+                type="Password"
+                placeholder="Parent Password "
+                className="studentInput"
+                value={parentPassword}
+                onChange={handleInputParentPassword}
+              />
+              {parentPasswordError ? (
+                <span className="inputError">minimum five characters</span>
+              ) : (
+                <span></span>
+              )}
             </div>
           </div>
           <button

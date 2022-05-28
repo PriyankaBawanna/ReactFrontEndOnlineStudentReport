@@ -26,9 +26,6 @@ h1 {
   align-items: center;
 }
 
-body {
-  background-image: url("../../../../Img/bgTeacherDashBoard\ \(2\).jpg");
-}
 .userListLink {
   display: flex;
   flex-direction: row;

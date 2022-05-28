@@ -10,36 +10,43 @@ const TermTwoMarkSheet = () => {
   const [termTwoResultStatus, setTermTwoResultStatus] = useState("");
   const [noResult, setNoResult] = useState("");
 
+  const [parentInfo, setParentInfo] = useState([]);
+  const [studentRollNumber, setStudentRollNumber] = useState("");
+
   useEffect(() => {
+    parentPersonalInfo();
     termTwoResult();
-    studentDetails();
   }, []);
 
   //Term Two student Result
   const termTwoResult = () => {
-    fetch(`http://localhost:8085/StudentResultTermTwo/${studentRollNo}`).then(
-      (result) => {
-        result.json().then((res) => {
-          setTermTwo(res);
-        });
-      }
-    );
+    fetch(
+      `http://localhost:8085/StudentResultTermTwo/${studentRollNumber}`
+    ).then((result) => {
+      result.json().then((res) => {
+        setTermTwo(res);
+      });
+    });
   };
   //get the current Parent Login
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
-
+  const parentEmail = parentDetails.parentEmail;
+  console.log("parent Email ", parentEmail);
   const studentRollNo = parentDetails.studentRollNo;
 
-  const studentDetails = () => {
-    fetch(`http://localhost:8085/StudentResult/${studentRollNo}`).then(
-      (result) => {
-        result.json().then((res) => {
-          setStudentDetail(res);
-        });
-      }
-    );
+  const parentPersonalInfo = () => {
+    console.warn("PArent Email", parentEmail);
+    fetch(`http://localhost:8085/ParentDetails/${parentEmail}`).then((info) => {
+      info.json().then((res) => {
+        setParentInfo(res);
+        {
+          parentInfo.map((item, i) => {
+            setStudentRollNumber(item.studentRollNo);
+          });
+        }
+      });
+    });
   };
-
   //if Result Status Approve than API Called and Approve Message Send To School Admin Email
   const termResultStatusApproveStatus = () => {
     setTermTwoResultStatus(approveStatus);
@@ -98,78 +105,65 @@ const TermTwoMarkSheet = () => {
   return (
     <>
       <div className="markSheet">
-        <>
-          <div className="studentInfo">
-            {studentDetail.map((item, i) => (
-              <p key={i}>
-                <p>Student Name : {item.studentName}</p>
-                <p>Student Email : {item.studentEmail}</p>
-                <p>Student Standard :{item.studentStandard}</p>
-                <p>Student Roll Number : {item.studentRollNo}</p>
+        <div className="termMarks">
+          <div className="headingSubjects">
+            <div>
+              <p>
+                <b>Subject</b>
               </p>
-            ))}
-          </div>
-
-          <div className="termMarks">
-            <div className="headingSubjects">
-              <div>
-                <p>
-                  <b>Subject</b>
-                </p>
-              </div>
-              <div>
-                <p>English</p>
-                <p>Hindi</p>
-                <p>Science</p>
-                <p>Social Science</p>
-                <p>Maths</p>
-                <p>Total</p>
-                <p>Percentage</p>
-                <p>Grade</p>
-              </div>
             </div>
-            <div className="marksHeading">
-              <div>
-                <p>
-                  <b>Max Marks</b>
-                </p>
-              </div>
-              <div>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100%</p>
-                <p>-</p>
-
-                <p></p>
-              </div>
-            </div>
-            <div className=">marksObtained">
-              <div>
-                <p>
-                  <b>Marks Obtained </b>
-                </p>
-              </div>
-              <div>
-                {termTwo.map((item, i) => (
-                  <p key={i}>
-                    <p>{item.englishTermTwoMarks}</p>
-                    <p>{item.hindiTermTwoMarks}</p>
-                    <p>{item.scienceTermTwoMarks}</p>
-                    <p>{item.socialScienceTermTwoMarks}</p>
-                    <p> {item.mathTermTwoMarks}</p>
-                    <p>{item.totalTermTwoMarks}</p>
-                    <p>{item.percentageTermTwo}</p>
-                    <p>{item.gradeTermTwo}</p>
-                  </p>
-                ))}
-              </div>
+            <div>
+              <p>English</p>
+              <p>Hindi</p>
+              <p>Science</p>
+              <p>Social Science</p>
+              <p>Maths</p>
+              <p>Total</p>
+              <p>Percentage</p>
+              <p>Grade</p>
             </div>
           </div>
-        </>
+          <div className="marksHeading">
+            <div>
+              <p>
+                <b>Max Marks</b>
+              </p>
+            </div>
+            <div>
+              <p>100</p>
+              <p>100</p>
+              <p>100</p>
+              <p>100</p>
+              <p>100</p>
+              <p>100</p>
+              <p>100%</p>
+              <p>-</p>
+
+              <p></p>
+            </div>
+          </div>
+          <div className=">marksObtained">
+            <div>
+              <p>
+                <b>Marks Obtained </b>
+              </p>
+            </div>
+            <div>
+              {termTwo.map((item, i) => (
+                <p key={i}>
+                  <p>{item.englishTermTwoMarks}</p>
+                  <p>{item.hindiTermTwoMarks}</p>
+                  <p>{item.scienceTermTwoMarks}</p>
+                  <p>{item.socialScienceTermTwoMarks}</p>
+                  <p> {item.mathTermTwoMarks}</p>
+                  <p>{item.totalTermTwoMarks}</p>
+                  <p>{item.percentageTermTwo}</p>
+                  <p>{item.gradeTermTwo}</p>
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
       <div className="approvalStatusParent">
         <div>

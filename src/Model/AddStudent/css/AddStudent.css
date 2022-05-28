@@ -1,7 +1,7 @@
 .addStudentBtn {
   height: 3rem;
   width: 10rem;
-  background-image: url("../../../Img/bgTeacherDashBoard\ \(2\).jpg");
+
   color: rgb(106, 175, 198);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 1rem;
@@ -10,7 +10,6 @@
   border: 1px rgb(106, 175, 198) solid;
 }
 .updateStudentBtn {
-  background-image: url("../../../Img/bgTeacherDashBoard\ \(2\).jpg");
   color: rgb(106, 175, 198);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 1rem;

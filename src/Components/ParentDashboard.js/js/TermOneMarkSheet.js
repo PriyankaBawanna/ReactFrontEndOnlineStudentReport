@@ -5,37 +5,48 @@ import "../css/ParentDashboard.css";
 const TermOneMarkSheet = () => {
   const [termOne, setTermOne] = useState([]);
   const [studentDetail, setStudentDetail] = useState([]);
+  const [parentInfo, setParentInfo] = useState([]);
+  const [studentRollNumber, setStudentRollNumber] = useState("");
 
   const [termOneResultStatus, setTermOneResultStatus] = useState("");
   useEffect(() => {
+    parentPersonalInfo();
     termOneResult();
-    studentDetails();
   }, []);
+
+  const parentPersonalInfo = () => {
+    console.warn("PArent Email", parentEmail);
+    fetch(`http://localhost:8085/ParentDetails/${parentEmail}`).then((info) => {
+      info.json().then((res) => {
+        setParentInfo(res);
+        {
+          parentInfo.map((item, i) => {
+            setStudentRollNumber(item.studentRollNo);
+          });
+        }
+      });
+    });
+  };
+
+  console.log("student Roll nuber ***", studentRollNumber);
 
   //Term One Result
   const termOneResult = () => {
-    fetch(`http://localhost:8085/StudentResultTermOne/${studentRollNo}`).then(
-      (result) => {
-        result.json().then((res) => {
-          setTermOne(res);
-        });
-      }
-    );
+    fetch(
+      `http://localhost:8085/StudentResultTermOne/${studentRollNumber}`
+    ).then((result) => {
+      result.json().then((res) => {
+        setTermOne(res);
+      });
+    });
   };
   //get The login Parent Details into the local storage
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
   const studentRollNo = parentDetails.studentRollNo;
+  const parentEmail = parentDetails.parentEmail;
+  console.log("parent Email ", parentEmail);
 
   //const studentRollNo= parentDetails.studentRollNo;
-  const studentDetails = () => {
-    fetch(`http://localhost:8085/StudentResult/${studentRollNo}`).then(
-      (result) => {
-        result.json().then((res) => {
-          setStudentDetail(res);
-        });
-      }
-    );
-  };
 
   //if Result Status Approve than API Called and Approve Message Send To School Admin Email
   const termResultStatusApproveStatus = () => {
@@ -97,17 +108,6 @@ const TermOneMarkSheet = () => {
     <>
       <div className="markSheet">
         <>
-          <div className="studentInfo">
-            {studentDetail.map((item, i) => (
-              <p key={i}>
-                <p>Student Name : {item.studentName}</p>
-                <p>Student Email : {item.studentEmail}</p>
-                <p>Student Standard :{item.studentStandard}</p>
-                <p>Student Roll Number : {item.studentRollNo}</p>
-              </p>
-            ))}
-          </div>
-
           <div className="termMarks">
             <div className="headingSubjects">
               <div>

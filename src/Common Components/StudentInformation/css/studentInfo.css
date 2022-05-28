@@ -42,7 +42,6 @@ tr:nth-child(even) {
   margin-top: 1rem;
 }
 .studentInfoEdit {
-  background-image: url("../../../Img/bgTeacherDashBoard\ \(2\).jpg");
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   color: rgb(106, 175, 198);
   border: 1px rgb(106, 175, 198) solid;
@@ -59,7 +58,6 @@ td {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .markSheetBtn {
-  background-image: url("../../../Img/bgTeacherDashBoard\ \(2\).jpg");
   color: rgb(106, 175, 198);
   padding: 0.5rem;
   border: 1px rgb(106, 175, 198) solid;

@@ -11,6 +11,9 @@ function HomeLink() {
       <Link to="/ParentLogin" className="loginLink">
         Parent Login
       </Link>
+      <Link to="/UserLogin" className="loginLink">
+        Login
+      </Link>
       <Link to="/Login" className="loginLink">
         School Admin Login
       </Link>

@@ -4,6 +4,7 @@ import "../../../Components/TeacherDashboard/css/TeacherDashBoard.css";
 const TeacherProfile = () => {
   //get login Teacher Data from Local Storage
   let teacherDetails = JSON.parse(localStorage.getItem("teacherDetails"));
+
   console.log("Teacher Login Details ", teacherDetails);
 
   return (
