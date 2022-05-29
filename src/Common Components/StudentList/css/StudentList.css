@@ -5,16 +5,16 @@ table {
 .table td,
 .table th {
   padding: 12px 15px;
-  border: 1px solid rgb(106, 175, 198);
+  border: 1px solid black;
   text-align: center;
   font-size: 16px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  color: rgb(106, 175, 198);
+  color: black;
 }
 
 .table th {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  color: rgb(106, 175, 198);
+  color: black;
 }
 
 .table tbody tr:nth-child(even) {
@@ -58,16 +58,16 @@ table {
 .inputSearchStudent {
   height: 3rem;
   width: 20rem;
-  border: 1px solid rgb(106, 175, 198);
+  border: 1px solid black;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  color: rgb(106, 175, 198);
+  color: black;
 }
 h3 {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  color: rgb(106, 175, 198);
+  color: black;
 }
 .deleteStudentBtn {
-  color: rgb(106, 175, 198);
+  color: black;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 1rem;
   border-style: none;
@@ -76,5 +76,17 @@ h3 {
 .listOfUser {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+.StudentListHeading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.optionAddParentAddStudent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }

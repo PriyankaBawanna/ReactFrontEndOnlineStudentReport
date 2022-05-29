@@ -7,12 +7,12 @@ const AdminProfile = () => {
 
   return (
     <>
-      <div className="dropdown">
-        <span className="userProfile">
-          <b>SA</b>
+      <div className="dropdownAdmin">
+        <span className="adminProfileHeading">
+          <b className="profileHeading">SA</b>
         </span>
 
-        <div className="triangle-up"></div>
+        <div className="triangleAdmin"></div>
         <div className="dropdownContentForAdmin">
           <p> Admin: {schoolAdminDetails.email}</p>
           {/**Logout for the clear the Session  */}

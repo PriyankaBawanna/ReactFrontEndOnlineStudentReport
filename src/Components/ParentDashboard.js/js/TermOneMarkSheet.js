@@ -4,9 +4,9 @@ import "../css/ParentDashboard.css";
 
 const TermOneMarkSheet = () => {
   const [termOne, setTermOne] = useState([]);
-  const [studentDetail, setStudentDetail] = useState([]);
+
   const [parentInfo, setParentInfo] = useState([]);
-  const [studentRollNumber, setStudentRollNumber] = useState("");
+  const [studentRollNo, setStudentRollNo] = useState("");
 
   const [termOneResultStatus, setTermOneResultStatus] = useState("");
   useEffect(() => {
@@ -21,28 +21,28 @@ const TermOneMarkSheet = () => {
         setParentInfo(res);
         {
           parentInfo.map((item, i) => {
-            setStudentRollNumber(item.studentRollNo);
+            setStudentRollNo(item.studentRollNo);
           });
         }
       });
     });
   };
 
-  console.log("student Roll nuber ***", studentRollNumber);
+  console.log("Student Roll number ", studentRollNo);
 
   //Term One Result
   const termOneResult = () => {
-    fetch(
-      `http://localhost:8085/StudentResultTermOne/${studentRollNumber}`
-    ).then((result) => {
-      result.json().then((res) => {
-        setTermOne(res);
-      });
-    });
+    fetch(`http://localhost:8085/StudentResultTermOne/${studentRollNo}`).then(
+      (result) => {
+        result.json().then((res) => {
+          setTermOne(res);
+        });
+      }
+    );
   };
   //get The login Parent Details into the local storage
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
-  const studentRollNo = parentDetails.studentRollNo;
+
   const parentEmail = parentDetails.parentEmail;
   console.log("parent Email ", parentEmail);
 

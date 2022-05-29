@@ -32,6 +32,7 @@ const Routers = () => {
         <Route path="/SchoolAdmin" element={<SchoolAdmin />}>
           <Route index element={<StudentList />} />
           <Route path="StudentList" element={<StudentList />}></Route>
+
           <Route path="TeacherList" element={<TeacherList />} />
         </Route>
         <Route path="/ParentDashboard" element={<ParentDashboard />}>

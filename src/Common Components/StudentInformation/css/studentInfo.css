@@ -21,7 +21,7 @@ table {
 
 td,
 th {
-  border: 1px solid rgb(106, 175, 198);
+  border: 1px solid black;
   text-align: left;
   padding: 8px;
 }
@@ -31,7 +31,7 @@ tr:nth-child(even) {
 .inputMarks {
   width: 5rem;
   border: 2px rgb(106, 175, 198) solid;
-  color: rgb(106, 175, 198);
+  color: black;
 }
 
 .btngroup {
@@ -43,22 +43,22 @@ tr:nth-child(even) {
 }
 .studentInfoEdit {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  color: rgb(106, 175, 198);
+  color: black;
   border: 1px rgb(106, 175, 198) solid;
 }
 .selectTerm {
   margin-top: -2rem;
-  color: rgb(106, 175, 198);
+  color: black;
   border: 1px rgb(106, 175, 198) solid;
 }
 h3,
 th,
 td {
-  color: rgb(106, 175, 198);
+  color: black;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .markSheetBtn {
-  color: rgb(106, 175, 198);
+  color: black;
   padding: 0.5rem;
   border: 1px rgb(106, 175, 198) solid;
   margin-left: 00.5rem;

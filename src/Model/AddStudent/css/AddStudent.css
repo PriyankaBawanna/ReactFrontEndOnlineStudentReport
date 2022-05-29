@@ -2,7 +2,7 @@
   height: 3rem;
   width: 10rem;
 
-  color: rgb(106, 175, 198);
+  color: black;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 1rem;
   border-style: none;
@@ -10,7 +10,7 @@
   border: 1px rgb(106, 175, 198) solid;
 }
 .updateStudentBtn {
-  color: rgb(106, 175, 198);
+  color: black;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 1rem;
   border-style: none;
@@ -23,17 +23,17 @@
 }
 .inputStudentLabel {
   margin: 1rem;
-  color: rgb(106, 175, 198);
+  color: black;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .studentInput {
   border: 1px rgb(106, 175, 198) solid;
-  color: rgb(106, 175, 198);
+  color: black;
 }
 .inputError {
   color: red;
 }
 h5,
 p {
-  color: rgb(106, 175, 198);
+  color: black;
 }

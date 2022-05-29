@@ -3,6 +3,8 @@ import HeaderAdmin from "./HeaderAdmin";
 import { Link, Outlet } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../css/schoolAdmin.css";
+import AdminProfile from "./AdminProfile";
+
 const SchoolAdmin = ({ setLoginUser }) => {
   const params = useParams();
   console.log("user id is : ", params);
@@ -11,23 +13,30 @@ const SchoolAdmin = ({ setLoginUser }) => {
 
   return (
     <>
-      <div className="schoolAdminHeading">
-        <h1>Welcome to online Student Report </h1>
+      <div>
+        <div className="schoolAdminHeaderLink">
+          <div className="schoolAdminLinkSection">
+            {/* <img src={schoolLogo} className="logoSchoolAdmin" /> */}
+            <p>Logo </p>
+
+            <div>
+              <Link to="StudentList" className="studentListLink">
+                Student List
+              </Link>
+
+              <Link to="TeacherList" className="studentListLink">
+                Teacher List
+              </Link>
+            </div>
+          </div>
+
+          <div className="adminProfile">
+            <AdminProfile />
+          </div>
+        </div>
+
+        <Outlet />
       </div>
-
-      <HeaderAdmin />
-
-      {/* <StudentList /> */}
-      <nav className="userListLink">
-        <Link to="StudentList" className="studentListLink">
-          Student List
-        </Link>
-
-        <Link to="TeacherList" className="studentListLink">
-          Teacher List
-        </Link>
-      </nav>
-      <Outlet />
     </>
   );
 };

@@ -4,6 +4,7 @@ import "../css/ParentDashboard.css";
 
 const ParentHeader = () => {
   const [parentInfo, setParentInfo] = useState([]);
+  const [parentData, setParentData] = useState([]);
   //const loginParent = JSON.parse(localStorage.getItem("loginParent"));
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
 
@@ -17,10 +18,13 @@ const ParentHeader = () => {
     console.warn("PArent Email", parentEmail);
     fetch(`http://localhost:8085/ParentDetails/${parentEmail}`).then((info) => {
       info.json().then((res) => {
-        setParentInfo(res);
+        setParentData(res);
+        setParentInfo([...res]);
       });
     });
   };
+
+  localStorage.setItem("studentDetails", JSON.stringify(parentData));
 
   useEffect(() => {
     parentPersonalInfo();

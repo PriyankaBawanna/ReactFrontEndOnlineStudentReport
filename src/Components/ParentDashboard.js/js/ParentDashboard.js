@@ -3,29 +3,24 @@ import TermOneMarkSheet from "./TermOneMarkSheet";
 import React, { useEffect, useState } from "react";
 import "../css/ParentDashboard.css";
 import { Link, Outlet } from "react-router-dom";
+import StudentInfo from "./StudentInfo";
+
 const ParentDashboard = () => {
   const [studentDetail, setStudentDetail] = useState([]);
+
   const [parentInfo, setParentInfo] = useState([]);
-  const [studentRollNumber, setStudentRollNumber] = useState("");
+  console.log("Parent Info copy", parentInfo);
+
+  const [studentRollNumber, setStudentRollNumber] = useState([]);
 
   useEffect(() => {
-    parentPersonalInfo();
     studentInfo();
   }, []);
 
-  const parentPersonalInfo = () => {
-    console.warn("PArent Email", parentEmail);
-    fetch(`http://localhost:8085/ParentDetails/${parentEmail}`).then((info) => {
-      info.json().then((res) => {
-        setParentInfo(res);
-        {
-          parentInfo.map((item, i) => {
-            setStudentRollNumber(item.studentRollNo);
-          });
-        }
-      });
-    });
-  };
+  let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
+
+  const parentEmail = parentDetails.parentEmail;
+  console.log("parentEmail-- ", parentEmail);
 
   console.log("Student Roll number----", studentRollNumber);
   const studentInfo = () => {
@@ -37,15 +32,13 @@ const ParentDashboard = () => {
       }
     );
   };
-  let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
-  let studentRollNo;
-  const parentEmail = parentDetails.parentEmail;
-  console.log("parentEmail-- ", parentEmail);
+
   return (
     <>
+      <StudentInfo />
       <div className="parentProfileIcon">
         <div className="parentDashboardLink">
-          <p>Logo</p>
+          {/* <p>Logo</p>
           <nav className="termResult">
             <Link to="TermOneMarkSheet" className="result">
               Term One
@@ -56,25 +49,14 @@ const ParentDashboard = () => {
             <Link to="FinalExam" className="result">
               Final Exam
             </Link>
-          </nav>
+          </nav> */}
         </div>
 
         <div>
           <ParentHeader />
         </div>
       </div>
-      <div className="studentInfo">
-        <div className="studentInfo">
-          {studentDetail.map((item, i) => (
-            <p key={i}>
-              <p>Student Name : {item.studentName}</p>
-              <p>Student Email : {item.studentEmail}</p>
-              <p>Student Standard :{item.studentStandard}</p>
-              <p>Student Roll Number : {item.studentRollNo}</p>
-            </p>
-          ))}
-        </div>
-      </div>
+
       <Outlet />
     </>
   );

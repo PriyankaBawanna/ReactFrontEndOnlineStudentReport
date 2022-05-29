@@ -1,8 +1,10 @@
 .adminHeader {
   display: flex;
+  /* justify-content: space-around; */
   flex-direction: row;
-  height: 5rem;
   width: 100%;
+  border: 1px solid black;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -21,7 +23,7 @@
 }
 h1 {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  color: rgb(106, 175, 198);
+  color: black;
   justify-content: center;
   align-items: center;
 }
@@ -36,6 +38,86 @@ h1 {
   text-decoration: none;
   margin: 1rem;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  color: rgb(106, 175, 198);
-  font-size: 2rem;
+  color: black;
+  font-size: 1rem;
+}
+
+.dropbtnAdmin {
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.adminDropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.schoolAdminDropDown {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.schoolAdminDropDown a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.schoolAdminDropDown a:hover {
+  background-color: #f1f1f1;
+}
+
+.adminDropdown:hover .schoolAdminDropDown {
+  display: block;
+}
+
+.adminDropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+/*---------*/
+.schoolLogo {
+  height: 4rem;
+  width: 4rem;
+}
+.logoSchoolAdmin {
+  width: 6rem;
+  height: 4rem;
+}
+.schoolAdminLin {
+  display: flex;
+  width: 20rem;
+  justify-content: space-around;
+}
+.headerMenuAdmin {
+  display: flex;
+  justify-content: space-around;
+  width: 40rem;
+  align-items: center;
+}
+.schoolAdminHeaderLink {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  border: 1px solid black;
+  width: 100%;
+}
+.schoolAdminLinkSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.adminProfile {
+  align-items: center;
+  height: 2rem;
 }

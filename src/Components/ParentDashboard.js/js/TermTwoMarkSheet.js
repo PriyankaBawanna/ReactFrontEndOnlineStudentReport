@@ -11,7 +11,7 @@ const TermTwoMarkSheet = () => {
   const [noResult, setNoResult] = useState("");
 
   const [parentInfo, setParentInfo] = useState([]);
-  const [studentRollNumber, setStudentRollNumber] = useState("");
+  const [studentRollNo, setStudentRollNo] = useState("");
 
   useEffect(() => {
     parentPersonalInfo();
@@ -20,19 +20,18 @@ const TermTwoMarkSheet = () => {
 
   //Term Two student Result
   const termTwoResult = () => {
-    fetch(
-      `http://localhost:8085/StudentResultTermTwo/${studentRollNumber}`
-    ).then((result) => {
-      result.json().then((res) => {
-        setTermTwo(res);
-      });
-    });
+    fetch(`http://localhost:8085/StudentResultTermTwo/${studentRollNo}`).then(
+      (result) => {
+        result.json().then((res) => {
+          setTermTwo(res);
+        });
+      }
+    );
   };
   //get the current Parent Login
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
   const parentEmail = parentDetails.parentEmail;
   console.log("parent Email ", parentEmail);
-  const studentRollNo = parentDetails.studentRollNo;
 
   const parentPersonalInfo = () => {
     console.warn("PArent Email", parentEmail);
@@ -41,7 +40,7 @@ const TermTwoMarkSheet = () => {
         setParentInfo(res);
         {
           parentInfo.map((item, i) => {
-            setStudentRollNumber(item.studentRollNo);
+            setStudentRollNo(item.studentRollNo);
           });
         }
       });
