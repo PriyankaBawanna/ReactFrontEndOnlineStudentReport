@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const StudentInfo = () => {
   const [parentData, setParentData] = useState([]);
 
-  const [studentRollNo, setstudentRollNo] = useState("");
+  const [studentRollNo, setStudentRollNo] = useState("");
   const [getData, setData] = useState([]);
   const [studentData, setStudentData] = useState([]);
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
@@ -11,74 +11,34 @@ const StudentInfo = () => {
   //   let studentRollNo = studentDetails.studentRollNo;
   const parentEmail = parentDetails.parentEmail;
   console.log("parent data 2 ", parentEmail);
+  const newData = {};
 
   useEffect(() => {
-    parentDetail();
-    studentDetail();
     data();
-  }, []);
-  const parentDetail = () => {
-    axios
-      .get(`http://localhost:8085/ParentDetails/${parentEmail}`)
-      .then((res) => {
-        setParentData(res.data);
-      });
-  };
+  }, [studentRollNo]);
 
   async function data() {
     axios
       .get(`http://localhost:8085/ParentDetails/${parentEmail}`)
       .then((res) => {
-        const json = res;
-        setData(json);
+        setParentData([...res.data]);
+        const json = res.data[0].studentRollNo;
+
+        if (json) {
+          setStudentRollNo(res.data[0].studentRollNo);
+          axios
+            .get(`http://localhost:8085/StudentResult/${studentRollNo}`)
+            .then((res) => {
+              setStudentData([...res.data]);
+            });
+        } else {
+        }
+
         console.log("USer Response ", json);
-        getData.map((obj) => {
-          let STData = obj.studentRollNo;
-          if (STData) {
-            console.log("roll  ", STData);
-            axios
-              .get(`http://localhost:8085/StudentResult/${STData}`)
-              .then((res) => {
-                const dataStudent = res;
-                console.log("data Studnet ", dataStudent);
-                setStudentData(dataStudent);
-              });
-          } else {
-            console.log("Student Roll number Nahi Hai ");
-          }
-        });
       });
   }
 
-  //   const data = () => {
-  //     if (parentEmail) {
-  //       fetch(`http://localhost:8085/ParentDetails/${parentEmail}`).then(
-  //         (result) => {
-  //           result.json().then((res) => {
-  //             setData(res);
-  //             console.log("Parent Data in Response ", res);
-  //             {
-  //               getData.map((obj, i) => {
-  //                 setstudentRollNo(obj.studentRollNo);
-  //               });
-  //             }
-  //           });
-  //         }
-  //       );
-  //     } else {
-  //       console.log("PArent Email Nahi hai ");
-  //     }
-  //   };
-  console.log("user Data ", getData);
-
-  const studentDetail = () => {
-    axios
-      .get(`http://localhost:8085/StudentResult/${studentRollNo}`)
-      .then((res) => {
-        setStudentData([...res.data]);
-      });
-  };
-
+  console.log("Student Data ", studentData);
   return (
     <>
       <div>

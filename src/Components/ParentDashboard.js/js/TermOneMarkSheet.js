@@ -1,45 +1,42 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../css/ParentDashboard.css";
+import ParentMessage from "./ParentMessage";
 
 const TermOneMarkSheet = () => {
   const [termOne, setTermOne] = useState([]);
+  const [marks, setMarks] = useState("");
 
   const [parentInfo, setParentInfo] = useState([]);
   const [studentRollNo, setStudentRollNo] = useState("");
 
   const [termOneResultStatus, setTermOneResultStatus] = useState("");
   useEffect(() => {
-    parentPersonalInfo();
-    termOneResult();
-  }, []);
+    data();
+  }, [studentRollNo]);
 
-  const parentPersonalInfo = () => {
-    console.warn("PArent Email", parentEmail);
-    fetch(`http://localhost:8085/ParentDetails/${parentEmail}`).then((info) => {
-      info.json().then((res) => {
-        setParentInfo(res);
-        {
-          parentInfo.map((item, i) => {
-            setStudentRollNo(item.studentRollNo);
-          });
+  async function data() {
+    axios
+      .get(`http://localhost:8085/ParentDetails/${parentEmail}`)
+      .then((res) => {
+        setParentInfo([...res.data]);
+        const json = res.data[0].studentRollNo;
+
+        if (json) {
+          setStudentRollNo(res.data[0].studentRollNo);
+          axios
+            .get(`http://localhost:8085/StudentResultTermOne/${studentRollNo}`)
+            .then((res) => {
+              setTermOne([...res.data]);
+              setMarks(res.data[0].englishTermOneMarks);
+            });
+        } else {
         }
+
+        console.log("USer Response ", json);
       });
-    });
-  };
+  }
 
-  console.log("Student Roll number ", studentRollNo);
-
-  //Term One Result
-  const termOneResult = () => {
-    fetch(`http://localhost:8085/StudentResultTermOne/${studentRollNo}`).then(
-      (result) => {
-        result.json().then((res) => {
-          setTermOne(res);
-        });
-      }
-    );
-  };
   //get The login Parent Details into the local storage
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
 
@@ -64,7 +61,6 @@ const TermOneMarkSheet = () => {
           alert(res.data.message);
 
           if (res.data.message === "Response Submitted") {
-            const studentRollNo = parentDetails.studentRollNo;
             axios
               .get(
                 `http://localhost:8085/getResultStatusTermOne/${studentRollNo}`
@@ -94,7 +90,6 @@ const TermOneMarkSheet = () => {
           alert(res.data.message);
 
           if (res.data.message === "Response Submitted") {
-            const studentRollNo = parentDetails.studentRollNo;
             axios
               .get(`http://localhost:8085/getResultStatus/${studentRollNo}`)
               .then((resp) => {});
@@ -104,10 +99,13 @@ const TermOneMarkSheet = () => {
       alert("error");
     }
   };
-  return (
-    <>
-      <div className="markSheet">
-        <>
+
+  if (marks) {
+    console.log("Term One Me response", termOne);
+    return (
+      <>
+        <div className="markSheet">
+          <b>Term One </b>
           <div className="termMarks">
             <div className="headingSubjects">
               <div>
@@ -167,27 +165,33 @@ const TermOneMarkSheet = () => {
               </div>
             </div>
           </div>
-        </>
-      </div>
-      <div className="approvalStatusParent">
-        <div>
-          <button
-            className="approvalButton resultBtn"
-            onClick={termResultStatusApproveStatus}
-          >
-            Approve
-          </button>
         </div>
-        <div>
-          <button
-            className="rejectButton resultBtn"
-            onClick={termResultStatusRejectStatus}
-          >
-            Reject
-          </button>
+        <div className="approvalStatusParent">
+          <div>
+            <button
+              className="approvalButton resultBtn"
+              onClick={termResultStatusApproveStatus}
+            >
+              Approve
+            </button>
+          </div>
+          <div>
+            <button
+              className="rejectButton resultBtn"
+              onClick={termResultStatusRejectStatus}
+            >
+              Reject
+            </button>
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  } else {
+    return (
+      <>
+        <ParentMessage />;
+      </>
+    );
+  }
 };
 export default TermOneMarkSheet;

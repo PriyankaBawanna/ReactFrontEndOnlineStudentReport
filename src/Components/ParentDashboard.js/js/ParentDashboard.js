@@ -35,10 +35,9 @@ const ParentDashboard = () => {
 
   return (
     <>
-      <StudentInfo />
       <div className="parentProfileIcon">
         <div className="parentDashboardLink">
-          {/* <p>Logo</p>
+          <p>Logo</p>
           <nav className="termResult">
             <Link to="TermOneMarkSheet" className="result">
               Term One
@@ -49,14 +48,14 @@ const ParentDashboard = () => {
             <Link to="FinalExam" className="result">
               Final Exam
             </Link>
-          </nav> */}
+          </nav>
         </div>
 
         <div>
           <ParentHeader />
         </div>
       </div>
-
+      <StudentInfo />
       <Outlet />
     </>
   );
