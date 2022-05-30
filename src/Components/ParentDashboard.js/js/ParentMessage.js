@@ -1,8 +1,11 @@
 import React from "react";
+import "../css/ParentDashboard.css";
 const ParentMessage = () => {
   return (
     <>
-      <h1>Result will be coming soon</h1>
+      <div className="message">
+        <h1>Result will be coming soon....!</h1>
+      </div>
     </>
   );
 };

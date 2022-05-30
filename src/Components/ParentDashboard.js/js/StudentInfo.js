@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import "../css/ParentDashboard.css";
 const StudentInfo = () => {
   const [parentData, setParentData] = useState([]);
 
@@ -42,21 +43,19 @@ const StudentInfo = () => {
   return (
     <>
       <div>
-        <p> email {studentRollNo}</p>
-        <div>
-          {parentData.map((item, i) => (
-            <p key={i}>
-              <p>Student Roll Number :{item.studentRollNo}</p>
-            </p>
-          ))}
-        </div>
-        <div>
+        <div className="studentData">
           {studentData.map((item, i) => (
             <p key={i}>
-              <p>Student Name : {item.studentName}</p>
-              <p>Student Email : {item.studentEmail}</p>
-              <p>Student Roll Number :{item.studentRollNo}</p>
-              <p>Student Standard: {item.studentStandard}</p>
+              <p className="studentDataRow">
+                Student Name : {item.studentName}
+              </p>
+              <p className="studentDataRow">
+                Student Email : {item.studentEmail}
+              </p>
+              <p className="studentDataRow">
+                Roll Number :{item.studentRollNo}
+              </p>
+              <p className="studentDataRow">Standard: {item.studentStandard}</p>
             </p>
           ))}
         </div>

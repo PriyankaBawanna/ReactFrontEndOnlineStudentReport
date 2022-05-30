@@ -34,17 +34,21 @@ const ParentHeader = () => {
     <>
       <div className="parentHeaderDetails">
         <div className="dropdown">
-          <span className="parentProfile">
+          <div className="parentProfile">
             <b className="profileIntro">PD</b>
-          </span>
-          <div className="triangle-up"></div>
+          </div>
+          <span className="triangleParentDashBoard"></span>
           <div className="dropdownContentParent">
             {parentInfo.map((item, i) => (
               <p key={i}>
-                <p>Parent Name : {item.parentName}</p>
-                <p>Parent Email : {item.parentEmail}</p>
-                <p>Student Roll Number :{item.studentRollNo}</p>
-                <p>Parent Mobile Number: {item.mobileNumber}</p>
+                <p className="parentData">Parent Name : {item.parentName}</p>
+                <p className="parentData">Parent Email : {item.parentEmail}</p>
+                <p className="parentData">
+                  Student Roll Number :{item.studentRollNo}
+                </p>
+                <p className="parentData">
+                  Parent Mobile Number: {item.mobileNumber}
+                </p>
               </p>
             ))}
             <Logout />

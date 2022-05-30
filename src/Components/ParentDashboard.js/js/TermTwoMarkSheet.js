@@ -108,56 +108,60 @@ const TermTwoMarkSheet = () => {
             <div className="headingSubjects">
               <div>
                 <p>
-                  <b>Subject</b>
+                  <b className="detailsStudentResult">Subject</b>
                 </p>
               </div>
               <div>
-                <p>English</p>
-                <p>Hindi</p>
-                <p>Science</p>
-                <p>Social Science</p>
-                <p>Maths</p>
-                <p>Total</p>
-                <p>Percentage</p>
-                <p>Grade</p>
+                <p className="studentResultRow">English</p>
+                <p className="studentResultRow">Hindi</p>
+                <p className="studentResultRow">Science</p>
+                <p className="studentResultRow">Social Science</p>
+                <p className="studentResultRow">Maths</p>
+                <p className="studentResultRow">Total</p>
+                <p className="studentResultRow">Percentage</p>
+                <p className="studentResultRow">Grade</p>
               </div>
             </div>
             <div className="marksHeading">
               <div>
                 <p>
-                  <b>Max Marks</b>
+                  <b className="detailsStudentResult">Max Marks</b>
                 </p>
               </div>
               <div>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100%</p>
-                <p>-</p>
-
-                <p></p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100%</p>
+                <p className="studentResultRow">-</p>
               </div>
             </div>
             <div className=">marksObtained">
               <div>
                 <p>
-                  <b>Marks Obtained </b>
+                  <b className="detailsStudentResult">Marks Obtained </b>
                 </p>
               </div>
               <div>
                 {termTwo.map((item, i) => (
                   <p key={i}>
-                    <p>{item.englishTermTwoMarks}</p>
-                    <p>{item.hindiTermTwoMarks}</p>
-                    <p>{item.scienceTermTwoMarks}</p>
-                    <p>{item.socialScienceTermTwoMarks}</p>
-                    <p> {item.mathTermTwoMarks}</p>
-                    <p>{item.totalTermTwoMarks}</p>
-                    <p>{item.percentageTermTwo}</p>
-                    <p>{item.gradeTermTwo}</p>
+                    <p className="studentResultRow">
+                      {item.englishTermTwoMarks}
+                    </p>
+                    <p className="studentResultRow">{item.hindiTermTwoMarks}</p>
+                    <p className="studentResultRow">
+                      {item.scienceTermTwoMarks}
+                    </p>
+                    <p className="studentResultRow">
+                      {item.socialScienceTermTwoMarks}
+                    </p>
+                    <p className="studentResultRow"> {item.mathTermTwoMarks}</p>
+                    <p className="studentResultRow">{item.totalTermTwoMarks}</p>
+                    <p className="studentResultRow">{item.percentageTermTwo}</p>
+                    <p className="studentResultRow">{item.gradeTermTwo}</p>
                   </p>
                 ))}
               </div>
@@ -167,7 +171,7 @@ const TermTwoMarkSheet = () => {
         <div className="approvalStatusParent">
           <div>
             <button
-              className="approvalButton  resultBtn"
+              className="rejectBtn "
               onClick={termResultStatusApproveStatus}
             >
               Approve
@@ -175,7 +179,7 @@ const TermTwoMarkSheet = () => {
           </div>
           <div>
             <button
-              className="rejectButton resultBtn"
+              className="rejectBtn"
               onClick={termResultStatusRejectStatus}
             >
               Reject

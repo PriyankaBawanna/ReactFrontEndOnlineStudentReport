@@ -16,7 +16,7 @@ const SchoolAdmin = ({ setLoginUser }) => {
       <div>
         <div className="schoolAdminHeaderLink">
           <div className="schoolAdminLinkSection">
-            {/* <img src={schoolLogo} className="logoSchoolAdmin" /> */}
+            {/* <img src={logo_school} className="logoSchoolAdmin" /> */}
             <p>Logo </p>
 
             <div>

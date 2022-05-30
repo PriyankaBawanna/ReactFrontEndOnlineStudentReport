@@ -110,56 +110,68 @@ const FinalExam = () => {
             <div className="headingSubjects">
               <div>
                 <p>
-                  <b>Subject</b>
+                  <b className="detailsStudentResult">Subject</b>
                 </p>
               </div>
               <div>
-                <p>English</p>
-                <p>Hindi</p>
-                <p>Science</p>
-                <p>Social Science</p>
-                <p>Maths</p>
-                <p>Total</p>
-                <p>Percentage</p>
-                <p>Grade</p>
+                <p className="studentResultRow">English</p>
+                <p className="studentResultRow">Hindi</p>
+                <p className="studentResultRow">Science</p>
+                <p className="studentResultRow">Social Science</p>
+                <p className="studentResultRow">Maths</p>
+                <p className="studentResultRow">Total</p>
+                <p className="studentResultRow">Percentage</p>
+                <p className="studentResultRow">Grade</p>
               </div>
             </div>
             <div className="marksHeading">
               <div>
                 <p>
-                  <b>Max Marks</b>
+                  <b className="detailsStudentResult">Max Marks</b>
                 </p>
               </div>
               <div>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100%</p>
-                <p>-</p>
-
-                <p></p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100%</p>
+                <p className="studentResultRow">-</p>
               </div>
             </div>
             <div className=">marksObtained">
               <div>
                 <p>
-                  <b>Marks Obtained </b>
+                  <b className="detailsStudentResult">Marks Obtained </b>
                 </p>
               </div>
               <div>
                 {termThree.map((item, i) => (
                   <p key={i}>
-                    <p>{item.englishTermThreeMarks}</p>
-                    <p>{item.hindiTermThreeMarks}</p>
-                    <p>{item.scienceTermThreeMarks}</p>
-                    <p>{item.socialScienceTermThreeMarks}</p>
-                    <p>{item.mathTermThreeMarks}</p>
-                    <p>{item.totalTermThreeMarks}</p>
-                    <p>{item.percentageTermThree}</p>
-                    <p>{item.gradeTermThree}</p>
+                    <p className="studentResultRow">
+                      {item.englishTermThreeMarks}
+                    </p>
+                    <p className="studentResultRow">
+                      {item.hindiTermThreeMarks}
+                    </p>
+                    <p className="studentResultRow">
+                      {item.scienceTermThreeMarks}
+                    </p>
+                    <p className="studentResultRow">
+                      {item.socialScienceTermThreeMarks}
+                    </p>
+                    <p className="studentResultRow">
+                      {item.mathTermThreeMarks}
+                    </p>
+                    <p className="studentResultRow">
+                      {item.totalTermThreeMarks}
+                    </p>
+                    <p className="studentResultRow">
+                      {item.percentageTermThree}
+                    </p>
+                    <p className="studentResultRow">{item.gradeTermThree}</p>
                   </p>
                 ))}
               </div>
@@ -168,7 +180,7 @@ const FinalExam = () => {
           <div className="approvalStatusParent">
             <div>
               <button
-                className="approvalButton resultBtn"
+                className="rejectBtn"
                 onClick={termResultStatusApproveStatus}
               >
                 Approve
@@ -176,7 +188,7 @@ const FinalExam = () => {
             </div>
             <div>
               <button
-                className="rejectButton resultBtn"
+                className="rejectBtn"
                 onClick={termResultStatusRejectStatus}
               >
                 Reject

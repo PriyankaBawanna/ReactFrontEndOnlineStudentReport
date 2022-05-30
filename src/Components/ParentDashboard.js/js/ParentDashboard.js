@@ -37,7 +37,7 @@ const ParentDashboard = () => {
     <>
       <div className="parentProfileIcon">
         <div className="parentDashboardLink">
-          <p>Logo</p>
+          <div className="schoolLogo"></div>
           <nav className="termResult">
             <Link to="TermOneMarkSheet" className="result">
               Term One

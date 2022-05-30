@@ -110,35 +110,35 @@ const TermOneMarkSheet = () => {
             <div className="headingSubjects">
               <div>
                 <p>
-                  <b>Subject</b>
+                  <b className="detailsStudentResult">Subject</b>
                 </p>
               </div>
               <div>
-                <p>English</p>
-                <p>Hindi</p>
-                <p>Science</p>
-                <p>Social Science</p>
-                <p>Maths</p>
-                <p>Total</p>
-                <p>Percentage</p>
-                <p>Grade</p>
+                <p className="studentResultRow">English</p>
+                <p className="studentResultRow">Hindi</p>
+                <p className="studentResultRow">Science</p>
+                <p className="studentResultRow">Social Science</p>
+                <p className="studentResultRow">Maths</p>
+                <p className="studentResultRow">Total</p>
+                <p className="studentResultRow">Percentage</p>
+                <p className="studentResultRow">Grade</p>
               </div>
             </div>
             <div className="marksHeading">
               <div>
                 <p>
-                  <b>Max Marks</b>
+                  <b className="detailsStudentResult">Max Marks</b>
                 </p>
               </div>
               <div>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100</p>
-                <p>100%</p>
-                <p>-</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100</p>
+                <p className="studentResultRow">100%</p>
+                <p className="studentResultRow">-</p>
 
                 <p></p>
               </div>
@@ -146,20 +146,26 @@ const TermOneMarkSheet = () => {
             <div className=">marksObtained">
               <div>
                 <p>
-                  <b>Marks Obtained </b>
+                  <b className="detailsStudentResult">Marks Obtained </b>
                 </p>
               </div>
               <div>
                 {termOne.map((item, i) => (
                   <p key={i}>
-                    <p>{item.englishTermOneMarks}</p>
-                    <p>{item.hindiTermOneMarks}</p>
-                    <p>{item.scienceTermOneMarks}</p>
-                    <p>{item.socialScienceTermOneMarks}</p>
-                    <p> {item.mathTermOneMarks}</p>
-                    <p>{item.totalTermOneMarks}</p>
-                    <p>{item.percentage}</p>
-                    <p>{item.grade}</p>
+                    <p className="studentResultRow">
+                      {item.englishTermOneMarks}
+                    </p>
+                    <p className="studentResultRow">{item.hindiTermOneMarks}</p>
+                    <p className="studentResultRow">
+                      {item.scienceTermOneMarks}
+                    </p>
+                    <p className="studentResultRow">
+                      {item.socialScienceTermOneMarks}
+                    </p>
+                    <p className="studentResultRow"> {item.mathTermOneMarks}</p>
+                    <p className="studentResultRow">{item.totalTermOneMarks}</p>
+                    <p className="studentResultRow">{item.percentage}</p>
+                    <p className="studentResultRow">{item.grade}</p>
                   </p>
                 ))}
               </div>
@@ -169,7 +175,7 @@ const TermOneMarkSheet = () => {
         <div className="approvalStatusParent">
           <div>
             <button
-              className="approvalButton resultBtn"
+              className="rejectBtn"
               onClick={termResultStatusApproveStatus}
             >
               Approve
@@ -177,7 +183,7 @@ const TermOneMarkSheet = () => {
           </div>
           <div>
             <button
-              className="rejectButton resultBtn"
+              className="rejectBtn"
               onClick={termResultStatusRejectStatus}
             >
               Reject
