@@ -46,6 +46,17 @@ tr:nth-child(even) {
   color: black;
   border: 1px rgb(106, 175, 198) solid;
 }
+.studentInfoEdit {
+  background-color: #c978d0;
+  border: none;
+  color: #f8ecf9;
+  height: 2rem;
+  width: 3rem;
+  border-radius: 7px;
+}
+.studentInfoEdit:hover {
+  color: #d89ef6;
+}
 .selectTerm {
   margin-top: -2rem;
   color: black;

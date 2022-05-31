@@ -11,34 +11,29 @@
 }
 .adminProfileHeading {
   position: static;
-  border: 1px solid;
+  border: 1px solid #faf6fc;
   border-radius: 50%;
   padding: 0.8rem;
-  background-color: pink;
+  background-color: #9848bf;
 }
 .profileHeading {
-  color: white;
+  color: #faf6fc;
+}
+.profileHeading :hover {
+  color: #deade2;
 }
 
-.triangleAdmin {
-  display: none;
-  width: 0;
-  height: 0;
-  border-left: 35px solid transparent;
-  border-right: 36px solid transparent;
-  border-bottom: 28px solid white;
-
-  margin-left: -4rem;
-}
 .dropdownContentForAdmin {
   display: none;
   margin-top: 1rem;
-  position: absolute;
-  background-color: white;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
   padding: 12px 16px;
   z-index: 1;
   margin-left: -9rem;
-  color: black;
+  position: absolute;
+  background-color: #faf6fc;
+}
+.dropdownContentForAdmin h6 {
+  color: #deade2;
 }

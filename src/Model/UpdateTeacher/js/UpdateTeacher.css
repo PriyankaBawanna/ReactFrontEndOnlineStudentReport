@@ -1,7 +1,11 @@
 .updateTeacher {
-  color: black;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-size: 1rem;
-  border-style: none;
-  border: 1px rgb(106, 175, 198) solid;
+  background-color: #c978d0;
+  border: none;
+  color: #f8ecf9;
+  height: 2rem;
+  width: 3rem;
+  border-radius: 7px;
+}
+.updateTeacher:hover {
+  color: #d89ef6;
 }

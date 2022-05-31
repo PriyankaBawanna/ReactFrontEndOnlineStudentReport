@@ -1,11 +1,10 @@
 .addParentBtn {
-  height: 3rem;
-  width: 10rem;
-
-  color: black;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-size: 1rem;
-  border-style: none;
-  margin: 2rem;
-  border: 1px rgb(106, 175, 198) solid;
+  background-color: #c978d0;
+  border: none;
+  color: #f8ecf9;
+  height: 2.5rem;
+  width: 7rem;
+  padding: 0.2rem;
+  border-radius: 7px;
+  margin: 1.5rem;
 }

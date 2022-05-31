@@ -50,8 +50,8 @@ const UpdateTeacher = (prop) => {
         },
       }
     );
-    updateTeacherData = await updateTeacherData.json();
-    alert("please Confirm ");
+    updateTeacherData = await updateTeacherData.json().then(prop.data);
+    setModal(false);
   };
   //Input Name handle
   const inputHandleTeacherName = (e) => {
@@ -177,9 +177,6 @@ const UpdateTeacher = (prop) => {
             cancel
           </button>
           {/** receive Function As props from  TeacherList to re render the Teacher List  */}
-          <button className="addStudentBtn" onClick={prop.data}>
-            Confirm
-          </button>
         </ModalBody>
       </Modal>
       <button onClick={() => setModal(true)} className="updateTeacher">

@@ -50,9 +50,7 @@ const UpdateStudent = (props) => {
         },
       }
     );
-    UpdateStudentData = await UpdateStudentData.json();
-
-    alert("please Confirm");
+    UpdateStudentData = await UpdateStudentData.json().then(props.data);
   };
   //Input handle Student Name
   const handleInputStudentName = (e) => {
@@ -177,9 +175,7 @@ const UpdateStudent = (props) => {
             Update
           </button>
           {/*function receive as  props  from StudentList Component   for rerender the updated  Student List  */}
-          <button className="addStudentBtn" onClick={props.data}>
-            Confirm
-          </button>
+
           <button className="addStudentBtn" onClick={() => setModal(false)}>
             cancel
           </button>

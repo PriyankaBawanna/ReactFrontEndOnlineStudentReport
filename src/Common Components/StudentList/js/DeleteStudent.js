@@ -28,8 +28,8 @@ const DeleteStudent = (props) => {
         method: "Delete",
       }
     );
-    parentData = await parentData.json();
-    alert("Please Confirm ");
+    parentData = await parentData.json().then(props.data);
+    setModal(false);
   };
 
   return (
@@ -42,14 +42,13 @@ const DeleteStudent = (props) => {
       >
         <ModalHeader toggle={() => setModal(!modal)}></ModalHeader>
         <ModalBody>
-          <h5>Do you Want Delete Student Data ?</h5>
-          <p>!!!..Parent Data will be also Deleted </p>
-          <button className="addStudentBtn" onClick={deleteStudent}>
-            Ok
-          </button>
-          <button className="addStudentBtn" onClick={props.data}>
-            Confirm
-          </button>
+          <div className="deleteStudentPop">
+            <h5>Do you Want Delete Student Data ?</h5>
+            <p>Parent Data will be also Deleted...! </p>
+            <button className="addStudentBtn" onClick={deleteStudent}>
+              Ok
+            </button>
+          </div>
         </ModalBody>
       </Modal>
       <button onClick={() => setModal(true)} className="deleteStudentBtn">

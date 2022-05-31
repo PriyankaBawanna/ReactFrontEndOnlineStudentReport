@@ -55,7 +55,7 @@
 }
 .logOutBtn {
   border: none;
-  background-color: white;
-  margin: 1rem;
-  color: black;
+  background-color: #faf6fc;
+  margin-top: 1rem;
+  color: #deade2;
 }

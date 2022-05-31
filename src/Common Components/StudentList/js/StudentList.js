@@ -44,7 +44,6 @@ const StudentList = () => {
   };
   function getData() {
     addStudent();
-    alert("Confirm");
   }
   return (
     <>
@@ -52,7 +51,7 @@ const StudentList = () => {
 
       <table>
         <div className="StudentListHeading">
-          <h3>List of Student</h3>
+          <h2>List of Student</h2>
         </div>
         <div className="optionAddParentAddStudent">
           <div>
@@ -75,6 +74,7 @@ const StudentList = () => {
               <th>Parent Email</th>
               <th>Student Standard</th>
               <th>Student Roll Number</th>
+              <th>Student Email</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -86,6 +86,7 @@ const StudentList = () => {
                 <td data-label="Student Email">{item.studentEmail}</td>
                 <td data-label="Student Standard">{item.studentStandard}</td>
                 <td data-label="Student Roll No ">{item.studentRollNo}</td>
+                <td data-label="Student Email ">{item.studentEmail}</td>
                 <td data-label="Update Student Data">
                   <UpdateStudent studentId={item._id} data={getData} />
                 </td>

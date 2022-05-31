@@ -14,7 +14,7 @@ const AdminProfile = () => {
 
         <div className="triangleAdmin"></div>
         <div className="dropdownContentForAdmin">
-          <p> Admin: {schoolAdminDetails.email}</p>
+          <h6> Admin: {schoolAdminDetails.email}</h6>
           {/**Logout for the clear the Session  */}
           <Logout />
         </div>

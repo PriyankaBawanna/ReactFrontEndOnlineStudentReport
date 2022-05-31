@@ -55,16 +55,20 @@ const TeacherList = () => {
   return (
     <>
       {/* for Add new Teacher */}
-      <AddTeacher teacherData={getData} />
+      <div className="teacherHeading">
+        <div className="listOfUser">
+          <h3>List Of Teachers </h3>
+        </div>
+        <div>
+          <AddTeacher teacherData={getData} />
 
-      <input
-        type="text"
-        placeholder="Search Teacher"
-        onChange={searchHandle}
-        className="inputSearchStudent"
-      />
-      <div className="listOfUser">
-        <h3>List Of Teachers </h3>
+          <input
+            type="text"
+            placeholder="Search Teacher"
+            onChange={searchHandle}
+            className="inputSearchStudent"
+          />
+        </div>
       </div>
 
       <table class="table">
