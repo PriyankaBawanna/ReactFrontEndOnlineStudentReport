@@ -2,20 +2,30 @@ import React, { useState, useEffect } from "react";
 import UpdateTeacher from "../../Model/UpdateTeacher/js/UpdateTeacher";
 import AddTeacher from "../../Model/AddTeacher/js/AddTeacher";
 import "../StudentList/css/StudentList.css";
+import axios from "axios";
+import ReactPaginate from "react-paginate";
 const TeacherList = () => {
+  const [offset, setOffset] = useState(0);
   const [users, setUser] = useState([]);
+  const [perPage] = useState(3);
+  const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     addTeacher();
-  }, []);
+  }, [offset]);
 
   //Teacher List rerender
   const addTeacher = async () => {
-    await fetch("http://localhost:8085/addTeacher").then((result) => {
-      result.json().then((resp) => {
-        setUser(resp);
-      });
-    });
+    const res = await axios.get(`http://localhost:8085/addTeacher`);
+    const data = res.data;
+    const slice = data.slice(offset, offset + perPage);
+    setUser(slice);
+    setPageCount(Math.ceil(data.length / perPage));
+  };
+  console.warn(users);
+  const handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    setOffset(selectedPage + 1);
   };
 
   //Delete The teacher
@@ -104,6 +114,22 @@ const TeacherList = () => {
           </tbody>
         ))}
       </table>
+
+      <div>
+        <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
+      </div>
     </>
   );
 };

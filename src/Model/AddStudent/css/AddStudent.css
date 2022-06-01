@@ -34,7 +34,7 @@
 .inputError {
   color: red;
 }
-h5,
-p {
-  color: black;
+h3 {
+  color: #deade2;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }

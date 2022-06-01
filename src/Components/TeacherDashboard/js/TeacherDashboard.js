@@ -8,8 +8,9 @@ const TeacherDashBoard = () => {
   return (
     <>
       <div className="teacherHeader">
-        <div>
-          <h1>Teacher Dashboard </h1>
+        <div className="logo">
+          <div className="schoolLogo"></div>
+          <h3>Teacher Dashboard </h3>
         </div>
 
         <div>
