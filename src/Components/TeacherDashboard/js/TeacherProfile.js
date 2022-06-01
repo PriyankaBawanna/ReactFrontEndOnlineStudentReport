@@ -11,10 +11,9 @@ const TeacherProfile = () => {
     <>
       <div className="dropdown">
         <span className="userProfile">
-          <b>User</b>
+          <b>TD</b>
         </span>
 
-        <div className="triangle-up"></div>
         <div className="dropdown-content">
           <p className="teacherDetails">
             Teacher Name : {teacherDetails.teacherName}

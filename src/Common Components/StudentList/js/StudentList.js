@@ -5,27 +5,32 @@ import AddStudent from "../../../Model/AddStudent/js/AddStudent";
 import UpdateStudent from "../../../Model/UpdateStudent/js/updateStudent";
 import "../css/StudentList.css";
 import DeleteStudent from "./DeleteStudent";
+import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 const StudentList = () => {
+  const [offset, setOffset] = useState(0);
   const [users, setUser] = useState([]);
-  const [modal, setModal] = useState(false);
+  const [perPage] = useState(5);
+  const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     addStudent();
-  }, []);
+  }, [offset]);
 
   //use to Show Student  details /List
   const addStudent = async () => {
-    const addStudent = fetch("http://localhost:8085/addStudent").then(
-      (result) => {
-        result.json().then((resp) => {
-          // console.warn(resp)
-          setUser(resp);
-        });
-      }
-    );
+    const res = await axios.get(`http://localhost:8085/addStudent`);
+    const data = res.data;
+    const slice = data.slice(offset, offset + perPage);
+    setUser(slice);
+    setPageCount(Math.ceil(data.length / perPage));
   };
   console.warn(users);
+  const handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    setOffset(selectedPage + 1);
+  };
 
   //search on the basis od student name
   const searchHandle = async (e) => {
@@ -45,6 +50,7 @@ const StudentList = () => {
   function getData() {
     addStudent();
   }
+
   return (
     <>
       {/** function pass as props to   AddStudent Component for render the list  */}
@@ -67,7 +73,7 @@ const StudentList = () => {
           />
         </div>
 
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>Student Name</th>
@@ -102,6 +108,20 @@ const StudentList = () => {
             </tbody>
           ))}
         </table>
+
+        <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
       </table>
     </>
   );
