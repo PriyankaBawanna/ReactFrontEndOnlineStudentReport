@@ -29,7 +29,7 @@
   border: 1px #b970c0 solid;
   color: #b970c0;
   padding: 0.3rem;
-  border-radius: 9px;
+  border-radius: 6px;
 }
 .inputError {
   color: red;

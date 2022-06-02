@@ -115,7 +115,7 @@ const StudentInformation = (p) => {
                 name="studentName"
                 value={studentName}
                 type="text"
-                className="studentInput"
+                className="updateStudentInput"
                 placeholder="Student Name "
                 onChange={(e) => setStudentName(e.target.value)}
               />
@@ -126,7 +126,7 @@ const StudentInformation = (p) => {
                 name="studentEmail"
                 value={studentEmail}
                 type="email"
-                className="studentInput"
+                className="updateStudentInput"
                 placeholder="Enter Parent Email id "
                 onChange={(e) => {
                   setStudentEmail(e.target.value);
@@ -139,7 +139,7 @@ const StudentInformation = (p) => {
                 name="studentStandard"
                 value={studentStandard}
                 type="Number"
-                className="studentInput"
+                className="updateStudentInput"
                 placeholder="Enter student Standard "
                 onChange={(e) => {
                   setStudentStandard(e.target.value);
@@ -152,7 +152,7 @@ const StudentInformation = (p) => {
                 name="studentRollNo"
                 value={studentRollNo}
                 type="text"
-                className="studentInput"
+                className="updateStudentInput"
                 placeholder="Enter student RollNo "
                 onChange={(e) => {
                   setStudentRollNo(e.target.value);
@@ -217,7 +217,7 @@ const StudentInformation = (p) => {
                               name="inputMarks"
                               value={englishTermOneMarks}
                               type="text"
-                              className="inputMarks"
+                              className="inputMarks StudentMarksTable"
                               onChange={(e) => {
                                 setEnglishTermOneMarks(e.target.value);
                               }}
@@ -232,7 +232,7 @@ const StudentInformation = (p) => {
                               name="inputMarks"
                               value={hindiTermOneMarks}
                               type="text"
-                              className="inputMarks"
+                              className="inputMarks StudentMarksTable"
                               onChange={(e) => {
                                 setHindiTermOneMarks(e.target.value);
                               }}
@@ -247,7 +247,7 @@ const StudentInformation = (p) => {
                               name="inputMarks"
                               value={scienceTermOneMarks}
                               type="text"
-                              className="inputMarks"
+                              className="inputMarks StudentMarksTable"
                               onChange={(e) => {
                                 setScienceTermOneMarks(e.target.value);
                               }}
@@ -262,7 +262,7 @@ const StudentInformation = (p) => {
                               name="inputMarks"
                               value={socialScienceTermOneMarks}
                               type="text"
-                              className="inputMarks"
+                              className="inputMarks StudentMarksTable"
                               onChange={(e) => {
                                 setSocialScienceTermOneMarks(e.target.value);
                               }}
@@ -277,7 +277,7 @@ const StudentInformation = (p) => {
                               name="text"
                               value={mathTermOneMarks}
                               type="text"
-                              className="inputMarks"
+                              className="inputMarks StudentMarksTable"
                               onChange={(e) => {
                                 setMathTermOneMarks(e.target.value);
                               }}
@@ -288,7 +288,7 @@ const StudentInformation = (p) => {
                         <tr>
                           <td>
                             <button
-                              className="markSheetBtn "
+                              className="markSheetBtn  StudentMarksTable"
                               onClick={TotalMarks}
                             >
                               Total
@@ -300,7 +300,7 @@ const StudentInformation = (p) => {
                               name="text"
                               value={totalTermOneMarks}
                               type="text"
-                              className="inputMarks"
+                              className="inputMarks StudentMarksTable"
                               onChange={(e) => {
                                 setTotalTermOneMarks(e.target.value);
                               }}
@@ -361,19 +361,19 @@ const StudentInformation = (p) => {
               }
             })()}
           </div>
-          <div className="btngroup">
+          <div className="btnGroup">
             <button
-              className="markSheetBtn "
+              className="markSheetBtn"
               onClick={() => {
                 setModal(false);
               }}
             >
-              cancel
+              Cancel
             </button>
           </div>
         </ModalBody>
       </Modal>
-      <button onClick={() => setModal(true)} className="studentInfoEdit">
+      <button onClick={() => setModal(true)} class="deleteStudentBtn">
         Edit
       </button>
     </>

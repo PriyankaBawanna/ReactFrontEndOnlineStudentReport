@@ -77,6 +77,7 @@ const StudentMarksList = () => {
             <td>Student Name</td>
             <td>Student Standard</td>
             <td>Student Roll Number</td>
+            <td>Student Email</td>
             <td>Term One</td>
             <td>Term Two</td>
             <td>Term Three</td>
@@ -91,7 +92,7 @@ const StudentMarksList = () => {
               <td data-label="Student Name">{item.studentName}</td>
               <td data-label="Student Standard">{item.studentStandard}</td>
               <td data-label="Student Roll No ">{item.studentRollNo}</td>
-
+              <td data-label="Student Email ">{item.studentEmail}</td>
               <td data-label="Term One">{item.totalTermOneMarks}</td>
               <td data-label="Term Two">{item.totalTermTwoMarks}</td>
               <td data-label="Term Three">{item.totalTermThreeMarks}</td>

@@ -17,7 +17,7 @@
   justify-content: center;
   height: 35rem;
   width: 100%;
-
+  background-image: url("../../../Img/imgSchool.png");
   background-repeat: no-repeat;
 }
 .homePage {

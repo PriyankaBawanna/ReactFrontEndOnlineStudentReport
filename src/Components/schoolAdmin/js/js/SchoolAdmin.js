@@ -4,6 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../css/schoolAdmin.css";
 import AdminProfile from "./AdminProfile";
+import AdminActionDropDownList from "./AdminActionDropDown";
 
 const SchoolAdmin = ({ setLoginUser }) => {
   const params = useParams();
@@ -17,6 +18,8 @@ const SchoolAdmin = ({ setLoginUser }) => {
         <div className="schoolAdminHeaderLink">
           <div className="schoolAdminLinkSection">
             <div className="schoolLogo"></div>
+            {/* <b>Drop Down</b>
+            <AdminActionDropDownList />  not looking good in UI */}
 
             <div>
               <Link to="StudentList" className="studentListLink">

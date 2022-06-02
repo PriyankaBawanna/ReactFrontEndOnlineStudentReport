@@ -113,7 +113,7 @@ const TermTwo = (p) => {
               name="inputMarks"
               value={englishTermTwoMarks}
               type="text"
-              className="inputMarks"
+              className="inputMarks StudentMarksTable"
               onChange={(e) => {
                 setEnglishTermTwoMarks(e.target.value);
               }}
@@ -128,7 +128,7 @@ const TermTwo = (p) => {
               name="inputMarks"
               value={hindiTermTwoMarks}
               type="text"
-              className="inputMarks"
+              className="inputMarks StudentMarksTable"
               onChange={(e) => {
                 setHindiTermTwoMarks(e.target.value);
               }}
@@ -143,7 +143,7 @@ const TermTwo = (p) => {
               name="inputMarks"
               value={scienceTermTwoMarks}
               type="text"
-              className="inputMarks"
+              className="inputMarks StudentMarksTable"
               onChange={(e) => {
                 setScienceTermTwoMarks(e.target.value);
               }}
@@ -158,7 +158,7 @@ const TermTwo = (p) => {
               name="inputMarks"
               value={socialScienceTermTwoMarks}
               type="text"
-              className="inputMarks"
+              className="inputMarks StudentMarksTable"
               onChange={(e) => {
                 setSocialScienceTermTwoMarks(e.target.value);
               }}
@@ -173,7 +173,7 @@ const TermTwo = (p) => {
               name="text"
               value={mathTermTwoMarks}
               type="text"
-              className="inputMarks"
+              className="inputMarks StudentMarksTable"
               onChange={(e) => {
                 setMathTermTwoMarks(e.target.value);
               }}
@@ -193,7 +193,7 @@ const TermTwo = (p) => {
               name="text"
               value={totalTermTwoMarks}
               type="text"
-              className="inputMarks"
+              className="inputMarks StudentMarksTable"
               onChange={(e) => {
                 setTotalTermTwoMarks(e.target.value);
               }}

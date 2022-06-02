@@ -1,0 +1,45 @@
+.OptionBtn {
+  background-color: #9848bf;
+  color: #faf6fc;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.optionAdmin {
+  position: relative;
+  display: inline-block;
+}
+
+.optionContent {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  margin-left: 1rem;
+}
+
+.optionContent a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.optionContent a:hover {
+  background-color: #f1f1f1;
+}
+
+.optionAdmin:hover .optionContent {
+  display: block;
+}
+
+.optionAdmin:hover .OptionBtn {
+  background-color: #9848bf;
+  color: #e2cded;
+}
+.abc {
+  color: pink;
+}

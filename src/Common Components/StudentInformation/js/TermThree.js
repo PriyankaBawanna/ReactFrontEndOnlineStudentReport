@@ -114,7 +114,7 @@ const TermThree = (p) => {
                 name="inputMarks"
                 value={englishTermThreeMarks}
                 type="text"
-                className="inputMarks"
+                className="inputMarks "
                 onChange={(e) => {
                   setEnglishTermThreeMarks(e.target.value);
                 }}
@@ -129,7 +129,7 @@ const TermThree = (p) => {
                 name="inputMarks"
                 value={hindiTermThreeMarks}
                 type="text"
-                className="inputMarks"
+                className="inputMarks StudentMarksTable"
                 onChange={(e) => {
                   setHindiTermThreeMarks(e.target.value);
                 }}
@@ -144,7 +144,7 @@ const TermThree = (p) => {
                 name="inputMarks"
                 value={scienceTermThreeMarks}
                 type="text"
-                className="inputMarks"
+                className="inputMarks StudentMarksTable"
                 onChange={(e) => {
                   setScienceTermThreeMarks(e.target.value);
                 }}
@@ -159,7 +159,7 @@ const TermThree = (p) => {
                 name="inputMarks"
                 value={socialScienceTermThreeMarks}
                 type="text"
-                className="inputMarks"
+                className="inputMarks StudentMarksTable"
                 onChange={(e) => {
                   setSocialScienceTermThreeMarks(e.target.value);
                 }}
@@ -174,7 +174,7 @@ const TermThree = (p) => {
                 name="text"
                 value={mathTermThreeMarks}
                 type="text"
-                className="inputMarks"
+                className="inputMarks StudentMarksTable"
                 onChange={(e) => {
                   setMathTermThreeMarks(e.target.value);
                 }}
@@ -194,7 +194,7 @@ const TermThree = (p) => {
                 name="text"
                 value={totalTermThreeMarks}
                 type="text"
-                className="inputMarks"
+                className="inputMarks StudentMarksTable"
                 onChange={(e) => {
                   setTotalTermThreeMarks(e.target.value);
                 }}
