@@ -1,21 +1,18 @@
 import React from "react";
 
-import LoginPage from "../Common Components/LoginPage/js/Login";
-import Registration from "../Common Components/RegistrationPage/AdminRegistrationPage/js/Registration";
-import HomePage from "../Components/Home/js/HomePage";
-import SchoolAdmin from "../Components/schoolAdmin/js/js/SchoolAdmin";
+import SchoolAdmin from "../admin/components/js/schoolAdmin";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import StudentList from "../Common Components/StudentList/js/StudentList";
-import TeacherList from "../Common Components/TeacherList/TeacherList";
-import ParentDashboard from "../Components/ParentDashboard.js/js/ParentDashboard";
-import TermOneMarkSheet from "../Components/ParentDashboard.js/js/TermOneMarkSheet";
-import TermTwoMarkSheet from "../Components/ParentDashboard.js/js/TermTwoMarkSheet";
-import FinalExam from "../Components/ParentDashboard.js/js/FinalExam";
-import TeacherLogin from "../Common Components/LoginPage/js/TeacherLogin";
-import ParentLogin from "../Common Components/LoginPage/js/ParentLogin";
-import TeacherDashBoard from "../Components/TeacherDashboard/js/TeacherDashboard";
-import UserLogin from "../Common Components/LoginPage/js/UserLogin";
+import StudentList from "../admin/studentList/js/studentList";
+import TeacherList from "../admin/teacherList/teacherList";
+import ParentDashboard from "../parent/js/parentDashboard";
+import TermOneMarkSheet from "../parent/js/termOneMarkSheet";
+import TermTwoMarkSheet from "../parent/js/termTwoMarkSheet";
+import FinalExam from "../parent/js/finalExam";
 
+import TeacherDashBoard from "../teacher/js/teacherDashboard";
+import UserLogin from "../userLogin/js/userLogin";
+import HomePage from "../Home/js/homePage";
+import Registration from "../admin/registrationPage/AdminRegistrationPage/js/registration";
 const Routers = () => {
   return (
     <BrowserRouter>
@@ -23,10 +20,7 @@ const Routers = () => {
         <Route path="/" element={<HomePage />}>
           <Route index element={<Registration />} />
           <Route path="/Registration" element={<Registration />} />
-          <Route path="/Login" element={<LoginPage />} />
           <Route path="/UserLogin" element={<UserLogin />} />
-          <Route path="/TeacherLogin" element={<TeacherLogin />} />
-          <Route path="/ParentLogin" element={<ParentLogin />} />
         </Route>
 
         <Route path="/SchoolAdmin" element={<SchoolAdmin />}>
