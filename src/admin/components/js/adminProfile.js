@@ -1,5 +1,5 @@
 import React from "react";
-import Logout from "../../../shared/logOut/logout";
+import Logout from "../../../shell/logOut/logout";
 
 import "../css/adminProfile.css";
 const AdminProfile = () => {

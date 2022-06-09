@@ -7,10 +7,7 @@ import StudentInfo from "./studentInfo";
 
 const ParentDashboard = () => {
   const [studentDetail, setStudentDetail] = useState([]);
-
   const [parentInfo, setParentInfo] = useState([]);
-  console.log("Parent Info copy", parentInfo);
-
   const [studentRollNumber, setStudentRollNumber] = useState([]);
 
   useEffect(() => {
@@ -20,9 +17,8 @@ const ParentDashboard = () => {
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
 
   const parentEmail = parentDetails.parentEmail;
-  console.log("parentEmail-- ", parentEmail);
 
-  console.log("Student Roll number----", studentRollNumber);
+  //Using the student's Roll Number, the obtains Student  information.
   const studentInfo = () => {
     fetch(`http://localhost:8085/StudentResult/${studentRollNumber}`).then(
       (result) => {
@@ -35,6 +31,7 @@ const ParentDashboard = () => {
 
   return (
     <>
+      {/*nav bar that displays student marks based on exam terms */}
       <div className="parentProfileIcon">
         <div className="parentDashboardLink">
           <div className="schoolLogo"></div>
@@ -61,4 +58,3 @@ const ParentDashboard = () => {
   );
 };
 export default ParentDashboard;
-// TermThreeMarkSheet;

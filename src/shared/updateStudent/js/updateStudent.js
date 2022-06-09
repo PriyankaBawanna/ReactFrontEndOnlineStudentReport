@@ -174,7 +174,6 @@ const UpdateStudent = (props) => {
           >
             Update
           </button>
-          {/*function receive as  props  from StudentList Component   for rerender the updated  Student List  */}
 
           <button className="addStudentBtn" onClick={() => setModal(false)}>
             cancel

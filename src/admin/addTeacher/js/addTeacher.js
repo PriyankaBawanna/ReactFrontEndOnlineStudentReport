@@ -53,7 +53,7 @@ const AddTeacher = (props) => {
     }
   };
 
-  //handle Teacher 10 digit  Mobile No \
+  //handle Teacher 10 digit  Mobile No
   const handleMobileNumber = (e) => {
     const { value } = e.target;
     setTeacherMobileNo(value);
@@ -64,6 +64,7 @@ const AddTeacher = (props) => {
     }
   };
 
+  //email Id Validation
   const handleTeacherEmailId = (e) => {
     const { value } = e.target;
     setTeacherEmailId(value);
@@ -75,6 +76,7 @@ const AddTeacher = (props) => {
     }
   };
 
+  //password  Validation
   const handleInputTeacherPassword = (e) => {
     const { value } = e.target;
     setTeacherPassword(value);

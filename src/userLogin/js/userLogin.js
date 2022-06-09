@@ -1,10 +1,8 @@
-import React, { useState, createContext, useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/login.css";
 import axios from "axios";
 const UserLogin = () => {
-  const location = useLocation();
-
   //for parent Email and Student Roll no
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -11,7 +11,7 @@ const AddStudent = (prop) => {
   const [studentEmail, setStudentEmail] = useState("");
   const [studentStandard, setStudentStandard] = useState("");
   const [studentRollNo, setStudentRollNo] = useState("");
-  const [confirm, setConfirm] = useState(false);
+  // const [confirm, setConfirm] = useState(false);
 
   const [studentNameError, setStudentNameError] = useState(false);
   const [studentEmailError, setStudentEmailError] = useState(false);

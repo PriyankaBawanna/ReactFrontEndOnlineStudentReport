@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Logout from "../../shared/logOut/logout";
+
+import Logout from "../../shell/logOut/logout";
 import "../css/parentDashboard.css";
 const ParentHeader = () => {
   const [parentInfo, setParentInfo] = useState([]);
@@ -7,12 +8,11 @@ const ParentHeader = () => {
   //const loginParent = JSON.parse(localStorage.getItem("loginParent"));
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
 
-  let parentName = parentDetails.parentName;
-  let parentId = parentDetails._id;
-  let parentEmail = parentDetails.parentEmail;
-  let parentMobileNo = parentDetails.mobileNumber;
-  console.log("Parent Id", parentId, parentName, parentMobileNo, parentEmail);
+  //get the current user login data
 
+  let parentEmail = parentDetails.parentEmail;
+
+  //Obtaining parent information through email
   const parentPersonalInfo = () => {
     console.warn("PArent Email", parentEmail);
     fetch(`http://localhost:8085/ParentDetails/${parentEmail}`).then((info) => {

@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/parentDashboard.css";
+//if student result not available
 const ParentMessage = () => {
   return (
     <>

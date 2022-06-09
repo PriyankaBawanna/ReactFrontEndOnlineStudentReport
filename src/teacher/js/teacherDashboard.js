@@ -1,4 +1,4 @@
-import React, { Profiler } from "react";
+import React from "react";
 
 import "../css/teacherDashBoard.css";
 import StudentMarksList from "./studentMarksList";

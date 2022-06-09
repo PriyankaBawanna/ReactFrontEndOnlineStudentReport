@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-
 import "../css/addParent.css";
 import "../../../shared/addStudent/css/addStudent.css";
 import axios from "axios";
+/*
+for adding information about the parents
+*/
 const AddParent = () => {
   /*modal useState*/
   const [modal, setModal] = useState(false);
@@ -42,6 +44,7 @@ const AddParent = () => {
     setParentEmail("");
   };
 
+  //Email Validation
   const handleInputParentEmail = (e) => {
     const { value } = e.target;
     setParentEmail(value);
@@ -53,6 +56,7 @@ const AddParent = () => {
     }
   };
 
+  //password Validation
   const handleInputParentPassword = (e) => {
     const { value } = e.target;
     setParentPassword(value);
@@ -62,7 +66,7 @@ const AddParent = () => {
     } else setParentPasswordError(false);
   };
 
-  //handle Teacher 10 digit  Mobile No \
+  //handle Teacher 10 digit  Mobile No
   const handleMobileNumber = (e) => {
     const { value } = e.target;
     setMobileNumber(value);
@@ -73,6 +77,7 @@ const AddParent = () => {
     }
   };
 
+  //Parent Name Validation name length should be greater than 3
   const handleParentNameInput = (e) => {
     const { value } = e.target;
     setParentName(value);

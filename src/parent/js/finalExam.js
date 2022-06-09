@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../css/parentDashboard.css";
 import axios from "axios";
 import ParentMessage from "./parentMessage";
+//result of the last examination
 const FinalExam = () => {
   //final Exam  Result
   const [termThree, setTermThree] = useState([]);
-  const [studentDetail, setStudentDetail] = useState([]);
 
   const [approveStatus, setApproveStatus] = useState("Approve");
   const [rejectStatus, setRejectStatus] = useState("Reject");
@@ -19,6 +19,7 @@ const FinalExam = () => {
     data();
   }, [studentRollNo]);
 
+  //obtaining Student data based on the biases of parent details
   async function data() {
     axios
       .get(`http://localhost:8085/ParentDetails/${parentEmail}`)
@@ -38,16 +39,12 @@ const FinalExam = () => {
             });
         } else {
         }
-
-        console.log("USer Response term two ", json);
       });
   }
 
+  //obtaining login parent email
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
   const parentEmail = parentDetails.parentEmail;
-  console.log("parent Email ", parentEmail);
-
-  //get the Student Details
 
   //if parent Approve the Result
   const termResultStatusApproveStatus = () => {
@@ -77,6 +74,7 @@ const FinalExam = () => {
     }
   };
 
+  //if parent reject the result
   const termResultStatusRejectStatus = () => {
     const resultRejectStatus = { termThreeResultStatus, studentRollNo };
     setTermTwoResultStatus(rejectStatus);
@@ -100,8 +98,7 @@ const FinalExam = () => {
       alert("error");
     }
   };
-  console.log("final", marks);
-  console.log("final Term", termThree);
+
   if (marks) {
     return (
       <>

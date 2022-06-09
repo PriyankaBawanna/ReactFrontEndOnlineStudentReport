@@ -1,5 +1,4 @@
-import React, { Profiler } from "react";
-
+import React from "react";
 import "../css/schoolAdmin.css";
 import AdminProfile from "./AdminProfile";
 

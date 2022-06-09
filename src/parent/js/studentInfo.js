@@ -9,7 +9,6 @@ const StudentInfo = () => {
   const [studentData, setStudentData] = useState([]);
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
   let studentDetails = JSON.parse(localStorage.getItem("studentDetails"));
-  //   let studentRollNo = studentDetails.studentRollNo;
   const parentEmail = parentDetails.parentEmail;
   console.log("parent data 2 ", parentEmail);
   const newData = {};
@@ -34,12 +33,9 @@ const StudentInfo = () => {
             });
         } else {
         }
-
-        console.log("USer Response ", json);
       });
   }
 
-  console.log("Student Data ", studentData);
   return (
     <>
       <div>

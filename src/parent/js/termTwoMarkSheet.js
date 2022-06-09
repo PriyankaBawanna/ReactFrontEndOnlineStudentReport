@@ -18,6 +18,7 @@ const TermTwoMarkSheet = () => {
     data();
   }, [studentRollNo]);
 
+  //on the basis of parent Email finding the Student Roll No
   async function data() {
     axios
       .get(`http://localhost:8085/ParentDetails/${parentEmail}`)
@@ -35,8 +36,6 @@ const TermTwoMarkSheet = () => {
             });
         } else {
         }
-
-        console.log("USer Response term two ", json);
       });
   }
 

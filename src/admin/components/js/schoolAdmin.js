@@ -7,7 +7,7 @@ import "../css/schoolAdmin.css";
 import "./adminProfile";
 import AdminProfile from "./adminProfile";
 
-const SchoolAdmin = ({ setLoginUser }) => {
+const SchoolAdmin = () => {
   const params = useParams();
   console.log("user id is : ", params);
   const [count, setCount] = useState(0);
@@ -19,8 +19,6 @@ const SchoolAdmin = ({ setLoginUser }) => {
         <div className="schoolAdminHeaderLink">
           <div className="schoolAdminLinkSection">
             <div className="schoolLogo"></div>
-            {/* <b>Drop Down</b>
-            <AdminActionDropDownList />  not looking good in UI */}
 
             <div>
               <Link to="StudentList" className="studentListLink">

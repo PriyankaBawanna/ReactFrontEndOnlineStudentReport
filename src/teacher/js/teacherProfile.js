@@ -1,5 +1,5 @@
 import React from "react";
-import Logout from "../../shared/logOut/logout";
+import Logout from "../../shell/logOut/logout";
 import "../../teacher/css/teacherDashBoard.css";
 const TeacherProfile = () => {
   //get login Teacher Data from Local Storage
