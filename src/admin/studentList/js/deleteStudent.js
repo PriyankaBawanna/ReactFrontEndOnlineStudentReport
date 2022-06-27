@@ -13,17 +13,24 @@ const DeleteStudent = (props) => {
 
   //delete the student data with relative parent Data
   const deleteStudent = async (studentRollNo) => {
-    console.log("RollNumber", props.rollNo);
-
-    setDeleteStudentData("true");
-
-    let userData = await fetch(
-      `http://localhost:8085/deleteUser/${props.rollNo}`,
+    console.log("user _id", studentRollNo);
+    let result = await fetch(
+      `http://localhost:8085/StudentDelete/${props.studentRollNo}`,
       {
         method: "Delete",
       }
     );
-    userData = await userData.json().then(props.data);
+    result = await result.json();
+
+    setDeleteStudentData("true");
+
+    let parentData = await fetch(
+      `http://localhost:8085/parentDelete/${props.studentRollNo}`,
+      {
+        method: "Delete",
+      }
+    );
+    parentData = await parentData.json().then(props.data);
     setModal(false);
   };
 

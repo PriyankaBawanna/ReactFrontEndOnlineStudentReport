@@ -20,7 +20,7 @@ const StudentList = () => {
 
   //use to Show Student  details /List
   const addStudent = async () => {
-    const res = await axios.get(`http://localhost:8085/listOfStudent`);
+    const res = await axios.get(`http://localhost:8085/addStudent`);
     const data = res.data;
     const slice = data.slice(offset, offset + perPage);
     setUser(slice);
@@ -37,7 +37,7 @@ const StudentList = () => {
     console.warn(e.target.value);
     let key = e.target.value;
     if (key) {
-      let result = await fetch(`http://localhost:8085/searchUser/${key}`);
+      let result = await fetch(`http://localhost:8085/StudentSearch/${key}`);
       result = await result.json();
       if (result) {
         console.log("Result of Student Search ", result);
@@ -77,7 +77,8 @@ const StudentList = () => {
           <thead>
             <tr>
               <th>Student Name</th>
-
+              <th>Parent Email</th>
+              <th>Student Standard</th>
               <th>Student Roll Number</th>
               <th>Student Email</th>
               <th>Edit</th>
@@ -87,17 +88,21 @@ const StudentList = () => {
           {users.map((item, i) => (
             <tbody>
               <tr key={i}>
-                <td data-label="Student Name">{item.name}</td>
-
-                <td data-label="Student Roll No ">{item.rollNo}</td>
-                <td data-label="Student Email ">{item.email}</td>
+                <td data-label="Student Name">{item.studentName}</td>
+                <td data-label="Student Email">{item.studentEmail}</td>
+                <td data-label="Student Standard">{item.studentStandard}</td>
+                <td data-label="Student Roll No ">{item.studentRollNo}</td>
+                <td data-label="Student Email ">{item.studentEmail}</td>
                 <td data-label="Update Student Data">
                   <UpdateStudent studentId={item._id} data={getData} />
                 </td>
 
                 <td data-label="Delete Student Data">
                   {/** function pass as props to   Delete student Component for render the list  */}
-                  <DeleteStudent rollNo={item.rollNo} data={getData} />
+                  <DeleteStudent
+                    studentRollNo={item.studentRollNo}
+                    data={getData}
+                  />
                 </td>
               </tr>
             </tbody>
