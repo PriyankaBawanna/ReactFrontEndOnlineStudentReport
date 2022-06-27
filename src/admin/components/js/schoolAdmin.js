@@ -10,8 +10,6 @@ import AdminProfile from "./adminProfile";
 const SchoolAdmin = () => {
   const params = useParams();
   console.log("user id is : ", params);
-  const [count, setCount] = useState(0);
-  useState(() => {}, [count]);
 
   return (
     <>

@@ -7,13 +7,13 @@ import "../../../shared/addStudent/css/addStudent.css";
 const UpdateTeacher = (prop) => {
   const [modal, setModal] = useState(false);
 
-  const [teacherNo, setTeacherNo] = useState("");
-  const [teacherName, setTeacherName] = useState("");
-  const [teacherMobileNo, setTeacherMobileNo] = useState("");
-  const [teacherEmailId, setTeacherEmailId] = useState("");
+  const [empId, setEmpId] = useState("");
+  const [name, setName] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [teacherNameError, setTeacherNameError] = useState(false);
-  const [teacherMobileNoError, setTeacherMobileNoError] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [mobileNoError, setMobileNoError] = useState(false);
   const [teacherEmailError, setTeacherEmailError] = useState(false);
 
   useEffect(() => {
@@ -22,29 +22,31 @@ const UpdateTeacher = (prop) => {
 
   //fetch Teacher details based on the user click
 
+  console.log("Teacher ID ", prop.teacherId);
+
   const getTeacherDetails = async () => {
     let teacherDetails = await fetch(
-      `http://localhost:8085/teacherInfo/${prop.teacherId}`
+      `http://localhost:8085/infoUser/${prop.teacherId}`
     );
 
     teacherDetails = await teacherDetails.json();
-    setTeacherName(teacherDetails.teacherName);
-    setTeacherEmailId(teacherDetails.teacherEmailId);
-    setTeacherMobileNo(teacherDetails.teacherMobileNo);
-    setTeacherNo(teacherDetails.teacherNo);
+    setName(teacherDetails.name);
+    setEmail(teacherDetails.email);
+    setMobileNo(teacherDetails.mobileNo);
+    setEmpId(teacherDetails.empId);
   };
 
   //update the Teacher Data
   const updateTeacherInfo = async () => {
     let updateTeacherData = await fetch(
-      `http://localhost:8085/teacherUpdate/${prop.teacherId}`,
+      `http://localhost:8085/updateUser/${prop.teacherId}`,
       {
         method: "put",
         body: JSON.stringify({
-          teacherNo,
-          teacherName,
-          teacherMobileNo,
-          teacherEmailId,
+          empId,
+          name,
+          mobileNo,
+          email,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -55,19 +57,19 @@ const UpdateTeacher = (prop) => {
     setModal(false);
   };
   //Input Name handle
-  const inputHandleTeacherName = (e) => {
-    setTeacherName(e.target.value);
+  const inputHandlename = (e) => {
+    setName(e.target.value);
     let nameLength = e.target.value.length;
 
     if (nameLength < 3) {
-      setTeacherNameError(true);
+      setNameError(true);
     } else {
-      setTeacherNameError(false);
+      setNameError(false);
     }
   };
   //Input Teacher Email Handle
   const inputHandleTeacherEmail = (e) => {
-    setTeacherEmailId(e.target.value);
+    setEmail(e.target.value);
     let emailValidation = e.target.value;
 
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
@@ -78,13 +80,13 @@ const UpdateTeacher = (prop) => {
     }
   };
   //Teacher mobile no handle
-  const inputHandleTeacherMobileNo = (e) => {
-    setTeacherMobileNo(e.target.value);
+  const inputHandlemobileNo = (e) => {
+    setMobileNo(e.target.value);
     let passwordError = e.target.value;
     if (passwordError.length < 10) {
-      setTeacherMobileNoError(true);
+      setMobileNoError(true);
     } else {
-      setTeacherMobileNoError(false);
+      setMobileNoError(false);
     }
   };
 
@@ -106,14 +108,14 @@ const UpdateTeacher = (prop) => {
           <div>
             <label className="inputStudentLabel">Teacher Name</label>
             <input
-              name="teacherName"
-              value={teacherName}
+              name="name"
+              value={name}
               type="text"
               className="studentInput"
               placeholder="Student Name "
-              onChange={inputHandleTeacherName}
+              onChange={inputHandlename}
             />
-            {teacherNameError ? (
+            {nameError ? (
               <span className="inputError">user not valid</span>
             ) : (
               <span></span>
@@ -122,8 +124,8 @@ const UpdateTeacher = (prop) => {
           <div>
             <label className="inputStudentLabel">Teacher Email Id </label>
             <input
-              name="teacherEmailId"
-              value={teacherEmailId}
+              name="email"
+              value={email}
               type="email"
               className="studentInput"
               placeholder="Enter Parent Email id "
@@ -138,14 +140,14 @@ const UpdateTeacher = (prop) => {
           <div>
             <label className="inputStudentLabel">Teacher Mobile No </label>
             <input
-              name="teacherMobileNo"
-              value={teacherMobileNo}
+              name="mobileNo"
+              value={mobileNo}
               type="Number"
               className="studentInput"
               placeholder="Mobile Number"
-              onChange={inputHandleTeacherMobileNo}
+              onChange={inputHandlemobileNo}
             />
-            {teacherMobileNoError ? (
+            {mobileNoError ? (
               <span className="inputError">
                 Mobile Number Must be equal to 10 digit
               </span>
@@ -156,13 +158,13 @@ const UpdateTeacher = (prop) => {
           <div>
             <label className="inputStudentLabel">Teacher Id </label>
             <input
-              name="teacherNo"
-              value={teacherNo}
+              name="empId"
+              value={empId}
               type="text"
               className="studentInput"
               placeholder="Teacher's ID "
               onChange={(e) => {
-                setTeacherNo(e.target.value);
+                setEmpId(e.target.value);
               }}
             />
           </div>

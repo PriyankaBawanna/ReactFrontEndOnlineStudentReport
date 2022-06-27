@@ -11,8 +11,8 @@ import FinalExam from "../parent/js/finalExam";
 
 import TeacherDashBoard from "../teacher/js/teacherDashboard";
 import UserLogin from "../userLogin/js/userLogin";
-import HomePage from "../Home/js/homePage";
-import Registration from "../admin/registrationPage/AdminRegistrationPage/js/registration";
+import HomePage from "../home/js/homePage";
+import Registration from "../admin/registrationPage/adminRegistrationPage/js/registration";
 const Routers = () => {
   return (
     <BrowserRouter>

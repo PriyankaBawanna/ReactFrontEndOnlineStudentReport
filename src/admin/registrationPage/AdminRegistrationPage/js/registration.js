@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import HomeLink from "../../../../Home/js/homeLink";
+import HomeLink from "../../../../home/js/homeLink";
 import axios from "axios";
 import "../../../../userLogin/css/login.css";
 // Registration from for the School Admin
 const Registration = () => {
+  const [role, setSelectRole] = useState(false);
+  const [empId, setEmpId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
   const [password, setPassword] = useState("");
   const [reEnterPassword, setReEnterPassword] = useState("");
   const [nameError, setNameError] = useState(false);
@@ -20,8 +23,8 @@ const Registration = () => {
 
   //POST School Admin name , email , password and reenter Password
   const register = () => {
-    const user = { name, email, password, reEnterPassword };
-    if (name && email && password) {
+    const user = { role, name, email, mobileNo, password, reEnterPassword };
+    if (name && email && password && mobileNo && role) {
       if (password === reEnterPassword) {
         axios
           .post("http://localhost:8085/register", user)
@@ -34,6 +37,9 @@ const Registration = () => {
     }
     setEmail("");
     setName("");
+    setMobileNo("");
+    setEmpId("");
+    setSelectRole(false);
     setPassword("");
     setReEnterPassword("");
   };
@@ -61,7 +67,7 @@ const Registration = () => {
     }
   };
   //check PassWord
-  const handleInputPAssword = (e) => {
+  const handleInputPassword = (e) => {
     const { value } = e.target;
     setPassword(value);
 
@@ -85,12 +91,23 @@ const Registration = () => {
       setReEnterPasswordError(false);
     }
   };
+
+  const handleInputMobile = (e) => {
+    const { value } = e.target;
+    console.log("user Mobile No", value);
+    setMobileNo(value);
+  };
   return (
     <>
       <div className="userLogin">
         <h1 className="introLoginUser">Admin Registration Page</h1>
         <form onSubmit={handleChange}>
           <div className="registerUser">
+            <div>
+              <div value={role} onChange={(e) => setSelectRole(e.target.value)}>
+                <input type="radio" value="Admin" name="user" /> Admin
+              </div>
+            </div>
             <div>
               <input
                 name="name"
@@ -123,12 +140,23 @@ const Registration = () => {
             </div>
             <div>
               <input
+                name="mobileNo"
+                value={mobileNo}
+                type="Number"
+                placeholder="Mobile No"
+                className="inputRegistration"
+                onChange={handleInputMobile}
+              />
+            </div>
+
+            <div>
+              <input
                 name="password"
                 value={password}
                 type="password"
                 placeholder="enter the password "
                 className="inputRegistration"
-                onChange={handleInputPAssword}
+                onChange={handleInputPassword}
               />
               {passwordError ? (
                 <span className="loginError">
@@ -138,6 +166,7 @@ const Registration = () => {
                 <span></span>
               )}
             </div>
+
             <div>
               <input
                 name="ReEnterPassword"

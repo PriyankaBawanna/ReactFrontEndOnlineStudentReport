@@ -7,20 +7,19 @@ import TermThree from "./termThree";
 import TermTwo from "./termTwo";
 const StudentInformation = (p) => {
   //for student Data
-  const [studentName, setStudentName] = useState("");
-  const [studentEmail, setStudentEmail] = useState("");
-  const [studentStandard, setStudentStandard] = useState("");
-  const [studentRollNo, setStudentRollNo] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [student_id, setStudent_id] = useState(p.student_id);
+  const [rollNo, setRollNo] = useState("");
+  const [term, setTermOne] = useState(1);
 
   //Term  One Student Data
-  const [hindiTermOneMarks, setHindiTermOneMarks] = useState();
-  const [englishTermOneMarks, setEnglishTermOneMarks] = useState();
-  const [scienceTermOneMarks, setScienceTermOneMarks] = useState();
-  const [socialScienceTermOneMarks, setSocialScienceTermOneMarks] = useState();
-  const [mathTermOneMarks, setMathTermOneMarks] = useState();
-  const [totalTermOneMarks, setTotalTermOneMarks] = useState();
+  const [sub1, setSub1] = useState();
+  const [sub2, setSub2] = useState();
+  const [sub3, setSub3] = useState();
+  const [sub4, setSub4] = useState();
+  const [sub5, setSub5] = useState();
+  const [total, setTotal] = useState();
   const [percentage, setPercentage] = useState("");
   const [grade, setGrade] = useState("");
 
@@ -33,46 +32,42 @@ const StudentInformation = (p) => {
   //post Method for saving Term One Student data (Student Subject Mark's and Student Information )
   const addStudentMarks = async () => {
     if (
-      studentEmail &&
-      studentName &&
-      studentRollNo &&
-      studentStandard &&
-      hindiTermOneMarks &&
-      englishTermOneMarks &&
-      scienceTermOneMarks &&
-      socialScienceTermOneMarks &&
-      mathTermOneMarks &&
-      totalTermOneMarks &&
+      email &&
+      name &&
+      rollNo &&
+      sub1 &&
+      sub2 &&
+      sub3 &&
+      sub4 &&
+      sub5 &&
+      total &&
       percentage &&
+      term &&
       grade
     ) {
-      let addTermOneMarks = await fetch(
-        `http://localhost:8085/studentUpdate/${p.student_id}`,
-        {
-          method: "put",
-          body: JSON.stringify({
-            studentName,
-            studentEmail,
-            studentStandard,
-            studentRollNo,
-            englishTermOneMarks,
-            hindiTermOneMarks,
-            scienceTermOneMarks,
-            socialScienceTermOneMarks,
-            mathTermOneMarks,
-            totalTermOneMarks,
-            percentage,
-            grade,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      let addTermOneMarks = await fetch(`http://localhost:8085/addTermMarks`, {
+        method: "post",
+        body: JSON.stringify({
+          name,
+          email,
+          term,
+          rollNo,
+          sub2,
+          sub1,
+          sub3,
+          sub4,
+          sub5,
+          total,
+          percentage,
+          grade,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       addTermOneMarks = await addTermOneMarks.json();
-      if (addTermOneMarks) {
-        alert("Please Confirm ");
-      }
+      alert("marks add");
+      setModal(false);
     } else {
       alert("Please enter all filed ");
     }
@@ -81,18 +76,15 @@ const StudentInformation = (p) => {
   //fetch Student details on the list  which is show the student Name ,Roll Number and Marks
   const getStudentDetails = async () => {
     let studentDetails = await fetch(
-      `http://localhost:8085/studentInfo/${p.student_id}`
+      `http://localhost:8085/infoUser/${p.studentId}`
     );
-
+    console.log("data", studentDetails);
     studentDetails = await studentDetails.json();
-    setStudentName(studentDetails.studentName);
-    console.log("Student Name ", studentDetails.studentName);
-    setStudentEmail(studentDetails.studentEmail);
-    setStudentStandard(studentDetails.studentStandard);
-    setStudentRollNo(studentDetails.studentRollNo);
-    setStudent_id(studentDetails.student_id);
-  };
+    setName(studentDetails.name);
+    setEmail(studentDetails.email);
 
+    setRollNo(studentDetails.rollNo);
+  };
   return (
     <>
       <Modal
@@ -112,50 +104,38 @@ const StudentInformation = (p) => {
             <div>
               <b className="inputStudentLabel">Student Name</b>
               <input
-                name="studentName"
-                value={studentName}
+                name="name"
+                value={name}
                 type="text"
                 className="updateStudentInput"
                 placeholder="Student Name "
-                onChange={(e) => setStudentName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div>
               <b className="inputStudentLabel">Parent Email</b>
               <input
-                name="studentEmail"
-                value={studentEmail}
+                name="email"
+                value={email}
                 type="email"
                 className="updateStudentInput"
                 placeholder="Enter Parent Email id "
                 onChange={(e) => {
-                  setStudentEmail(e.target.value);
+                  setEmail(e.target.value);
                 }}
               />
             </div>
-            <div>
-              <b className="inputStudentLabel">Student Standard</b>
-              <input
-                name="studentStandard"
-                value={studentStandard}
-                type="Number"
-                className="updateStudentInput"
-                placeholder="Enter student Standard "
-                onChange={(e) => {
-                  setStudentStandard(e.target.value);
-                }}
-              />
-            </div>
+
             <div className="studentdetailscol">
               <b className="inputStudentLabel">Roll No </b>
               <input
-                name="studentRollNo"
-                value={studentRollNo}
+                name="rollNo"
+                value={rollNo}
                 type="text"
                 className="updateStudentInput"
                 placeholder="Enter student RollNo "
                 onChange={(e) => {
-                  setStudentRollNo(e.target.value);
+                  setRollNo(e.target.value);
                 }}
               />
             </div>
@@ -177,12 +157,12 @@ const StudentInformation = (p) => {
                 case "Term One":
                   const TotalMarks = () => {
                     const TotalSum =
-                      Number(englishTermOneMarks) +
-                      Number(hindiTermOneMarks) +
-                      Number(mathTermOneMarks) +
-                      Number(scienceTermOneMarks) +
-                      Number(socialScienceTermOneMarks);
-                    setTotalTermOneMarks(TotalSum);
+                      Number(sub2) +
+                      Number(sub1) +
+                      Number(sub5) +
+                      Number(sub3) +
+                      Number(sub4);
+                    setTotal(TotalSum);
                     console.log("total Marks ", TotalSum);
                     const percentage = (TotalSum / 500) * 100;
                     setPercentage(percentage);
@@ -215,11 +195,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={englishTermOneMarks}
+                              value={sub2}
                               type="text"
                               className="inputMarks StudentMarksTable"
                               onChange={(e) => {
-                                setEnglishTermOneMarks(e.target.value);
+                                setSub2(e.target.value);
                               }}
                             />
                           </td>
@@ -230,11 +210,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={hindiTermOneMarks}
+                              value={sub1}
                               type="text"
                               className="inputMarks StudentMarksTable"
                               onChange={(e) => {
-                                setHindiTermOneMarks(e.target.value);
+                                setSub1(e.target.value);
                               }}
                             />
                           </td>
@@ -245,11 +225,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={scienceTermOneMarks}
+                              value={sub3}
                               type="text"
                               className="inputMarks StudentMarksTable"
                               onChange={(e) => {
-                                setScienceTermOneMarks(e.target.value);
+                                setSub3(e.target.value);
                               }}
                             />
                           </td>
@@ -260,11 +240,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="inputMarks"
-                              value={socialScienceTermOneMarks}
+                              value={sub4}
                               type="text"
                               className="inputMarks StudentMarksTable"
                               onChange={(e) => {
-                                setSocialScienceTermOneMarks(e.target.value);
+                                setSub4(e.target.value);
                               }}
                             />
                           </td>
@@ -275,11 +255,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="text"
-                              value={mathTermOneMarks}
+                              value={sub5}
                               type="text"
                               className="inputMarks StudentMarksTable"
                               onChange={(e) => {
-                                setMathTermOneMarks(e.target.value);
+                                setSub5(e.target.value);
                               }}
                             />
                           </td>
@@ -298,11 +278,11 @@ const StudentInformation = (p) => {
                           <td>
                             <input
                               name="text"
-                              value={totalTermOneMarks}
+                              value={total}
                               type="text"
                               className="inputMarks StudentMarksTable"
                               onChange={(e) => {
-                                setTotalTermOneMarks(e.target.value);
+                                setTotal(e.target.value);
                               }}
                             />
                           </td>
@@ -316,7 +296,7 @@ const StudentInformation = (p) => {
                         </tr>
                         <tr>
                           <td>
-                            <p>Grade</p>
+                            <p>grade</p>
                           </td>
 
                           <td>{grade}</td>

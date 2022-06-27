@@ -7,27 +7,28 @@ const AddStudent = (prop) => {
   /*modal useState*/
   const [modal, setModal] = useState(false);
   /*input form state validation use state*/
-  const [studentName, setStudentName] = useState("");
-  const [studentEmail, setStudentEmail] = useState("");
-  const [studentStandard, setStudentStandard] = useState("");
-  const [studentRollNo, setStudentRollNo] = useState("");
+
+  const [role, setRole] = useState("Student");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [rollNo, setRollNo] = useState("");
   // const [confirm, setConfirm] = useState(false);
 
-  const [studentNameError, setStudentNameError] = useState(false);
-  const [studentEmailError, setStudentEmailError] = useState(false);
-  const [studentStandardError, setStudentStandardError] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   //function use to save student data into data base using post API
   const addStudentData = () => {
     const studentData = {
-      studentName,
-      studentEmail,
-      studentStandard,
-      studentRollNo,
+      role,
+      name,
+      email,
+      rollNo,
     };
-    if (studentName && studentEmail && studentStandard && studentRollNo) {
+    if (role && name && email && rollNo) {
       axios
-        .post(`http://localhost:8085/addStudent`, studentData)
+        .post(`http://localhost:8085/register`, studentData)
         .then((res) => alert(res.data.message))
         .then(prop.data);
     } else {
@@ -40,48 +41,37 @@ const AddStudent = (prop) => {
   };
 
   //function for handle Student Name Input With Validation
-  const handleInputStudentName = (e) => {
+  const handleInputname = (e) => {
     const { value } = e.target;
-    setStudentName(value);
+    setName(value);
     let nameLength = value.length;
 
     if (nameLength < 3) {
-      setStudentNameError(true);
+      setNameError(true);
     }
-    setStudentNameError(false);
+    setNameError(false);
   };
 
   //function For Input Student Email with email  Validation
 
-  const handleInputStudentEmail = (e) => {
+  const handleInputemail = (e) => {
     const { value } = e.target;
-    setStudentEmail(value);
+    setEmail(value);
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     if (regEx.test(value)) {
-      setStudentEmailError(false);
+      setEmailError(false);
     } else if (!regEx.test(value) && value !== "") {
-      setStudentEmailError(true);
+      setEmailError(true);
     }
   };
 
   //function for Input Student standard 1 st to 12 th
-  const handleInputStudentStandard = (e) => {
-    const { value } = e.target;
-    setStudentStandard(value);
-    if (value > 12) {
-      setStudentStandardError(true);
-    } else {
-      setStudentStandardError(false);
-    }
-  };
 
   const addStudentChange = () => {
     setModal(true);
-
-    setStudentName("");
-    setStudentEmail("");
-    setStudentStandard("");
-    setStudentRollNo("");
+    setName("");
+    setEmail("");
+    setRollNo("");
   };
 
   return (
@@ -103,14 +93,14 @@ const AddStudent = (prop) => {
             <div>
               <label className="inputStudentLabel">Student Name </label>
               <input
-                name="studentName"
-                value={studentName}
+                name="name"
+                value={name}
                 type="text"
                 className="studentInput"
                 autocomplete="off"
-                onChange={handleInputStudentName}
+                onChange={handleInputname}
               />
-              {studentNameError ? (
+              {nameError ? (
                 <span className="inputError">user not valid</span>
               ) : (
                 <span></span>
@@ -119,47 +109,30 @@ const AddStudent = (prop) => {
             <div>
               <label className="inputStudentLabel"> Student Email </label>
               <input
-                name="studentEmail"
-                value={studentEmail}
+                name="email"
+                value={email}
                 type="email"
                 className="studentInput"
                 autocomplete="off"
-                onChange={handleInputStudentEmail}
+                onChange={handleInputemail}
               />
-              {studentEmailError ? (
+              {emailError ? (
                 <span className="inputError">Email not valid</span>
               ) : (
                 <span></span>
               )}
             </div>
-            <div>
-              <label className="inputStudentLabel">Student Standard</label>
-              <input
-                name="studentStandard"
-                value={studentStandard}
-                type="Number"
-                autocomplete="off"
-                className="studentInput"
-                onChange={handleInputStudentStandard}
-              />
-              {studentStandardError ? (
-                <span className="inputError">
-                  class 1 <sup>st</sup> to 12 <sup>th</sup>
-                </span>
-              ) : (
-                <span></span>
-              )}
-            </div>
+
             <div>
               <label className="inputStudentLabel">Student Roll No.</label>
               <input
-                name="studentRollNo"
-                value={studentRollNo}
+                name="rollNo"
+                value={rollNo}
                 type="text"
                 autocomplete="off"
                 className="studentInput"
                 onChange={(e) => {
-                  setStudentRollNo(e.target.value);
+                  setRollNo(e.target.value);
                 }}
               />
             </div>

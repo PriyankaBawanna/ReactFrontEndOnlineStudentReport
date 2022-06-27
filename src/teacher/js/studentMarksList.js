@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import StudentInformation from "../StudentInformation/js/studentInformation";
+import StudentInformation from "../studentInformation/js/studentInformation";
 import DeleteStudent from "../../admin/studentList/js/deleteStudent";
 import AddStudent from "../../shared/addStudent/js/addStudent";
 import axios from "axios";
@@ -17,13 +17,13 @@ const StudentMarksList = () => {
 
   //use to render StudentList with student Name and Exam Marks
   const addStudent = async () => {
-    const res = await axios.get(`http://localhost:8085/addStudent`);
+    const res = await axios.get(`http://localhost:8085/listOfStudent`);
     const data = res.data;
     const slice = data.slice(offset, offset + perPage);
     setUser(slice);
     setPageCount(Math.ceil(data.length / perPage));
   };
-  console.warn(users);
+  console.warn("User", users);
   const handlePageClick = (e) => {
     const selectedPage = e.selected;
     setOffset(selectedPage + 1);
@@ -75,7 +75,7 @@ const StudentMarksList = () => {
         <thead>
           <tr>
             <td>Student Name</td>
-            <td>Student Standard</td>
+
             <td>Student Roll Number</td>
             <td>Student Email</td>
             <td>Term One</td>
@@ -89,28 +89,26 @@ const StudentMarksList = () => {
         {users.map((item, i) => (
           <tbody>
             <tr key={i}>
-              <td data-label="Student Name">{item.studentName}</td>
-              <td data-label="Student Standard">{item.studentStandard}</td>
-              <td data-label="Student Roll No ">{item.studentRollNo}</td>
-              <td data-label="Student Email ">{item.studentEmail}</td>
-              <td data-label="Term One">{item.totalTermOneMarks}</td>
+              <td data-label="Student Name">{item.name}</td>
+
+              <td data-label="Student Roll No ">{item.rollNo}</td>
+              <td data-label="Student Email ">{item.email}</td>
+
+              <td data-label="Term One">{item.total}</td>
               <td data-label="Term Two">{item.totalTermTwoMarks}</td>
               <td data-label="Term Three">{item.totalTermThreeMarks}</td>
 
               <td data-label="Operation">
                 {/* Student Marks will be Add according  to student ID  */}
                 <StudentInformation
-                  student_id={item._id}
+                  _id={item._id}
                   studentList={studentMarksData}
                 />
               </td>
               <td data-label="Operation">
                 {/* student will be delete according to Roll No
                  */}
-                <DeleteStudent
-                  studentRollNo={item.studentRollNo}
-                  data={getData}
-                />
+                <DeleteStudent rollNo={item.rollNo} data={getData} />
               </td>
             </tr>
           </tbody>

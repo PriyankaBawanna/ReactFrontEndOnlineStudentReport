@@ -7,27 +7,29 @@ const AddTeacher = (props) => {
   /*modal useState*/
   const [modal, setModal] = useState(false);
 
-  const [teacherNo, setTeacherNo] = useState("");
-  const [teacherName, setTeacherName] = useState("");
-  const [teacherMobileNo, setTeacherMobileNo] = useState("");
-  const [teacherEmailId, setTeacherEmailId] = useState("");
-  const [teacherNameError, setTeacherNameError] = useState(false);
-  const [teacherMobileNoError, setTeacherMobileNoError] = useState(false);
+  const [role, setRole] = useState("Teacher");
+  const [empId, setEmpId] = useState("");
+  const [name, setName] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
+  const [email, setEmail] = useState("");
+  const [nameError, setNameError] = useState(false);
+  const [mobileNoError, setMobileNoError] = useState(false);
   const [teacherEmailError, setTeacherEmailError] = useState(false);
   const [teacherPassword, setTeacherPassword] = useState("");
   const [teacherPasswordError, setTeacherPasswordError] = useState(false);
   //function use to save teacher data into data base using post API
   const addTeacherData = () => {
     const teacherData = {
-      teacherNo,
-      teacherName,
-      teacherEmailId,
-      teacherMobileNo,
+      empId,
+      role,
+      name,
+      email,
+      mobileNo,
       teacherPassword,
     };
-    if (teacherNo && teacherName && teacherEmailId && teacherMobileNo) {
+    if (empId && name && email && mobileNo) {
       axios
-        .post("http://localhost:8085/addTeacher", teacherData)
+        .post("http://localhost:8085/register", teacherData)
         .then((res) => alert(res.data.message))
         .then(props.teacherData);
     } else {
@@ -35,39 +37,39 @@ const AddTeacher = (props) => {
     }
     localStorage.setItem("teacherDetails", JSON.stringify(teacherData));
     setModal(false);
-    setTeacherNo("");
-    setTeacherName("");
-    setTeacherMobileNo("");
-    setTeacherEmailId("");
+    setEmpId("");
+    setName("");
+    setMobileNo("");
+    setEmail("");
     setTeacherPassword("");
   };
 
   //handle Teacher Name Input
-  const handleTeacherNameInput = (e) => {
+  const handleNameInput = (e) => {
     const { value } = e.target;
-    setTeacherName(value);
+    setName(value);
     if (value.length < 3) {
-      setTeacherNameError(true);
+      setNameError(true);
     } else {
-      setTeacherNameError(false);
+      setNameError(false);
     }
   };
 
   //handle Teacher 10 digit  Mobile No
   const handleMobileNumber = (e) => {
     const { value } = e.target;
-    setTeacherMobileNo(value);
+    setMobileNo(value);
     if (value.length < 10) {
-      setTeacherMobileNoError(true);
+      setMobileNoError(true);
     } else {
-      setTeacherMobileNoError(false);
+      setMobileNoError(false);
     }
   };
 
   //email Id Validation
-  const handleTeacherEmailId = (e) => {
+  const handleEmail = (e) => {
     const { value } = e.target;
-    setTeacherEmailId(value);
+    setEmail(value);
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     if (regEx.test(value)) {
       setTeacherEmailError(false);
@@ -103,14 +105,14 @@ const AddTeacher = (props) => {
           <div>
             <label className="inputStudentLabel">Teacher Name </label>
             <input
-              name="teacherName"
+              name="name"
               type="text"
               placeholder="teacher name"
-              value={teacherName}
+              value={name}
               className="studentInput"
-              onChange={handleTeacherNameInput}
+              onChange={handleNameInput}
             />
-            {teacherNameError ? (
+            {nameError ? (
               <span className="inputError">user not valid</span>
             ) : (
               <span></span>
@@ -119,13 +121,13 @@ const AddTeacher = (props) => {
           <div>
             <label className="inputStudentLabel">Teacher Id </label>
             <input
-              name="teacherNo"
+              name="empId"
               type="text"
               placeholder="enter the teacher Id "
-              value={teacherNo}
+              value={empId}
               className="studentInput"
               onChange={(e) => {
-                setTeacherNo(e.target.value);
+                setEmpId(e.target.value);
               }}
             />
           </div>
@@ -133,14 +135,14 @@ const AddTeacher = (props) => {
           <div>
             <label className="inputStudentLabel">Teacher Mobile No </label>
             <input
-              name="teacherMobileNo"
+              name="mobileNo"
               type="number"
               placeholder="Mobile No."
-              value={teacherMobileNo}
+              value={mobileNo}
               className="studentInput"
               onChange={handleMobileNumber}
             />
-            {teacherMobileNoError ? (
+            {mobileNoError ? (
               <span className="inputError">
                 Mobile Number Must be equal to 10 digit
               </span>
@@ -152,12 +154,12 @@ const AddTeacher = (props) => {
           <div>
             <label className="inputStudentLabel">Teacher Email Id </label>
             <input
-              name="teacherEmailId"
+              name="email"
               type="text"
               placeholder=" Email Id"
               className="studentInput"
-              value={teacherEmailId}
-              onChange={handleTeacherEmailId}
+              value={email}
+              onChange={handleEmail}
             />
             {teacherEmailError ? (
               <span className="inputError">Email not valid</span>

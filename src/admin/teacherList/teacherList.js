@@ -16,7 +16,7 @@ const TeacherList = () => {
 
   //Teacher List rerender
   const addTeacher = async () => {
-    const res = await axios.get(`http://localhost:8085/addTeacher`);
+    const res = await axios.get(`http://localhost:8085/teacherList`);
     const data = res.data;
     const slice = data.slice(offset, offset + perPage);
     setUser(slice);
@@ -29,9 +29,9 @@ const TeacherList = () => {
   };
 
   //Delete The teacher
-  const deleteTeacher = async (id) => {
-    console.log("user _id", id);
-    let result = await fetch(`http://localhost:8085/teacher/${id}`, {
+  const deleteTeacher = async (empId) => {
+    console.log("user _id", empId);
+    let result = await fetch(`http://localhost:8085/deleteTeacher/${empId}`, {
       method: "Delete",
     });
     result = await result.json();
@@ -45,8 +45,11 @@ const TeacherList = () => {
   const searchHandle = async (e) => {
     console.warn(e.target.value);
     let key = e.target.value;
+    const role = "Teacher";
     if (key) {
-      let result = await fetch(`http://localhost:8085/TeacherSearch/${key}`);
+      let result = await fetch(
+        `http://localhost:8085/searchUser/${role}/${key}`
+      );
       result = await result.json();
       if (result) {
         console.log("Result of Student Search ", result);
@@ -95,16 +98,16 @@ const TeacherList = () => {
         {users.map((item, i) => (
           <tbody>
             <tr key={i}>
-              <td data-label="Teacher Name">{item.teacherName}</td>
-              <td data-label="Teacher ID">{item.teacherNo}</td>
-              <td data-label="Mobile No.">{item.teacherMobileNo}</td>
-              <td data-label="Email ID ">{item.teacherEmailId}</td>
+              <td data-label="Teacher Name">{item.name}</td>
+              <td data-label="Teacher ID">{item.empId}</td>
+              <td data-label="Mobile No.">{item.mobileNo}</td>
+              <td data-label="Email ID ">{item.email}</td>
               <td data-label="Update">
                 <UpdateTeacher teacherId={item._id} data={getData} />
               </td>
               <td data-label="Delete">
                 <button
-                  onClick={() => deleteTeacher(item._id)}
+                  onClick={() => deleteTeacher(item.empId)}
                   className="deleteStudentBtn"
                 >
                   Delete

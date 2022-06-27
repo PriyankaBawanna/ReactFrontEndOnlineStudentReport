@@ -8,42 +8,43 @@ const UpdateStudent = (props) => {
   const [modal, setModal] = useState(false);
   /*input form state validation use state*/
 
-  const [studentName, setStudentName] = useState("");
-  const [studentEmail, setStudentEmail] = useState("");
-  const [studentStandard, setStudentStandard] = useState("");
-  const [studentRollNo, setStudentRollNo] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [studentNameError, setStudentNameError] = useState(false);
-  const [studentEmailError, setStudentEmailError] = useState(false);
+  const [rollNo, setRollNo] = useState("");
+
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const [studentStandardError, setStudentStandardError] = useState(false);
 
   useEffect(() => {
     getStudentDetails();
   }, []);
 
+  console.log("Student Id ", props.studentId);
+
   //getting Student details for edit
   const getStudentDetails = async () => {
     let studentDetails = await fetch(
-      `http://localhost:8085/studentInfo/${props.studentId}`
+      `http://localhost:8085/infoUser/${props.studentId}`
     );
 
     studentDetails = await studentDetails.json();
-    setStudentName(studentDetails.studentName);
-    setStudentEmail(studentDetails.studentEmail);
-    setStudentStandard(studentDetails.studentStandard);
-    setStudentRollNo(studentDetails.studentRollNo);
+    setName(studentDetails.name);
+    setEmail(studentDetails.email);
+
+    setRollNo(studentDetails.rollNo);
   };
   //updated data Add into the Data Base
   const UpdateStudentData = async () => {
     let UpdateStudentData = await fetch(
-      `http://localhost:8085/studentUpdate/${props.studentId}`,
+      `http://localhost:8085/updateUser/${props.studentId}`,
       {
         method: "Put",
         body: JSON.stringify({
-          studentName,
-          studentEmail,
-          studentStandard,
-          studentRollNo,
+          name,
+          email,
+          rollNo,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -51,41 +52,29 @@ const UpdateStudent = (props) => {
       }
     );
     UpdateStudentData = await UpdateStudentData.json().then(props.data);
+    setModal(false);
   };
   //Input handle Student Name
-  const handleInputStudentName = (e) => {
+  const handleInputname = (e) => {
     const { value } = e.target;
-    setStudentName(value);
+    setName(value);
     if (value.length < 3) {
-      setStudentNameError(true);
+      setNameError(true);
     } else {
-      setStudentNameError(false);
+      setNameError(false);
     }
   };
 
   //Input handle Student Email
-  const handleStudentEmail = (e) => {
+  const handleemail = (e) => {
     const { value } = e.target;
-    setStudentEmail(value);
+    setEmail(value);
 
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     if (regEx.test(value)) {
-      setStudentEmailError(false);
+      setEmailError(false);
     } else if (!regEx.test(value) && value !== "") {
-      setStudentEmailError(true);
-    }
-  };
-
-  //student Input for handle standard
-  const handleStudentStandard = (e) => {
-    const { value } = e.target;
-    setStudentStandard(value);
-    let studentStandard = e.target.value;
-
-    if (studentStandard > 12) {
-      setStudentStandardError(true);
-    } else {
-      setStudentStandardError(false);
+      setEmailError(true);
     }
   };
 
@@ -108,14 +97,14 @@ const UpdateStudent = (props) => {
             <div>
               <label className="inputStudentLabel"> Student Name</label>
               <input
-                name="studentName"
-                value={studentName}
+                name="name"
+                value={name}
                 type="text"
                 className="studentInput"
                 placeholder="Student Name "
-                onChange={handleInputStudentName}
+                onChange={handleInputname}
               />
-              {studentNameError ? (
+              {nameError ? (
                 <span className="inputError">user not valid</span>
               ) : (
                 <span></span>
@@ -124,45 +113,30 @@ const UpdateStudent = (props) => {
             <div>
               <label className="inputStudentLabel">Student Email</label>
               <input
-                name="studentEmail"
-                value={studentEmail}
+                name="email"
+                value={email}
                 type="email"
                 className="studentInput"
                 placeholder="Enter Parent Email id "
-                onChange={handleStudentEmail}
+                onChange={handleemail}
               />
-              {studentEmailError ? (
+              {emailError ? (
                 <span className="inputError">Email not valid</span>
               ) : (
                 <span></span>
               )}
             </div>
-            <div>
-              <label className="inputStudentLabel">Student Standard</label>
-              <input
-                name="studentStandard"
-                value={studentStandard}
-                type="Number"
-                className="studentInput"
-                placeholder="Enter student Standard "
-                onChange={handleStudentStandard}
-              />
-              {studentStandardError ? (
-                <span className="inputError"> class 1 st to 12 th </span>
-              ) : (
-                <span></span>
-              )}
-            </div>
+
             <div>
               <label className="inputStudentLabel">Student Roll No </label>
               <input
-                name="studentRollNo"
-                value={studentRollNo}
+                name="rollNo"
+                value={rollNo}
                 type="text"
                 className="studentInput"
                 placeholder="Enter student RollNo "
                 onChange={(e) => {
-                  setStudentRollNo(e.target.value);
+                  setRollNo(e.target.value);
                 }}
               />
             </div>
