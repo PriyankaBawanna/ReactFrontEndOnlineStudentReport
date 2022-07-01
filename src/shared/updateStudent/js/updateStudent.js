@@ -8,43 +8,42 @@ const UpdateStudent = (props) => {
   const [modal, setModal] = useState(false);
   /*input form state validation use state*/
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [studentName, setStudentName] = useState("");
+  const [studentEmail, setStudentEmail] = useState("");
+  const [studentStandard, setStudentStandard] = useState("");
+  const [studentRollNo, setStudentRollNo] = useState("");
 
-  const [rollNo, setRollNo] = useState("");
-
-  const [nameError, setNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
+  const [studentNameError, setStudentNameError] = useState(false);
+  const [studentEmailError, setStudentEmailError] = useState(false);
   const [studentStandardError, setStudentStandardError] = useState(false);
 
   useEffect(() => {
     getStudentDetails();
   }, []);
 
-  console.log("Student Id ", props.studentId);
-
   //getting Student details for edit
   const getStudentDetails = async () => {
     let studentDetails = await fetch(
-      `http://localhost:8085/infoUser/${props.studentId}`
+      `http://localhost:8085/studentInfo/${props.studentId}`
     );
 
     studentDetails = await studentDetails.json();
-    setName(studentDetails.name);
-    setEmail(studentDetails.email);
-
-    setRollNo(studentDetails.rollNo);
+    setStudentName(studentDetails.studentName);
+    setStudentEmail(studentDetails.studentEmail);
+    setStudentStandard(studentDetails.studentStandard);
+    setStudentRollNo(studentDetails.studentRollNo);
   };
   //updated data Add into the Data Base
   const UpdateStudentData = async () => {
     let UpdateStudentData = await fetch(
-      `http://localhost:8085/updateUser/${props.studentId}`,
+      `http://localhost:8085/studentUpdate/${props.studentId}`,
       {
         method: "Put",
         body: JSON.stringify({
-          name,
-          email,
-          rollNo,
+          studentName,
+          studentEmail,
+          studentStandard,
+          studentRollNo,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -55,26 +54,39 @@ const UpdateStudent = (props) => {
     setModal(false);
   };
   //Input handle Student Name
-  const handleInputname = (e) => {
+  const handleInputStudentName = (e) => {
     const { value } = e.target;
-    setName(value);
+    setStudentName(value);
     if (value.length < 3) {
-      setNameError(true);
+      setStudentNameError(true);
     } else {
-      setNameError(false);
+      setStudentNameError(false);
     }
   };
 
   //Input handle Student Email
-  const handleemail = (e) => {
+  const handleStudentEmail = (e) => {
     const { value } = e.target;
-    setEmail(value);
+    setStudentEmail(value);
 
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     if (regEx.test(value)) {
-      setEmailError(false);
+      setStudentEmailError(false);
     } else if (!regEx.test(value) && value !== "") {
-      setEmailError(true);
+      setStudentEmailError(true);
+    }
+  };
+
+  //student Input for handle standard
+  const handleStudentStandard = (e) => {
+    const { value } = e.target;
+    setStudentStandard(value);
+    let studentStandard = e.target.value;
+
+    if (studentStandard > 12) {
+      setStudentStandardError(true);
+    } else {
+      setStudentStandardError(false);
     }
   };
 
@@ -97,14 +109,14 @@ const UpdateStudent = (props) => {
             <div>
               <label className="inputStudentLabel"> Student Name</label>
               <input
-                name="name"
-                value={name}
+                name="studentName"
+                value={studentName}
                 type="text"
                 className="studentInput"
                 placeholder="Student Name "
-                onChange={handleInputname}
+                onChange={handleInputStudentName}
               />
-              {nameError ? (
+              {studentNameError ? (
                 <span className="inputError">user not valid</span>
               ) : (
                 <span></span>
@@ -113,31 +125,43 @@ const UpdateStudent = (props) => {
             <div>
               <label className="inputStudentLabel">Student Email</label>
               <input
-                name="email"
-                value={email}
+                name="studentEmail"
+                value={studentEmail}
                 type="email"
                 className="studentInput"
                 placeholder="Enter Parent Email id "
-                onChange={handleemail}
+                onChange={handleStudentEmail}
               />
-              {emailError ? (
+              {studentEmailError ? (
                 <span className="inputError">Email not valid</span>
               ) : (
                 <span></span>
               )}
             </div>
-
+            <div>
+              <label className="inputStudentLabel">Student Standard</label>
+              <input
+                name="studentStandard"
+                value={studentStandard}
+                type="Number"
+                className="studentInput"
+                placeholder="Enter student Standard "
+                onChange={handleStudentStandard}
+              />
+              {studentStandardError ? (
+                <span className="inputError"> class 1 st to 12 th </span>
+              ) : (
+                <span></span>
+              )}
+            </div>
             <div>
               <label className="inputStudentLabel">Student Roll No </label>
               <input
-                name="rollNo"
-                value={rollNo}
+                name="studentRollNo"
+                value={studentRollNo}
                 type="text"
                 className="studentInput"
                 placeholder="Enter student RollNo "
-                onChange={(e) => {
-                  setRollNo(e.target.value);
-                }}
               />
             </div>
           </div>

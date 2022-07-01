@@ -10,7 +10,7 @@ const ParentHeader = () => {
 
   //get the current user login data
 
-  let parentEmail = parentDetails.parentEmail;
+  let parentEmail = parentDetails.email;
 
   //Obtaining parent information through email
   const parentPersonalInfo = () => {
@@ -40,13 +40,10 @@ const ParentHeader = () => {
           <div className="dropdownContentParent">
             {parentInfo.map((item, i) => (
               <p key={i}>
-                <p className="parentData">Parent Name : {item.parentName}</p>
-                <p className="parentData">Parent Email : {item.parentEmail}</p>
+                <p className="parentData">Parent Name : {item.name}</p>
+                <p className="parentData">Parent Email : {parentEmail}</p>
                 <p className="parentData">
                   Student Roll Number :{item.studentRollNo}
-                </p>
-                <p className="parentData">
-                  Parent Mobile Number: {item.mobileNumber}
                 </p>
               </p>
             ))}

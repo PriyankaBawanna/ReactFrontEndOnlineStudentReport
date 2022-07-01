@@ -3,57 +3,51 @@ import React, { useEffect, useState } from "react";
 import "../css/parentDashboard.css";
 const StudentInfo = () => {
   const [parentData, setParentData] = useState([]);
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [studentRollNo, setStudentRollNo] = useState("");
+  const [standard, setStandard] = useState("");
   const [getData, setData] = useState([]);
   const [studentData, setStudentData] = useState([]);
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
-  let studentDetails = JSON.parse(localStorage.getItem("studentDetails"));
-  const parentEmail = parentDetails.parentEmail;
+
+  const parentEmail = parentDetails.email;
   console.log("parent data 2 ", parentEmail);
-  const newData = {};
 
   useEffect(() => {
-    data();
-  }, [studentRollNo]);
+    parentInfo();
+  }, []);
 
-  async function data() {
-    axios
-      .get(`http://localhost:8085/ParentDetails/${parentEmail}`)
-      .then((res) => {
-        setParentData([...res.data]);
-        const json = res.data[0].studentRollNo;
+  const parentInfo = () => {
+    axios.get(`http://localhost:8085/userData/${parentEmail}`).then((resp) => {
+      setParentData([...resp.data]);
+      const rollNo = resp.data[0].rollNo;
+      setStudentRollNo(rollNo);
 
-        if (json) {
-          setStudentRollNo(res.data[0].studentRollNo);
-          axios
-            .get(`http://localhost:8085/StudentResult/${studentRollNo}`)
-            .then((res) => {
-              setStudentData([...res.data]);
-            });
-        } else {
-        }
-      });
-  }
+      if (rollNo) {
+        axios.get(`http://localhost:8085/StudentResult/12`).then((res) => {
+          setStudentData([...res.data]);
+          console.log("User response", [...res.data]);
+          const Name = res.data[0].studentName;
+          setName(Name);
+          const Email = res.data[0].studentEmail;
+          setEmail(Email);
+          const studentStandard = res.data[0].studentStandard;
+          setStandard(studentStandard);
+        });
+      }
+    });
+  };
 
   return (
     <>
       <div>
         <div className="studentData">
-          {studentData.map((item, i) => (
-            <p key={i}>
-              <p className="studentDataRow">
-                Student Name : {item.studentName}
-              </p>
-              <p className="studentDataRow">
-                Student Email : {item.studentEmail}
-              </p>
-              <p className="studentDataRow">
-                Roll Number :{item.studentRollNo}
-              </p>
-              <p className="studentDataRow">Standard: {item.studentStandard}</p>
-            </p>
-          ))}
+          <p className="studentDataRow">Parent Email :{parentEmail} </p>
+          <p className="studentDataRow">Student Name :{name} </p>
+          <p className="studentDataRow">Student Email :{email}</p>
+          <p className="studentDataRow">Roll Number :{studentRollNo}</p>
+          <p className="studentDataRow">Standard:{standard} </p>
         </div>
       </div>
     </>

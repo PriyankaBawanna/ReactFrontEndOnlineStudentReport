@@ -66,7 +66,7 @@ const TeacherList = () => {
   }
 
   return (
-    <>
+    <div className="userTable">
       {/* for Add new Teacher */}
       <div className="teacherHeading">
         <div className="listOfUser">
@@ -133,7 +133,7 @@ const TeacherList = () => {
           activeClassName={"active"}
         />
       </div>
-    </>
+    </div>
   );
 };
 export default TeacherList;

@@ -52,9 +52,8 @@ const StudentList = () => {
   }
 
   return (
-    <>
+    <div className="userTable">
       {/** function pass as props to   AddStudent Component for render the list  */}
-
       <table>
         <div className="StudentListHeading">
           <h2>List of Student</h2>
@@ -123,7 +122,7 @@ const StudentList = () => {
           activeClassName={"active"}
         />
       </table>
-    </>
+    </div>
   );
 };
 export default StudentList;

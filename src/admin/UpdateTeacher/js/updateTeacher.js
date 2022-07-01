@@ -163,9 +163,6 @@ const UpdateTeacher = (prop) => {
               type="text"
               className="studentInput"
               placeholder="Teacher's ID "
-              onChange={(e) => {
-                setEmpId(e.target.value);
-              }}
             />
           </div>
 

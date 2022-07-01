@@ -15,33 +15,28 @@ const TermOneMarkSheet = () => {
     data();
   }, [studentRollNo]);
 
-  async function data() {
-    axios
-      .get(`http://localhost:8085/ParentDetails/${parentEmail}`)
-      .then((res) => {
-        setParentInfo([...res.data]);
-        const json = res.data[0].studentRollNo;
-
-        if (json) {
-          setStudentRollNo(res.data[0].studentRollNo);
-          axios
-            .get(`http://localhost:8085/StudentResultTermOne/${studentRollNo}`)
-            .then((res) => {
-              setTermOne([...res.data]);
-              setMarks(res.data[0].englishTermOneMarks);
-            });
-        } else {
-        }
-
-        console.log("USer Response ", json);
-      });
-  }
-
-  //get The login Parent Details into the local storage
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
 
-  const parentEmail = parentDetails.parentEmail;
-  console.log("parent Email ", parentEmail);
+  const parentEmail = parentDetails.email;
+  console.log("parent data 2 ", parentEmail);
+
+  const data = () => {
+    axios.get(`http://localhost:8085/userData/${parentEmail}`).then((resp) => {
+      setParentInfo([...resp.data]);
+      const rollNo = resp.data[0].rollNo;
+      setStudentRollNo(rollNo);
+
+      if (rollNo) {
+        axios
+          .get(`http://localhost:8085/StudentResult/${studentRollNo}`)
+          .then((res) => {
+            setTermOne([...res.data]);
+            console.log("User response", [...res.data]);
+            setMarks(res.data[0].englishTermOneMarks);
+          });
+      }
+    });
+  };
 
   //const studentRollNo= parentDetails.studentRollNo;
 
@@ -100,12 +95,12 @@ const TermOneMarkSheet = () => {
     }
   };
 
+  console.log("Term One Me response", termOne);
   if (marks) {
-    console.log("Term One Me response", termOne);
+    console.log("marks TM2", termOne);
     return (
       <>
         <div className="markSheet">
-          <b>Term One </b>
           <div className="termMarks">
             <div className="headingSubjects">
               <div>
@@ -139,8 +134,6 @@ const TermOneMarkSheet = () => {
                 <p className="studentResultRow">100</p>
                 <p className="studentResultRow">100%</p>
                 <p className="studentResultRow">-</p>
-
-                <p></p>
               </div>
             </div>
             <div className=">marksObtained">
@@ -175,7 +168,7 @@ const TermOneMarkSheet = () => {
         <div className="approvalStatusParent">
           <div>
             <button
-              className="rejectBtn"
+              className="rejectBtn "
               onClick={termResultStatusApproveStatus}
             >
               Approve
@@ -195,7 +188,7 @@ const TermOneMarkSheet = () => {
   } else {
     return (
       <>
-        <ParentMessage />;
+        <ParentMessage />
       </>
     );
   }

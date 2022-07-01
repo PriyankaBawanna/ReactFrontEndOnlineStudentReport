@@ -18,31 +18,29 @@ const TermTwoMarkSheet = () => {
     data();
   }, [studentRollNo]);
 
+  let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
+
+  const parentEmail = parentDetails.email;
+  console.log("parent data 2 ", parentEmail);
+
   //on the basis of parent Email finding the Student Roll No
   async function data() {
-    axios
-      .get(`http://localhost:8085/ParentDetails/${parentEmail}`)
-      .then((res) => {
-        setParentInfo([...res.data]);
-        const json = res.data[0].studentRollNo;
+    axios.get(`http://localhost:8085/userData/${parentEmail}`).then((resp) => {
+      setParentInfo([...resp.data]);
+      const rollNo = resp.data[0].rollNo;
+      console.log("Student Roll No ", rollNo);
+      setStudentRollNo(rollNo);
 
-        if (json) {
-          setStudentRollNo(res.data[0].studentRollNo);
-          axios
-            .get(`http://localhost:8085/StudentResultTermTwo/${studentRollNo}`)
-            .then((res) => {
-              setTermTwo([...res.data]);
-              setMarks(res.data[0].englishTermTwoMarks);
-            });
-        } else {
-        }
-      });
+      if (rollNo) {
+        axios
+          .get(`http://localhost:8085/StudentResult/${studentRollNo}`)
+          .then((res) => {
+            setTermTwo([...res.data]);
+            setMarks(res.data[0].englishTermOneMarks);
+          });
+      }
+    });
   }
-
-  //get the current Parent Login
-  let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
-  const parentEmail = parentDetails.parentEmail;
-  console.log("parent Email ", parentEmail);
 
   //if Result Status Approve than API Called and Approve Message Send To School Admin Email
   const termResultStatusApproveStatus = () => {
@@ -98,6 +96,7 @@ const TermTwoMarkSheet = () => {
       alert("error");
     }
   };
+
   if (marks) {
     console.log("marks TM2", termTwo);
     return (

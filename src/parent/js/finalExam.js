@@ -19,32 +19,31 @@ const FinalExam = () => {
     data();
   }, [studentRollNo]);
 
-  //obtaining Student data based on the biases of parent details
-  async function data() {
-    axios
-      .get(`http://localhost:8085/ParentDetails/${parentEmail}`)
-      .then((res) => {
-        setParentInfo([...res.data]);
-        const json = res.data[0].studentRollNo;
-
-        if (json) {
-          setStudentRollNo(res.data[0].studentRollNo);
-          axios
-            .get(
-              `http://localhost:8085/StudentResultTermThree/${studentRollNo}`
-            )
-            .then((res) => {
-              setTermThree([...res.data]);
-              setMarks(res.data[0].englishTermThreeMarks);
-            });
-        } else {
-        }
-      });
-  }
-
   //obtaining login parent email
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
-  const parentEmail = parentDetails.parentEmail;
+
+  const parentEmail = parentDetails.email;
+  console.log("parent data 2 ", parentEmail);
+
+  //obtaining Student data based on the biases of parent details
+
+  const data = () => {
+    axios.get(`http://localhost:8085/userData/${parentEmail}`).then((resp) => {
+      setParentInfo([...resp.data]);
+      const rollNo = resp.data[0].rollNo;
+      setStudentRollNo(rollNo);
+
+      if (rollNo) {
+        axios
+          .get(`http://localhost:8085/StudentResult/${studentRollNo}`)
+          .then((res) => {
+            setTermThree([...res.data]);
+            console.log("User response", [...res.data]);
+            setMarks(res.data[0].englishTermOneMarks);
+          });
+      }
+    });
+  };
 
   //if parent Approve the Result
   const termResultStatusApproveStatus = () => {

@@ -2,6 +2,10 @@ table {
   width: 100%;
 }
 
+.userTable {
+  margin: 0.5rem;
+}
+
 .table td,
 .table th {
   padding: 12px 15px;

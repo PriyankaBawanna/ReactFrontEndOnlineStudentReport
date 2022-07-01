@@ -4,7 +4,7 @@ import "../css/login.css";
 import axios from "axios";
 const UserLogin = () => {
   //user role and password
-  const [role, setSelectRole] = useState(false);
+  const [role, setSelectRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,32 +15,43 @@ const UserLogin = () => {
   //navigate to home page of parent
   const navigate = useNavigate();
 
-  console.log("User role ", role);
-
   // User Login
-  const handleUserLogin = () => {
+  const handleUserLogin = (e) => {
+    setSelectRole(e.target.value);
     const user = { role, email, password };
-    if (user) {
-      console.log("user details", user);
-      axios.post("http://localhost:8085/userLogin", user).then((res) => {
-        switch (role) {
-          case "Admin":
+    if (role) {
+      if (role == "Admin") {
+        axios.post("http://localhost:8085/userLogin", user).then((res) => {
+          if (res.data == true) {
             localStorage.setItem("userDetails", JSON.stringify(user));
             navigate("/SchoolAdmin", { replace: true });
-            break;
-          case "Teacher":
-            console.log("Teacher execute ");
+          } else {
+            alert(res.data.message);
+          }
+        });
+      }
+
+      if (role == "Teacher") {
+        axios.post("http://localhost:8085/userLogin", user).then((res) => {
+          if (res.data == true) {
             localStorage.setItem("teacherDetails", JSON.stringify(user));
             navigate("/TeacherDashBoard");
-            break;
-          case "Parent":
+          } else {
+            alert(res.data.message);
+          }
+        });
+      }
+
+      if (role == "Parent") {
+        axios.post("http://localhost:8085/userLogin", user).then((res) => {
+          if (res.data == true) {
             localStorage.setItem("parentDetails", JSON.stringify(user));
             navigate("/ParentDashboard");
-            break;
-          default:
-            console.log("No User Match ");
-        }
-      });
+          } else {
+            alert(res.data.message);
+          }
+        });
+      }
     }
   };
 
@@ -66,10 +77,28 @@ const UserLogin = () => {
         <h1 className="introLoginUser">User Login </h1>
 
         <div className="loginInput">
-          <div onChange={(e) => setSelectRole(e.target.value)}>
-            <input type="radio" value="Admin" name="gender" /> Admin
-            <input type="radio" value="Teacher" name="gender" /> Teacher
-            <input type="radio" value="Parent" name="gender" /> parent
+          <div onChange={handleUserLogin}>
+            <input
+              type="radio"
+              value="Admin"
+              name="Admin"
+              checked={role === "Admin"}
+            />
+            Admin
+            <input
+              type="radio"
+              value="Teacher"
+              name="Teacher"
+              checked={role === "Teacher"}
+            />
+            Teacher
+            <input
+              type="radio"
+              value="Parent"
+              name="Parent"
+              checked={role === "Parent"}
+            />
+            parent
           </div>
 
           <div>
