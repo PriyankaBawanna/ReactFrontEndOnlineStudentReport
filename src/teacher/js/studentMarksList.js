@@ -56,67 +56,68 @@ const StudentMarksList = () => {
     alert("Student Marks Add successfully");
   }
   return (
-    <div className="studentMarksInfoTable">
-      {/* Add student  for Add New Student into the List  */}
-      <div className="teacherSection ">
-        <h3 className="studentListHeading">List of Student</h3>
-        <div className="search">
-          <input
-            type="text"
-            placeholder="Search student"
-            onChange={searchHandle}
-            className="searchStudent"
-          />
-          <AddStudent data={getData} />
+    <div className="marksTable">
+      <div className="studentMarksInfoTable">
+        {/* Add student  for Add New Student into the List  */}
+        <div className="teacherSection ">
+          <h3 className="studentListHeading">List of Student</h3>
+          <div className="search">
+            <input
+              type="text"
+              placeholder="Search student"
+              onChange={searchHandle}
+              className="searchStudent"
+            />
+            <AddStudent data={getData} />
+          </div>
         </div>
-      </div>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <td>Student Name</td>
-            <td>Student Standard</td>
-            <td>Student Roll Number</td>
-            <td>Student Email</td>
-            <td>Term One</td>
-            <td>Term Two</td>
-            <td>Term Three</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-        </thead>
-
-        {users.map((item, i) => (
-          <tbody>
-            <tr key={i}>
-              <td data-label="Student Name">{item.studentName}</td>
-              <td data-label="Student Standard">{item.studentStandard}</td>
-              <td data-label="Student Roll No ">{item.studentRollNo}</td>
-              <td data-label="Student Email ">{item.studentEmail}</td>
-              <td data-label="Term One">{item.totalTermOneMarks}</td>
-              <td data-label="Term Two">{item.totalTermTwoMarks}</td>
-              <td data-label="Term Three">{item.totalTermThreeMarks}</td>
-
-              <td data-label="Operation">
-                {/* Student Marks will be Add according  to student ID  */}
-                <StudentInformation
-                  student_id={item._id}
-                  studentList={studentMarksData}
-                />
-              </td>
-              <td data-label="Operation">
-                {/* student will be delete according to Roll No
-                 */}
-                <DeleteStudent
-                  studentRollNo={item.studentRollNo}
-                  data={getData}
-                />
-              </td>
+        <table class="table">
+          <thead>
+            <tr>
+              <td>Student Name</td>
+              <td>Student Standard</td>
+              <td>Student Roll Number</td>
+              <td>Student Email</td>
+              <td>Term One</td>
+              <td>Term Two</td>
+              <td>Term Three</td>
+              <td>Edit</td>
+              <td>Delete</td>
             </tr>
-          </tbody>
-        ))}
-      </table>
+          </thead>
 
+          {users.map((item, i) => (
+            <tbody>
+              <tr key={i}>
+                <td data-label="Student Name">{item.studentName}</td>
+                <td data-label="Student Standard">{item.studentStandard}</td>
+                <td data-label="Student Roll No ">{item.studentRollNo}</td>
+                <td data-label="Student Email ">{item.studentEmail}</td>
+                <td data-label="Term One">{item.totalTermOneMarks}</td>
+                <td data-label="Term Two">{item.totalTermTwoMarks}</td>
+                <td data-label="Term Three">{item.totalTermThreeMarks}</td>
+
+                <td data-label="Operation">
+                  {/* Student Marks will be Add according  to student ID  */}
+                  <StudentInformation
+                    student_id={item._id}
+                    studentList={studentMarksData}
+                  />
+                </td>
+                <td data-label="Operation">
+                  {/* student will be delete according to Roll No
+                   */}
+                  <DeleteStudent
+                    studentRollNo={item.studentRollNo}
+                    data={getData}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </table>
+      </div>
       <ReactPaginate
         previousLabel={"prev"}
         nextLabel={"next"}

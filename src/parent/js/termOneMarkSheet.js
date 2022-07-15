@@ -10,7 +10,6 @@ const TermOneMarkSheet = () => {
   const [parentInfo, setParentInfo] = useState([]);
   const [studentRollNo, setStudentRollNo] = useState("");
 
-  const [termOneResultStatus, setTermOneResultStatus] = useState("");
   useEffect(() => {
     data();
   }, [studentRollNo]);
@@ -38,13 +37,11 @@ const TermOneMarkSheet = () => {
     });
   };
 
-  //const studentRollNo= parentDetails.studentRollNo;
-
   //if Result Status Approve than API Called and Approve Message Send To School Admin Email
   const termResultStatusApproveStatus = () => {
-    setTermOneResultStatus("Approve");
-
+    var termOneResultStatus = "Approve";
     const approveStatusResult = { termOneResultStatus, studentRollNo };
+    console.log("approve Status Result ", termOneResultStatus, studentRollNo);
     if (termOneResultStatus && studentRollNo) {
       axios
 
@@ -54,8 +51,9 @@ const TermOneMarkSheet = () => {
         )
         .then((res) => {
           alert(res.data.message);
-
-          if (res.data.message === "Response Submitted") {
+          console.log("response is submitted now we need to send mail ");
+          if (res.data.message == "Response Submitted") {
+            console.log("Condition is true ");
             axios
               .get(
                 `http://localhost:8085/getResultStatusTermOne/${studentRollNo}`
@@ -72,7 +70,7 @@ const TermOneMarkSheet = () => {
   //if Result Status Reject  than API Called and Reject  Message Send To School Admin Email
 
   const termResultStatusRejectStatus = () => {
-    setTermOneResultStatus("Reject");
+    var termOneResultStatus = "Reject";
     const resultRejectStatus = { termOneResultStatus, studentRollNo };
     if (termOneResultStatus && studentRollNo) {
       axios
@@ -95,7 +93,6 @@ const TermOneMarkSheet = () => {
     }
   };
 
-  console.log("Term One Me response", termOne);
   if (marks) {
     console.log("marks TM2", termOne);
     return (

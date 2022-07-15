@@ -58,14 +58,16 @@ const UserLogin = () => {
   const handleEmail = (e) => {
     const { value } = e.target;
     setEmail(value);
-
+    //regular expression for validate email
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+
     if (regEx.test(value)) {
       setEmailError(false);
     } else if (!regEx.test(value) && value !== "") {
       setEmailError(true);
     }
   };
+
   const handlePassword = (e) => {
     const { value } = e.target;
     setPassword(value);
@@ -84,21 +86,21 @@ const UserLogin = () => {
               name="Admin"
               checked={role === "Admin"}
             />
-            Admin
+            <b className="userType">Admin</b>
             <input
               type="radio"
               value="Teacher"
               name="Teacher"
               checked={role === "Teacher"}
             />
-            Teacher
+            <b className="userType">Teacher</b>
             <input
               type="radio"
               value="Parent"
               name="Parent"
               checked={role === "Parent"}
             />
-            parent
+            <b className="userType">Parent</b>
           </div>
 
           <div>

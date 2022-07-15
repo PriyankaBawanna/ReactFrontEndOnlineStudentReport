@@ -15,8 +15,8 @@ const AddTeacher = (props) => {
   const [nameError, setNameError] = useState(false);
   const [mobileNoError, setMobileNoError] = useState(false);
   const [teacherEmailError, setTeacherEmailError] = useState(false);
-  const [teacherPassword, setTeacherPassword] = useState("");
-  const [teacherPasswordError, setTeacherPasswordError] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
   //function use to save teacher data into data base using post API
   const addTeacherData = () => {
     const teacherData = {
@@ -25,9 +25,9 @@ const AddTeacher = (props) => {
       name,
       email,
       mobileNo,
-      teacherPassword,
+      password,
     };
-    if (empId && name && email && mobileNo) {
+    if ((empId && name && email && mobileNo, password)) {
       axios
         .post("http://localhost:8085/register", teacherData)
         .then((res) => alert(res.data.message))
@@ -41,7 +41,7 @@ const AddTeacher = (props) => {
     setName("");
     setMobileNo("");
     setEmail("");
-    setTeacherPassword("");
+    setPassword("");
   };
 
   //handle Teacher Name Input
@@ -70,6 +70,7 @@ const AddTeacher = (props) => {
   const handleEmail = (e) => {
     const { value } = e.target;
     setEmail(value);
+
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     if (regEx.test(value)) {
       setTeacherEmailError(false);
@@ -79,13 +80,13 @@ const AddTeacher = (props) => {
   };
 
   //password  Validation
-  const handleInputTeacherPassword = (e) => {
+  const handleInputpassword = (e) => {
     const { value } = e.target;
-    setTeacherPassword(value);
+    setPassword(value);
 
     if (value.length < 5) {
-      setTeacherPasswordError(true);
-    } else setTeacherPasswordError(false);
+      setPasswordError(true);
+    } else setPasswordError(false);
   };
 
   return (
@@ -171,14 +172,14 @@ const AddTeacher = (props) => {
           <div>
             <label className="inputStudentLabel">Teacher Password </label>
             <input
-              name="teacherPassword"
+              name="password"
               type="Password"
               placeholder="Teacher Password "
               className="studentInput"
-              value={teacherPassword}
-              onChange={handleInputTeacherPassword}
+              value={password}
+              onChange={handleInputpassword}
             />
-            {teacherPasswordError ? (
+            {passwordError ? (
               <span className="inputError">minimum five characters</span>
             ) : (
               <span></span>

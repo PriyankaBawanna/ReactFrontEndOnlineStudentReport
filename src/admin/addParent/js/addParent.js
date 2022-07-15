@@ -44,12 +44,14 @@ const AddParent = () => {
     setRollNo("");
     setMobileNo("");
     setEmail("");
+    setPassword("");
   };
 
   //Email Validation
   const handleInputemail = (e) => {
     const { value } = e.target;
     setEmail(value);
+
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     if (regEx.test(value)) {
       setEmailError(false);
@@ -189,7 +191,7 @@ const AddParent = () => {
             type="submit"
             onClick={addParentData}
           >
-            Add Parent Details
+            Add Parent
           </button>
         </ModalBody>
       </Modal>

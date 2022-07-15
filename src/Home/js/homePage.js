@@ -9,6 +9,7 @@ const homePage = () => {
         <h1 className="introHeading">
           Welcome To Student Online Progress Report
         </h1>
+        {/* home page image */}
         <div className="intro"></div>
       </div>
       <div>

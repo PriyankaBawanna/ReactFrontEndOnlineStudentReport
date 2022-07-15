@@ -47,7 +47,7 @@ const FinalExam = () => {
 
   //if parent Approve the Result
   const termResultStatusApproveStatus = () => {
-    setTermTwoResultStatus(approveStatus);
+    var termThreeResultStatus = "approveStatus";
 
     const approveStats = { termThreeResultStatus, studentRollNo };
     if (termThreeResultStatus && studentRollNo) {
@@ -76,7 +76,7 @@ const FinalExam = () => {
   //if parent reject the result
   const termResultStatusRejectStatus = () => {
     const resultRejectStatus = { termThreeResultStatus, studentRollNo };
-    setTermTwoResultStatus(rejectStatus);
+    var termThreeResultStatus = "rejectStatus";
     if (termThreeResultStatus && studentRollNo) {
       axios
         .post(

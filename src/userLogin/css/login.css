@@ -8,6 +8,10 @@
 .introLoginUser {
   color: gray;
 }
+.userType {
+  color: gray;
+  font-size: 1rem;
+}
 .inputLogin {
   height: 2.5rem;
 }

@@ -5,6 +5,7 @@ import "../css/adminProfile.css";
 const AdminProfile = () => {
   //get login User Details
   let schoolAdminDetails = JSON.parse(localStorage.getItem("userDetails"));
+  console.log("school Admin  details", schoolAdminDetails);
 
   return (
     <>

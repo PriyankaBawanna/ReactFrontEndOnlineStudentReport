@@ -25,16 +25,18 @@ const StudentInfo = () => {
       setStudentRollNo(rollNo);
 
       if (rollNo) {
-        axios.get(`http://localhost:8085/StudentResult/12`).then((res) => {
-          setStudentData([...res.data]);
-          console.log("User response", [...res.data]);
-          const Name = res.data[0].studentName;
-          setName(Name);
-          const Email = res.data[0].studentEmail;
-          setEmail(Email);
-          const studentStandard = res.data[0].studentStandard;
-          setStandard(studentStandard);
-        });
+        axios
+          .get(`http://localhost:8085/StudentResult/${rollNo}`)
+          .then((res) => {
+            setStudentData([...res.data]);
+            console.log("User response", [...res.data]);
+            const Name = res.data[0].studentName;
+            setName(Name);
+            const Email = res.data[0].studentEmail;
+            setEmail(Email);
+            const studentStandard = res.data[0].studentStandard;
+            setStandard(studentStandard);
+          });
       }
     });
   };
@@ -43,7 +45,6 @@ const StudentInfo = () => {
     <>
       <div>
         <div className="studentData">
-          <p className="studentDataRow">Parent Email :{parentEmail} </p>
           <p className="studentDataRow">Student Name :{name} </p>
           <p className="studentDataRow">Student Email :{email}</p>
           <p className="studentDataRow">Roll Number :{studentRollNo}</p>

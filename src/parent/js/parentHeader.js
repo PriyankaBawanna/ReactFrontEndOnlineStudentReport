@@ -8,26 +8,9 @@ const ParentHeader = () => {
   //const loginParent = JSON.parse(localStorage.getItem("loginParent"));
   let parentDetails = JSON.parse(localStorage.getItem("parentDetails"));
 
-  //get the current user login data
-
   let parentEmail = parentDetails.email;
 
-  //Obtaining parent information through email
-  const parentPersonalInfo = () => {
-    console.warn("PArent Email", parentEmail);
-    fetch(`http://localhost:8085/ParentDetails/${parentEmail}`).then((info) => {
-      info.json().then((res) => {
-        setParentData(res);
-        setParentInfo([...res]);
-      });
-    });
-  };
-
   localStorage.setItem("studentDetails", JSON.stringify(parentData));
-
-  useEffect(() => {
-    parentPersonalInfo();
-  }, []);
 
   return (
     <>
@@ -38,15 +21,10 @@ const ParentHeader = () => {
           </div>
           <span className="triangleParentDashBoard"></span>
           <div className="dropdownContentParent">
-            {parentInfo.map((item, i) => (
-              <p key={i}>
-                <p className="parentData">Parent Name : {item.name}</p>
-                <p className="parentData">Parent Email : {parentEmail}</p>
-                <p className="parentData">
-                  Student Roll Number :{item.studentRollNo}
-                </p>
-              </p>
-            ))}
+            <p>
+              <p className="parentData">Parent Email : {parentEmail}</p>
+            </p>
+
             <Logout />
           </div>
         </div>

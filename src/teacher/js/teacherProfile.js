@@ -15,17 +15,11 @@ const TeacherProfile = () => {
         </span>
 
         <div className="dropdown-content">
+          <p className="teacherDetails">Teacher Name : {teacherDetails.name}</p>
+          <p className="teacherDetails">Teacher Email:{teacherDetails.email}</p>
+          <p className="teacherDetails">Teacher ID:{teacherDetails.mobileNo}</p>
           <p className="teacherDetails">
-            Teacher Name : {teacherDetails.teacherName}
-          </p>
-          <p className="teacherDetails">
-            Teacher Email:{teacherDetails.teacherEmailId}
-          </p>
-          <p className="teacherDetails">
-            Teacher ID:{teacherDetails.teacherNo}
-          </p>
-          <p className="teacherDetails">
-            Teacher Mobile No. {teacherDetails.teacherMobileNo}
+            Teacher Mobile No. {teacherDetails.empId}
           </p>
           {/*Log out for clear the session  */}
 

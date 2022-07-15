@@ -48,7 +48,7 @@ const ParentDashboard = () => {
           </nav>
         </div>
 
-        <div>
+        <div className="parentUserProfile">
           <ParentHeader />
         </div>
       </div>

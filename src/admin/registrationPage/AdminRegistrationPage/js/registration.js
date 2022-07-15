@@ -105,7 +105,8 @@ const Registration = () => {
           <div className="registerUser">
             <div>
               <div value={role} onChange={(e) => setSelectRole(e.target.value)}>
-                <input type="radio" value="Admin" name="user" /> Admin
+                <input type="radio" value="Admin" name="user" />{" "}
+                <b className="introLoginUser">Admin</b>
               </div>
             </div>
             <div>
